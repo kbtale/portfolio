@@ -39,3 +39,17 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# AI Agent temporary files
+AGENT.md
+agent.md
+.agents/
+.agent/
+.ai/
+.cursor/
+.claude/
+
+# Agent session cache/memory
+*.agent-state
+.agent-cache/
+.codex/
