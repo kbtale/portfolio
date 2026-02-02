@@ -41,6 +41,8 @@ yarn-error.log*
 next-env.d.ts
 
 # AI Agent temporary files
+AGENT.md
+agent.md
 .agents/
 .agent/
 .ai/
@@ -50,3 +52,4 @@ next-env.d.ts
 # Agent session cache/memory
 *.agent-state
 .agent-cache/
+.codex/
