@@ -1,3 +1,4 @@
+import FaceCanvas from "../components/FaceCanvas";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -6,54 +7,79 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.grid}>
           <section className={styles.heroText}>
-            <p>[Nav: Home · Work · About · Contact]</p>
             <h1>[Your Name]</h1>
             <p>[Slogan or short intro that spans two lines]</p>
             <p>[Primary CTA] · [Secondary CTA]</p>
           </section>
           <section className={styles.heroFace}>
-            <h2>Wireframe Face</h2>
-            <p>[3D placeholder / interactive canvas]</p>
+            <div className={styles.faceCanvas}>
+              <FaceCanvas />
+            </div>
           </section>
 
           <section className={styles.workFilter}>
             <h2>Work Filters</h2>
-            <p>[All] [3D] [Web] [Brand]</p>
+            <p>All 3D Web Brand Motion</p>
+            <div>
+              <h3>Studio Launch</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt.
+              </p>
+            </div>
+            <div>
+              <h3>Immersive Product</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim
+                ad minim veniam.
+              </p>
+            </div>
+            <div>
+              <h3>Brand System</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
+                aute irure dolor in reprehenderit.
+              </p>
+            </div>
           </section>
           <section className={styles.workA}>
-            <h3>Project A</h3>
-            <p>[Image]</p>
-            <p>[Title · Tech stack · Year]</p>
+            <h3>Atlas Experience</h3>
+            <p>Full-screen 3D brand story with scroll-driven sequences.</p>
+            <p>Three.js · R3F · GSAP · 2025</p>
           </section>
           <section className={styles.workB}>
-            <h3>Project B</h3>
-            <p>[Image]</p>
-            <p>[Title · Tech stack · Year]</p>
+            <h3>Vanta Commerce</h3>
+            <p>High-conversion product UI with interactive previews.</p>
+            <p>Next.js · Tailwind · Vercel · 2024</p>
           </section>
 
           <section className={styles.experienceDate}>
             <h3>2024–Present</h3>
-            <p>[Location]</p>
+            <p>Remote · New York</p>
           </section>
           <section className={styles.experienceRole}>
-            <h3>Role & Description</h3>
-            <p>[Company · Team]</p>
-            <p>[Key achievement or responsibility]</p>
+            <h3>Senior Creative Developer</h3>
+            <p>Studio North · Experience Team</p>
+            <p>
+              Led immersive product storytelling, bridging 3D, motion, and web
+              performance.
+            </p>
           </section>
 
           <section className={styles.about}>
             <h2>About</h2>
             <p>
-              [Short bio paragraph that spans a couple of lines to test column
-              width and rhythm.]
+              I design and build interactive brand experiences that feel tactile
+              and cinematic. My focus is on 3D, motion, and performance-driven
+              UI.
             </p>
-            <p>[Skills · Tools · Focus]</p>
+            <p>Three.js · R3F · GSAP · WebGL · UI Systems</p>
           </section>
           <section className={styles.contact}>
             <h2>Contact</h2>
-            <p>[Email]</p>
-            <p>[Phone]</p>
-            <p>[LinkedIn · GitHub · Behance]</p>
+            <p>hello@yourdomain.com</p>
+            <p>+1 (212) 555-0198</p>
+            <p>LinkedIn · GitHub · Behance</p>
           </section>
         </div>
       </main>
