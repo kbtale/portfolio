@@ -1,0 +1,147 @@
+.buttonColorSwoosh {
+  --elastic-ease-out: linear(
+    0,
+    0.5737 7.6%,
+    0.8382 11.87%,
+    0.9463 14.19%,
+    1.0292 16.54%,
+    1.0886 18.97%,
+    1.1258 21.53%,
+    1.137 22.97%,
+    1.1424 24.48%,
+    1.1423 26.1%,
+    1.1366 27.86%,
+    1.1165 31.01%,
+    1.0507 38.62%,
+    1.0219 42.57%,
+    0.9995 46.99%,
+    0.9872 51.63%,
+    0.9842 58.77%,
+    1.0011 81.26%,
+    1
+  );
+  --smooth-ease: cubic-bezier(.32, .72, 0, 1);
+  --color-ease: cubic-bezier(.215, .61, .355, 1);
+  --_theme---button-bg: var(--background);
+  --_theme---button-text: var(--text-primary);
+  --_colors---swatch--silver: var(--accent-pink);
+  --_colors---swatch--orange: var(--accent-orange);
+  --_colors---swatch--black: var(--text-primary);
+
+  transition: transform .45s var(--elastic-ease-out);
+  -webkit-tap-highlight-color: transparent;
+  pointer-events: auto;
+  font-family: var(--font-sanchez);
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  user-select: none;
+  transform-style: preserve-3d;
+  font-size: 0.95rem;
+  line-height: 1em;
+  text-decoration: none;
+  display: grid;
+  position: relative;
+}
+
+.buttonColorSwooshBg {
+  transition: scale .45s var(--smooth-ease), background-color .2s var(--color-ease);
+  background-color: var(--_theme---button-bg);
+  grid-area: 1 / 1;
+  display: grid;
+  overflow: clip;
+}
+
+.buttonColorSwooshBgInner {
+  translate: -10% 100% 0;
+  rotate: 0 0 1 -12deg;
+  transition: translate .6s var(--smooth-ease), rotate .5s var(--smooth-ease);
+  transition-delay: calc((var(--index) * -1) * .042s);
+  transform-origin: 100% 0;
+  grid-area: 1 / 1;
+  width: 120%;
+  display: block;
+}
+
+.isFirst {
+  background-color: var(--_colors---swatch--silver);
+  z-index: 0;
+}
+
+.isSecond {
+  background-color: var(--_colors---swatch--orange);
+  z-index: 1;
+}
+
+.buttonColorSwooshInner {
+  color: var(--_theme---button-text);
+  white-space: pre;
+  z-index: 2;
+  grid-gap: .5rem;
+  grid-area: 1 / 1;
+  align-items: center;
+  padding: .6em 1.2em .6em 2em;
+  display: grid;
+  overflow: clip;
+  position: relative;
+}
+
+.buttonColorSwooshText {
+  transition: translate .75s var(--elastic-ease-out), rotate .5s var(--smooth-ease), opacity .2s ease-out, color .2s var(--color-ease);
+  transform-origin: 0 0;
+  grid-area: 1 / 1;
+  display: flex;
+  align-items: center;
+}
+
+.buttonColorSwooshDot {
+  transition: background-color .2s var(--color-ease);
+  background-color: var(--_colors---swatch--orange);
+  border-radius: 50%;
+  flex: none;
+  width: .5em;
+  height: .5em;
+  position: absolute;
+  left: .7em;
+}
+
+.buttonColorSwooshInner::after {
+  content: attr(data-text);
+  color: var(--_colors---swatch--black);
+  display: block;
+  grid-area: 1 / 1;
+  translate: 0 2em 0;
+  rotate: 1 1 .5 -30deg;
+  transform-origin: top right;
+  transition: translate .75s var(--elastic-ease-out), rotate .5s var(--smooth-ease), opacity .2s ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .buttonColorSwoosh:is(:hover, :focus-visible) .buttonColorSwooshBgInner {
+    translate: -10% 0 0;
+    rotate: 0 0 1 0deg;
+    transition-delay: calc(var(--index) * .064s);
+  }
+
+  .buttonColorSwoosh:is(:hover, :focus-visible) .buttonColorSwooshText {
+    rotate: 1 1 0.45 -60deg;
+    translate: 0 -2em 0;
+    opacity: 0;
+  }
+
+  .buttonColorSwoosh:is(:hover, :focus-visible) .buttonColorSwooshDot {
+    background-color: var(--text-primary) !important;
+  }
+
+  .buttonColorSwoosh:is(:hover, :focus-visible) .buttonColorSwooshInner::after {
+    rotate: 1 1 .45 0deg;
+    translate: 0 0 0;
+    opacity: 1;
+    transition-delay: .1s;
+  }
+}
+
+@media (max-width: 991px) {
+  .buttonColorSwoosh {
+    font-size: 0.9rem;
+  }
+}

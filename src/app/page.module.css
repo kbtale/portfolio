@@ -8,6 +8,8 @@
   --button-primary-hover: #c94d3d;
   --button-secondary-hover: #f6dcd6;
   --button-secondary-border: #de998b;
+  --accent-orange: #dc753c;
+  --accent-pink: #f6dcd6;
 
   display: block;
   min-height: 100vh;
@@ -84,7 +86,45 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 20px;
+}
+
+.heroNameBlock {
+  padding: 3px 0;
+}
+
+.heroNameBlock h1 {
+  font-size: 6rem;
+  line-height: 40px;
+  margin: 0;
+}
+
+.heroSloganBlock {
+  padding: 3px 0;
+  max-width: 75%;
+  font-size: 1.5rem;
+  align-self: flex-start;
+  color: var(--text-secondary);
+}
+
+.heroCtas {
+  display: flex;
   gap: 16px;
+}
+
+.primaryCta,
+.secondaryCta {
+  border: none;
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sanchez);
+  cursor: pointer;
+}
+
+.primaryCta {
+  background: var(--text-primary);
+  color: var(--background);
 }
 
 .heroFace {
