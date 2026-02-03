@@ -1,0 +1,139 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  width: fit-content;
+  display: block;
+  margin: 0 auto;
+  z-index: 30;
+  background: transparent;
+  border-bottom: none;
+}
+
+.navInner {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  width: fit-content;
+  background: rgba(255, 245, 236, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(64, 46, 50, 0.6);
+}
+
+.navMenu {
+  display: flex;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navItem {
+  display: flex;
+  align-items: center;
+  margin: 0 4px;
+  transition: margin 0.35s ease;
+}
+
+.navItemActive {
+  margin: 0;
+}
+
+.navWhoosh {
+  max-width: 140px;
+  overflow: hidden;
+  transition:
+    opacity 0.3s ease,
+    transform 0.35s ease,
+    max-width 0.35s ease,
+    padding 0.35s ease,
+    font-size 0.35s ease;
+}
+
+.navWhooshInner {
+  transition: padding 0.35s ease;
+}
+
+.navWhoosh:global(.activeSection) {
+  opacity: 0;
+  transform: scale(0.6);
+  max-width: 0;
+  padding: 0;
+  font-size: 0.6rem;
+  pointer-events: none;
+}
+
+.navWhoosh:global(.activeSection) .navWhooshInner {
+  padding: 0;
+}
+
+.navToggle {
+  display: none;
+  background: none;
+  border: 1px solid rgba(64, 46, 50, 0.4);
+  padding: 6px 10px;
+  gap: 4px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navToggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--text-primary);
+}
+
+@media (max-width: 900px) {
+  .navInner {
+    padding: 10px 16px;
+  }
+
+  .navMenu {
+    position: fixed;
+    inset: 60px 16px auto 16px;
+    background: rgba(255, 245, 236, 0.98);
+    border: 1px solid rgba(64, 46, 50, 0.2);
+    padding: 16px;
+    transform: translateY(-12px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .navList {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .navToggle {
+    display: inline-flex;
+  }
+
+  .navbar[data-open="true"] .navMenu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .navInner {
+    background: rgba(64, 46, 50, 0.92);
+    border-bottom-color: rgba(246, 220, 214, 0.2);
+  }
+
+  .navMenu {
+    background: rgba(64, 46, 50, 0.98);
+  }
+
+  .navToggle {
+    border-color: rgba(246, 220, 214, 0.4);
+  }
+}

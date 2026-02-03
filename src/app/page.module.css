@@ -20,7 +20,7 @@
 .main {
   min-height: 100vh;
   width: 100%;
-  background-color: var(--foreground);
+  background-color: transparent;
   padding: 0;
 }
 
@@ -45,30 +45,6 @@
   color: var(--text-primary);
 }
 
-.grid::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    repeating-linear-gradient(
-      to right,
-      var(--line-color) 0,
-      var(--line-color) 1px,
-      transparent 1px,
-      transparent calc(var(--column-width) + var(--gutter))
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      var(--line-color) 0,
-      var(--line-color) 1px,
-      transparent 1px,
-      transparent var(--row-height)
-    );
-  background-position: var(--margin) 0, 0 0;
-  background-size: calc(var(--column-width) + var(--gutter)) 100%, 100% var(--row-height);
-  opacity: 0.8;
-}
 
 .grid > section {
   position: relative;
@@ -110,6 +86,7 @@
 .heroCtas {
   display: flex;
   gap: 16px;
+  flex-wrap: wrap;
 }
 
 .primaryCta,
@@ -284,6 +261,11 @@ a.secondary {
   .heroText,
   .heroFace {
     grid-row: auto;
+  }
+
+  .heroCtas {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 

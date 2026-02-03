@@ -1,13 +1,15 @@
 import FaceWireframeCanvas from "../components/FaceWireframeCanvas";
+import StickyNavbar from "../components/StickyNavbar";
 import WhooshButton from "../components/WhooshButton";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <div className={styles.page}>
+      <StickyNavbar />
       <main className={styles.main}>
         <div className={styles.grid}>
-          <section className={styles.heroText}>
+          <section className={styles.heroText} id="home" data-section="home">
             <div className={styles.heroNameBlock}>
               <h1>Carlos Bolívar</h1>
             </div>
@@ -19,13 +21,13 @@ export default function Home() {
               <WhooshButton label="Get in Touch" href="#contact" />
             </div>
           </section>
-          <section className={styles.heroFace}>
+          <section className={styles.heroFace} data-section="home">
             <div className={styles.faceCanvas}>
               <FaceWireframeCanvas />
             </div>
           </section>
 
-          <section className={styles.workFilter}>
+          <section className={styles.workFilter} id="work" data-section="work">
             <h2>Work Filters</h2>
             <p>All · Workflow Automation · Backend Engineering · Full Stack Web · System Optimization</p>
             <div>
@@ -65,31 +67,31 @@ export default function Home() {
               </p>
             </div>
           </section>
-          <section className={styles.workA}>
+          <section className={styles.workA} data-section="work">
             <h3>Operational Automation Suite</h3>
             <p>Workflow Automation</p>
             <p>Node.js · Chrome Extensions (Manifest V3) · Power Automate</p>
           </section>
-          <section className={styles.workB}>
+          <section className={styles.workB} data-section="work">
             <h3>Legacy Data Migration Engine</h3>
             <p>Backend Engineering</p>
             <p>Python · XML Parsing · SQL · PowerShell</p>
           </section>
 
-          <section className={styles.experienceDate}>
+          <section className={styles.experienceDate} id="experience" data-section="experience">
             <h3>Dec 2025 – Present</h3>
             <p>Openrise</p>
           </section>
-          <section className={styles.experienceRole}>
+          <section className={styles.experienceRole} data-section="experience">
             <h3>Lead Developer</h3>
             <p>Designing open source tools focused on technical efficiency.</p>
           </section>
 
-          <section className={styles.experienceDate}>
+          <section className={styles.experienceDate} data-section="experience">
             <h3>Jul 2018 – Present</h3>
             <p>Freelance · Remote</p>
           </section>
-          <section className={styles.experienceRole}>
+          <section className={styles.experienceRole} data-section="experience">
             <h3>Freelance Software Developer</h3>
             <p>
               Delivering end-to-end software solutions and scalable web
@@ -99,11 +101,11 @@ export default function Home() {
             </p>
           </section>
 
-          <section className={styles.experienceDate}>
+          <section className={styles.experienceDate} data-section="experience">
             <h3>Apr 2025 – Nov 2025</h3>
             <p>BetterWorld Technology</p>
           </section>
-          <section className={styles.experienceRole}>
+          <section className={styles.experienceRole} data-section="experience">
             <h3>Service Desk Team Lead (Technical)</h3>
             <p>
               Led automated reporting workflows using Node.js and API
@@ -113,11 +115,11 @@ export default function Home() {
             </p>
           </section>
 
-          <section className={styles.experienceDate}>
+          <section className={styles.experienceDate} data-section="experience">
             <h3>Jan 2024 – Mar 2025</h3>
             <p>BetterWorld Technology</p>
           </section>
-          <section className={styles.experienceRole}>
+          <section className={styles.experienceRole} data-section="experience">
             <h3>IT Services Delivery Associate</h3>
             <p>
               Managed complex network configurations and infrastructure
@@ -127,11 +129,11 @@ export default function Home() {
             </p>
           </section>
 
-          <section className={styles.experienceDate}>
+          <section className={styles.experienceDate} data-section="experience">
             <h3>Apr 2023 – Dec 2023</h3>
             <p>Inglés en Español</p>
           </section>
-          <section className={styles.experienceRole}>
+          <section className={styles.experienceRole} data-section="experience">
             <h3>Technical Support Associate</h3>
             <p>
               Managed technical maintenance of web platforms (Wix/Velo) and
@@ -140,11 +142,11 @@ export default function Home() {
             </p>
           </section>
 
-          <section className={styles.experienceDate}>
+          <section className={styles.experienceDate} data-section="experience">
             <h3>Feb 2022 – Feb 2023</h3>
             <p>Centro Venezolano Americano del Zulia</p>
           </section>
-          <section className={styles.experienceRole}>
+          <section className={styles.experienceRole} data-section="experience">
             <h3>IT Academic Analyst</h3>
             <p>
               Led digital transformation initiatives, conducting advanced data
@@ -153,7 +155,7 @@ export default function Home() {
             </p>
           </section>
 
-          <section className={styles.about}>
+          <section className={styles.about} id="about" data-section="about">
             <h2>About</h2>
             <h3>Product-minded Full Stack Engineer & Operations Leader.</h3>
             <p>
@@ -172,7 +174,7 @@ export default function Home() {
             <p>Focus: Workflow Automation, Immersive Web, System Architecture.</p>
             <p>Languages: Spanish (Native), English (Fluent), Italian (Intermediate).</p>
           </section>
-          <section className={styles.contact}>
+          <section className={styles.contact} id="contact" data-section="contact">
             <h2>Contact</h2>
             <p>carlosabolivart@gmail.com</p>
             <p>LinkedIn: /in/carlos-alejandro-bolivar</p>

@@ -43,6 +43,19 @@
   position: relative;
 }
 
+
+.transparentBase {
+  --_theme---button-bg: transparent;
+}
+
+.noDot .buttonColorSwooshInner {
+  padding: .6em 1.2em;
+}
+
+.noDot .buttonColorSwooshDot {
+  display: none;
+}
+
 .buttonColorSwooshBg {
   transition: scale .45s var(--smooth-ease), background-color .2s var(--color-ease);
   background-color: var(--_theme---button-bg);
