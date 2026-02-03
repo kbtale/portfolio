@@ -1,15 +1,23 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Averia_Serif_Libre, Kameron, Sanchez } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const kameron = Kameron({
+  variable: "--font-kameron",
   subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const averiaSerifLibre = Averia_Serif_Libre({
+  variable: "--font-averia",
   subsets: ["latin"],
+  weight: ["300", "400", "700"],
+});
+
+const sanchez = Sanchez({
+  variable: "--font-sanchez",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body className={`${kameron.variable} ${averiaSerifLibre.variable} ${sanchez.variable}`}>
         {children}
       </body>
     </html>
