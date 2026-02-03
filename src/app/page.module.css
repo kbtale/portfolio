@@ -8,6 +8,8 @@
   --button-primary-hover: #c94d3d;
   --button-secondary-hover: #f6dcd6;
   --button-secondary-border: #de998b;
+  --accent-orange: #dc753c;
+  --accent-pink: #f6dcd6;
 
   display: block;
   min-height: 100vh;
@@ -18,7 +20,7 @@
 .main {
   min-height: 100vh;
   width: 100%;
-  background-color: var(--foreground);
+  background-color: transparent;
   padding: 0;
 }
 
@@ -43,30 +45,6 @@
   color: var(--text-primary);
 }
 
-.grid::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background-image:
-    repeating-linear-gradient(
-      to right,
-      var(--line-color) 0,
-      var(--line-color) 1px,
-      transparent 1px,
-      transparent calc(var(--column-width) + var(--gutter))
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      var(--line-color) 0,
-      var(--line-color) 1px,
-      transparent 1px,
-      transparent var(--row-height)
-    );
-  background-position: var(--margin) 0, 0 0;
-  background-size: calc(var(--column-width) + var(--gutter)) 100%, 100% var(--row-height);
-  opacity: 0.8;
-}
 
 .grid > section {
   position: relative;
@@ -84,7 +62,46 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 20px;
+}
+
+.heroNameBlock {
+  padding: 3px 0;
+}
+
+.heroNameBlock h1 {
+  font-size: 6rem;
+  line-height: 40px;
+  margin: 0;
+}
+
+.heroSloganBlock {
+  padding: 3px 0;
+  max-width: 75%;
+  font-size: 1.5rem;
+  align-self: flex-start;
+  color: var(--text-secondary);
+}
+
+.heroCtas {
+  display: flex;
   gap: 16px;
+  flex-wrap: wrap;
+}
+
+.primaryCta,
+.secondaryCta {
+  border: none;
+  padding: 10px 16px;
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-sanchez);
+  cursor: pointer;
+}
+
+.primaryCta {
+  background: var(--text-primary);
+  color: var(--background);
 }
 
 .heroFace {
@@ -244,6 +261,11 @@ a.secondary {
   .heroText,
   .heroFace {
     grid-row: auto;
+  }
+
+  .heroCtas {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }
 
