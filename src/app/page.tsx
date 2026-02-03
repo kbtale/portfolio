@@ -1,4 +1,4 @@
-import FaceCanvas from "../components/FaceCanvas";
+import FaceWireframeCanvas from "../components/FaceWireframeCanvas";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
           </section>
           <section className={styles.heroFace}>
             <div className={styles.faceCanvas}>
-              <FaceCanvas />
+              <FaceWireframeCanvas />
             </div>
           </section>
 
