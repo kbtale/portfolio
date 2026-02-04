@@ -1,11 +1,15 @@
 import FaceWireframeCanvas from "../components/FaceWireframeCanvas";
 import StickyNavbar from "../components/StickyNavbar";
 import WhooshButton from "../components/WhooshButton";
+import WireframeGridCanvas from "../components/WireframeGridCanvas";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <div className={styles.page}>
+      <div className={styles.wireframeCanvas} aria-hidden="true">
+        <WireframeGridCanvas />
+      </div>
       <StickyNavbar />
       <main className={styles.main}>
         <div className={styles.grid}>

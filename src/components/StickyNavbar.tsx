@@ -15,6 +15,7 @@ const SECTION_ITEMS = [
 export default function StickyNavbar() {
   const [activeId, setActiveId] = useState<string | null>("home");
   const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const items = useMemo(() => SECTION_ITEMS, []);
 
   useEffect(() => {
@@ -83,10 +84,20 @@ export default function StickyNavbar() {
     };
   }, [items]);
 
+  useEffect(() => {
+    const onScroll = () => {
+      setIsScrolled(window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <nav
       className={styles.navbar}
       data-open={isOpen ? "true" : "false"}
+      data-scrolled={isScrolled ? "true" : "false"}
       aria-label="Primary"
     >
       <div className={styles.navInner}>
