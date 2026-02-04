@@ -1,0 +1,113 @@
+{
+  "nav": {
+    "home": "Home",
+    "work": "Progetti",
+    "experience": "Esperienza",
+    "about": "Chi sono",
+    "contact": "Contatto"
+  },
+  "cta": {
+    "viewWork": "Vedi lavori",
+    "getInTouch": "Contattami"
+  },
+  "hero": {
+    "name": "Carlos Bolívar",
+    "slogan": "Progetto sistemi. Automatizzo la crescita."
+  },
+  "work": {
+    "title": "Filtri di lavoro",
+    "filters": "Tutti · Automazione dei flussi · Ingegneria backend · Full stack web · Ottimizzazione dei sistemi",
+    "items": {
+      "automationSuite": {
+        "title": "Suite di automazione operativa",
+        "tag": "Automazione dei flussi",
+        "description": "Ho sviluppato estensioni del browser e utility desktop per eliminare l'inserimento manuale dei dati, ottimizzando processi interni ad alto volume."
+      },
+      "dataMigration": {
+        "title": "Motore di migrazione dati legacy",
+        "tag": "Ingegneria backend",
+        "description": "Ho sviluppato script di scraping e parsing ad alta fedeltà per migrare dati critici tra architetture legacy e ambienti moderni SharePoint/Cloud."
+      },
+      "inventory": {
+        "title": "Architettura di inventario scalabile",
+        "tag": "Full stack web",
+        "description": "Ho progettato architetture di database sicure e scalabili per sistemi di inventario, gestendo transazioni ad alto volume per clienti privati."
+      },
+      "edtech": {
+        "title": "Ottimizzazione piattaforma EdTech",
+        "tag": "Ottimizzazione dei sistemi",
+        "description": "Ho ottimizzato un ambiente di apprendimento virtuale, riducendo del 90% le richieste di supporto giornaliere con miglioramenti di stabilità backend e strumenti amministrativi personalizzati."
+      }
+    },
+    "cards": {
+      "workA": {
+        "title": "Suite di automazione operativa",
+        "tag": "Automazione dei flussi",
+        "stack": "Node.js · Estensioni Chrome (Manifest V3) · Power Automate"
+      },
+      "workB": {
+        "title": "Motore di migrazione dati legacy",
+        "tag": "Ingegneria backend",
+        "stack": "Python · XML Parsing · SQL · PowerShell"
+      }
+    }
+  },
+  "experience": {
+    "items": [
+      {
+        "date": "Dic 2025 – Presente",
+        "company": "Openrise",
+        "role": "Lead Developer",
+        "description": "Progetto strumenti open source focalizzati sull'efficienza tecnica."
+      },
+      {
+        "date": "Lug 2018 – Presente",
+        "company": "Freelance · Remoto",
+        "role": "Sviluppatore software freelance",
+        "description": "Realizzo soluzioni end‑to‑end e piattaforme web scalabili con uno stack robusto (Laravel, Vue.js, Node.js). Specializzato in strumenti di automazione che risolvono inefficienze operative."
+      },
+      {
+        "date": "Apr 2025 – Nov 2025",
+        "company": "BetterWorld Technology",
+        "role": "Service Desk Team Lead (Technical)",
+        "description": "Ho guidato flussi di report automatizzati usando Node.js e integrazioni API. Ho ottenuto record di CSAT per 4 mesi consecutivi attraverso strategia basata sui dati e ristrutturazione del team."
+      },
+      {
+        "date": "Gen 2024 – Mar 2025",
+        "company": "BetterWorld Technology",
+        "role": "IT Services Delivery Associate",
+        "description": "Ho gestito configurazioni di rete e progetti infrastrutturali. Ho sviluppato script di automazione in Python per migrazione dati e estensioni Chrome per ottimizzare le operazioni di ingegneria."
+      },
+      {
+        "date": "Apr 2023 – Dic 2023",
+        "company": "Inglés en Español",
+        "role": "Technical Support Associate",
+        "description": "Ho gestito la manutenzione tecnica di piattaforme web (Wix/Velo) e standardizzato strumenti di valutazione digitale per ottimizzare i processi di intake."
+      },
+      {
+        "date": "Feb 2022 – Feb 2023",
+        "company": "Centro Venezolano Americano del Zulia",
+        "role": "IT Academic Analyst",
+        "description": "Ho guidato iniziative di trasformazione digitale, conducendo analisi avanzate (Pareto/Ishikawa) per individuare colli di bottiglia e sviluppando strumenti web che hanno aumentato l'efficienza del 500%."
+      }
+    ]
+  },
+  "about": {
+    "title": "Chi sono",
+    "subtitle": "Full Stack Engineer orientato al prodotto e leader operativo.",
+    "paragraphs": [
+      "Con oltre 6 anni di esperienza, collego logica architetturale complessa ed efficienza operativa. Mi specializzo nello sviluppo di applicazioni web scalabili (Next.js, Laravel) e strumenti interni che risolvono problemi di business.",
+      "Il mio background unisce competenze tecniche profonde, dall'automazione in Python all'integrazione di IA generativa, con leadership strategica. Non scrivo solo codice; progetto sistemi che riducono attriti, ottimizzano i flussi e generano crescita misurabile.",
+      "Core Stack: React, Next.js, Node.js, Python, Laravel.",
+      "Focus: Automazione dei flussi, web immersivo, architettura dei sistemi.",
+      "Lingue: Spagnolo (Madrelingua), Inglese (Fluente), Italiano (Intermedio)."
+    ]
+  },
+  "contact": {
+    "title": "Contatto",
+    "email": "carlosabolivart@gmail.com",
+    "linkedin": "LinkedIn: /in/carlos-alejandro-bolivar",
+    "github": "GitHub: github.com/kbtale",
+    "location": "Località: Maracaibo, Venezuela"
+  }
+}

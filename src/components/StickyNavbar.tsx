@@ -1,22 +1,25 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { useTranslations } from "next-intl";
 import WhooshButton from "./WhooshButton";
 import styles from "./StickyNavbar.module.css";
 
-const SECTION_ITEMS = [
-  { id: "home", label: "Home" },
-  { id: "work", label: "Work" },
-  { id: "experience", label: "Experience" },
-  { id: "about", label: "About" },
-  { id: "contact", label: "Contact" },
-];
-
 export default function StickyNavbar() {
+  const t = useTranslations("nav");
   const [activeId, setActiveId] = useState<string | null>("home");
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const items = useMemo(() => SECTION_ITEMS, []);
+  const items = useMemo(
+    () => [
+      { id: "home", label: t("home") },
+      { id: "work", label: t("work") },
+      { id: "experience", label: t("experience") },
+      { id: "about", label: t("about") },
+      { id: "contact", label: t("contact") },
+    ],
+    [t]
+  );
 
   useEffect(() => {
     let rafId: number | null = null;
