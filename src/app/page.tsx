@@ -1,9 +1,12 @@
 import { Fragment } from "react";
 import { getTranslations } from "next-intl/server";
 import FaceWireframeCanvas from "../components/FaceWireframeCanvas";
+import ParallaxTitle from "../components/ParallaxTitle";
+import ProjectsSection from "../components/ProjectsSection";
 import StickyNavbar from "../components/StickyNavbar";
 import WhooshButton from "../components/WhooshButton";
 import WireframeGridCanvas from "../components/WireframeGridCanvas";
+import { projects } from "../data/projects";
 import styles from "./page.module.css";
 
 export default async function Home() {
@@ -25,7 +28,7 @@ export default async function Home() {
               <p>{t("hero.slogan")}</p>
             </div>
             <div className={styles.heroCtas}>
-              <WhooshButton label={t("cta.viewWork") } href="#work" />
+              <WhooshButton label={t("cta.viewWork") } href="#projects" />
               <WhooshButton label={t("cta.getInTouch")} href="#contact" />
             </div>
           </section>
@@ -35,40 +38,7 @@ export default async function Home() {
             </div>
           </section>
 
-          <section className={styles.workFilter} id="work" data-section="work">
-            <h2>{t("work.title")}</h2>
-            <p>{t("work.filters")}</p>
-            <div>
-              <h3>{t("work.items.automationSuite.title")}</h3>
-              <p>{t("work.items.automationSuite.tag")}</p>
-              <p>{t("work.items.automationSuite.description")}</p>
-            </div>
-            <div>
-              <h3>{t("work.items.dataMigration.title")}</h3>
-              <p>{t("work.items.dataMigration.tag")}</p>
-              <p>{t("work.items.dataMigration.description")}</p>
-            </div>
-            <div>
-              <h3>{t("work.items.inventory.title")}</h3>
-              <p>{t("work.items.inventory.tag")}</p>
-              <p>{t("work.items.inventory.description")}</p>
-            </div>
-            <div>
-              <h3>{t("work.items.edtech.title")}</h3>
-              <p>{t("work.items.edtech.tag")}</p>
-              <p>{t("work.items.edtech.description")}</p>
-            </div>
-          </section>
-          <section className={styles.workA} data-section="work">
-            <h3>{t("work.cards.workA.title")}</h3>
-            <p>{t("work.cards.workA.tag")}</p>
-            <p>{t("work.cards.workA.stack")}</p>
-          </section>
-          <section className={styles.workB} data-section="work">
-            <h3>{t("work.cards.workB.title")}</h3>
-            <p>{t("work.cards.workB.tag")}</p>
-            <p>{t("work.cards.workB.stack")}</p>
-          </section>
+          <ProjectsSection projects={projects} />
 
           {t.raw("experience.items").map(
             (

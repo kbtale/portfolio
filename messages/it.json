@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "Home",
-    "work": "Progetti",
+    "projects": "Il mio lavoro",
     "experience": "Esperienza",
     "about": "Chi sono",
     "contact": "Contatto"
@@ -15,8 +15,18 @@
     "slogan": "Progetto sistemi. Automatizzo la crescita."
   },
   "work": {
-    "title": "Filtri di lavoro",
+    "animatedTitle": "Il mio lavoro",
     "filters": "Tutti · Automazione dei flussi · Ingegneria backend · Full stack web · Ottimizzazione dei sistemi",
+    "categoriesLabel": "Categorie dei progetti",
+    "categories": {
+      "websites": "Siti web",
+      "webapps": "Web app",
+      "desktop": "Desktop",
+      "mobile": "Mobile",
+      "extensions": "Estensioni",
+      "libraries": "Librerie",
+      "tools": "Strumenti"
+    },
     "items": {
       "automationSuite": {
         "title": "Suite di automazione operativa",
@@ -51,6 +61,10 @@
         "stack": "Python · XML Parsing · SQL · PowerShell"
       }
     }
+  },
+  "projects": {
+    "techStack": "Stack tecnico",
+    "viewProject": "Vedi progetto"
   },
   "experience": {
     "items": [

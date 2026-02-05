@@ -13,7 +13,7 @@ export default function StickyNavbar() {
   const items = useMemo(
     () => [
       { id: "home", label: t("home") },
-      { id: "work", label: t("work") },
+      { id: "projects", label: t("projects") },
       { id: "experience", label: t("experience") },
       { id: "about", label: t("about") },
       { id: "contact", label: t("contact") },
