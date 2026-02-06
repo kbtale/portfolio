@@ -68,7 +68,7 @@ export const techStack: Tech[] = [
   { id: "supabase", name: "Supabase", icon: "supabase", category: "platform" },
   { id: "chrome-extensions", name: "Chrome Extensions", icon: "chrome", category: "platform" },
   { id: "nodejs", name: "Node.js", icon: "node", category: "platform" },
-  { id: "ai", name: "AI Integration", icon: "ai", category: "tool" },
+  { id: "ai", name: "AI", icon: "ai", category: "tool" },
   { id: "docker", name: "Docker", icon: "docker", category: "tool" },
   { id: "apicalypse", name: "Apicalypse", icon: "apicalypse", category: "tool" },
   { id: "make", name: "Make", icon: "make", category: "tool" },
@@ -87,7 +87,7 @@ export const projects: Project[] = [
     categories: ["websites", "webapps"],
     additionalLinks: {
       type: "website",
-      link: "findthagame.vercel.app",
+      link: "https://findthagame.vercel.app",
     },
     media: {
       type: "video",
@@ -154,12 +154,12 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/shell-c",
     repo: "kbtale/shell-c",
     stars: null,
-    description: "Developed as a robust C-based solution to the CodeCrafters challenge, this cross-platform shell implements a fully functional command-line interpreter compatible with Linux, macOS, and Windows. The architecture supports complex command parsing, including context-aware escaping, quoted string handling, and multi-stage pipelines. It features granular I/O redirection for standard output and error streams, alongside persistent history management and platform-specific tab autocompletion. Beyond standard POSIX compliance, the application includes a suite of extended built-in utilities for tasks ranging from binary file inspection to network diagnostics, utilizing distinct process creation strategies like fork/exec and _spawnv to ensure native performance across operating systems.",
+    description: "This project rebuilds the command line interface with expanded capabilities. Beyond basic file management, it includes utilities to view file internals, check the weather, and diagnose internet issues. It runs on Windows, Mac, and Linux.",
     tech: ["c"],
     categories: ["tools", "desktop"],
     additionalLinks: {
       type: "none",
-      link: "This project rebuilds the command line interface with expanded capabilities. Beyond basic file management, it includes utilities to view file internals, check the weather, and diagnose internet issues. It runs on Windows, Mac, and Linux.",
+      link: "",
     },
     media: {
       type: "video",

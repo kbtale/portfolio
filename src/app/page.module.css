@@ -197,7 +197,7 @@
   position: absolute;
   inset: 0;
   margin: auto;
-  width: clamp(260px, 22vw, 340px);
+  width: clamp(300px, 28vw, 400px);
   min-height: clamp(300px, 38vh, 440px);
   background: #fffcf8;
   border: 1px solid rgba(64, 46, 50, 0.5);
@@ -340,7 +340,7 @@
 }
 
 .projectMedia {
-  height: clamp(150px, 24vh, 200px);
+  height: clamp(140px, 20vh, 180px);
   flex: 0 0 auto;
   background: linear-gradient(
     135deg,
@@ -385,6 +385,109 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
   overflow: hidden;
+}
+
+.projectActions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.projectActionRow {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.wideWhooshWrapper {
+  flex: 1;
+}
+
+/* Ensure WhooshButton takes full width of wrapper */
+.wideWhooshWrapper > a {
+  width: 100%;
+  border-radius: 0;
+}
+
+
+
+/* Badges Container - Top of Media */
+.projectBadges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: flex-start; /* Align left */
+  align-items: flex-start;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.repoBadge {
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  padding: 6px 12px;
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: opacity 0.3s ease, background 0.2s ease;
+  
+  /* No rounded corners as requested */
+  border-radius: 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Only show and enable clicks when hovering the ACTIVE card */
+.projectCard[data-active="true"]:hover .repoBadge {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.repoBadge:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.repoBadgeDivider {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.projectStack {
+  font-size: 0.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.techBadge {
+  background: rgba(64, 46, 50, 0.08);
+  border: 1px solid rgba(64, 46, 50, 0.1);
+  padding: 4px 8px;
+  /* No rounded corners */
+  border-radius: 0;
+  white-space: nowrap;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Target the inner elements cleanly */
+.githubBadgeInner {
+  padding: 6px 10px !important;
+  border-radius: 20px !important;
 }
 
 .projectsTitle {

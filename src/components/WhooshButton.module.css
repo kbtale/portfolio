@@ -144,6 +144,18 @@
     opacity: 0;
   }
 
+  .buttonColorSwoosh.hasIcon:is(:hover, :focus-visible) .buttonColorSwooshText {
+    rotate: none;
+    translate: none;
+    opacity: 1;
+    color: var(--_theme---button-bg); /* Switch to background color on hover */
+  }
+
+  /* Adjust padding for icon-only buttons to be more square/fitted */
+  .hasIcon.noDot .buttonColorSwooshInner {
+    padding: 0.5em; /* Reduced from 0.8em to match text button height (using ~1.2em icon) */
+  }
+
   .buttonColorSwoosh:is(:hover, :focus-visible) .buttonColorSwooshDot {
     background-color: var(--text-primary) !important;
   }

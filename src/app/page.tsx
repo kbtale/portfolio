@@ -6,7 +6,7 @@ import ProjectsSection from "../components/ProjectsSection";
 import StickyNavbar from "../components/StickyNavbar";
 import WhooshButton from "../components/WhooshButton";
 import WireframeGridCanvas from "../components/WireframeGridCanvas";
-import { projects } from "../data/projects";
+import { fetchGitHubMeta, projects } from "../data/projects";
 import styles from "./page.module.css";
 
 export default async function Home() {
@@ -38,7 +38,15 @@ export default async function Home() {
             </div>
           </section>
 
-          <ProjectsSection projects={projects} />
+
+          <ProjectsSection 
+            projects={await Promise.all(
+              projects.map(async (p) => {
+                const meta = await fetchGitHubMeta(p.repo);
+                return { ...p, stars: meta?.stars ?? null };
+              })
+            )} 
+          />
 
           {t.raw("experience.items").map(
             (
