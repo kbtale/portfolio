@@ -15,6 +15,10 @@ export type Project = {
   tech: string[]
   categories: ProjectCategoryId[]
   additionalLinks: { type: string; link: string }
+  media?: {
+    type: "image" | "video";
+    url: string;
+  };
 };
 
 export type ProjectCategoryId =
@@ -85,6 +89,10 @@ export const projects: Project[] = [
       type: "website",
       link: "findthagame.vercel.app",
     },
+    media: {
+      type: "video",
+      url: "https://github.com/user-attachments/assets/a6e10484-587e-466a-a8de-b02ac710de9a"
+    }
   },
   {
     id: "ocr-to-txt",
@@ -99,6 +107,10 @@ export const projects: Project[] = [
       type: "installer",
       link: "https://github.com/kbtale/ocr-to-txt/releases/tag/v1.0"
     },
+    media: {
+      type: "image",
+      url: "https://raw.githubusercontent.com/kbtale/ocr-to-txt/refs/heads/master/src/media/Interface.png"
+    }
   },
   {
     id: "lease-sentinel",
@@ -113,6 +125,10 @@ export const projects: Project[] = [
       type: "website",
       link: "https://lease-sentinel.vercel.app/",
     },
+    media: {
+      type: "video",
+      url: "https://github.com/user-attachments/assets/8eb97ecf-a650-4fab-9aaa-3ae42a62de68"
+    }
   },
   {
     id: "palindot",
@@ -127,6 +143,10 @@ export const projects: Project[] = [
       type: "none",
       link: "",
     },
+    media: {
+      type: "image",
+      url: ""
+    }
   },
   {
     id: "shell-c",
@@ -141,6 +161,10 @@ export const projects: Project[] = [
       type: "none",
       link: "This project rebuilds the command line interface with expanded capabilities. Beyond basic file management, it includes utilities to view file internals, check the weather, and diagnose internet issues. It runs on Windows, Mac, and Linux.",
     },
+    media: {
+      type: "video",
+      url: "https://github.com/user-attachments/assets/5c94e22a-642a-4c0e-bade-804216c247e6"
+    }
   },
   {
     id: "retro-notes",
@@ -155,6 +179,10 @@ export const projects: Project[] = [
       type: "none",
       link: "",
     },
+    media: {
+      type: "video",
+      url: "https://github.com/user-attachments/assets/2c9199db-4307-46bf-8844-423c49e5076d"
+    }
   },
   {
     id: "exhale-app",
@@ -169,6 +197,10 @@ export const projects: Project[] = [
       type: "installer",
       link: "https://github.com/kbtale/exhale-app/releases/tag/v1.1.0"
     },
+    media: {
+      type: "image",
+      url: ""
+    }
   },
   {
     id: "useless-polymath",
@@ -183,6 +215,10 @@ export const projects: Project[] = [
       type: "none",
       link: "",
     },
+    media: {
+      type: "image",
+      url: ""
+    }
   },
   {
     id: "civy",
@@ -197,6 +233,10 @@ export const projects: Project[] = [
       type: "none",
       link: "",
     },
+    media: {
+      type: "video",
+      url: "https://github.com/user-attachments/assets/51981cd9-b120-4d6b-837c-63ee0acef9e7"
+    }
   },
   {
     id: "react-three-text-fx",
@@ -211,6 +251,10 @@ export const projects: Project[] = [
       type: "webiste",
       link: "https://www.npmjs.com/package/react-three-text-fx",
     },
+    media: {
+      type: "video",
+      url: "https://github.com/user-attachments/assets/43bda4d2-65b5-476e-99c7-2fdace0dcccf"
+    }
   },
   {
     id: "openrise-www",
@@ -225,6 +269,10 @@ export const projects: Project[] = [
       type: "website",
       link: "https://openrise.tech/",
     },
+    media: {
+      type: "video",
+      url: "https://github.com/user-attachments/assets/04a59354-78a5-4060-909e-0c75b265982a"
+    }
   },
   {
     id: "te-filter",
@@ -239,6 +287,10 @@ export const projects: Project[] = [
       type: "none",
       link: ""
     },
+    media: {
+      type: "image",
+      url: ""
+    }
   },
 ];
 

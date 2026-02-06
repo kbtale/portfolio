@@ -4,6 +4,7 @@ import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import ParallaxTitle from "./ParallaxTitle";
 import WhooshButton from "./WhooshButton";
+import Image from "next/image";
 import type { Project, ProjectCategoryId } from "../data/projects";
 import { projectCategories, techStack } from "../data/projects";
 import styles from "../app/page.module.css";
@@ -221,7 +222,38 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
               data-position={positionMap[index]}
               data-active={index === activePositionIndex}
             >
-              <div className={styles.projectMedia} aria-hidden="true" />
+              <div className={styles.projectMedia} aria-hidden="true">
+                {project.media && project.media.url ? (
+                  project.media.type === "video" ? (
+                    <video
+                      src={project.media.url}
+                      className={styles.projectVideo}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                    />
+                  ) : (
+                    <Image
+                      src={project.media.url}
+                      alt={project.title}
+                      className={styles.projectImage}
+                      draggable={false}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  )
+                ) : (
+                  <Image
+                    src="/images/placeholder.jpeg"
+                    alt=""
+                    className={styles.projectImage}
+                    draggable={false}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                )}
+              </div>
               <div className={styles.projectBody}>
                 <h3>{project.title}</h3>
                 <p className={styles.projectDescription}>{project.description || "—"}</p>
