@@ -64,7 +64,6 @@
   z-index: 1;
 }
 
-
 .grid > section {
   position: relative;
   z-index: 1;
@@ -200,19 +199,76 @@
   margin: auto;
   width: clamp(260px, 22vw, 340px);
   min-height: clamp(300px, 38vh, 440px);
-  background: rgba(255, 255, 255, 0.9);
+  background: #fffcf8;
   border: 1px solid rgba(64, 46, 50, 0.5);
   box-shadow: 0 24px 48px rgba(64, 46, 50, 0.12);
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   transform-style: preserve-3d;
-  transition: transform 0.85s ease, opacity 0.85s ease;
+  transition:
+    transform 0.85s ease,
+    opacity 0.85s ease;
   pointer-events: none;
+  animation: popIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) backwards;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+}
+
+/* 3D Side Edge - Left spine (for left-side cards) */
+.projectCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -30px;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(to right, #d8cfc8, #e8e0d8);
+  border: 1px solid rgba(64, 46, 50, 0.25);
+  border-right: none;
+  transform-origin: right center;
+  transform: perspective(800px) rotateY(-60deg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.85s ease;
+}
+
+/* 3D Side Edge - Right spine (for right-side cards) */
+.projectCard::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -30px;
+  width: 30px;
+  height: 100%;
+  background: linear-gradient(to left, #d8cfc8, #e8e0d8);
+  border: 1px solid rgba(64, 46, 50, 0.25);
+  border-left: none;
+  transform-origin: left center;
+  transform: perspective(800px) rotateY(60deg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.85s ease;
 }
 
 .projectCard * {
   pointer-events: none;
+}
+
+/* Extended positions for small card counts */
+.projectCard[data-position="-2"] {
+  transform: translateX(-800px) rotateY(55deg) scale(0.58);
+  opacity: 0;
+}
+
+.projectCard[data-position="-1"] {
+  transform: translateX(-720px) rotateY(50deg) scale(0.63);
+  opacity: 0;
 }
 
 .projectCard[data-position="0"] {
@@ -251,6 +307,30 @@
   opacity: 0;
 }
 
+.projectCard[data-position="7"] {
+  transform: translateX(720px) rotateY(-50deg) scale(0.63);
+  opacity: 0;
+}
+
+.projectCard[data-position="8"] {
+  transform: translateX(800px) rotateY(-55deg) scale(0.58);
+  opacity: 0;
+}
+
+/* Show LEFT edge (::before) on LEFT-side cards */
+.projectCard[data-position="0"]::before,
+.projectCard[data-position="1"]::before,
+.projectCard[data-position="2"]::before {
+  opacity: 1;
+}
+
+/* Show RIGHT edge (::after) on RIGHT-side cards */
+.projectCard[data-position="4"]::after,
+.projectCard[data-position="5"]::after,
+.projectCard[data-position="6"]::after {
+  opacity: 1;
+}
+
 .projectCard[data-active="true"] {
   pointer-events: auto;
 }
@@ -262,7 +342,11 @@
 .projectMedia {
   height: clamp(150px, 24vh, 200px);
   flex: 0 0 auto;
-  background: linear-gradient(135deg, rgba(64, 46, 50, 0.12), rgba(64, 46, 50, 0.02));
+  background: linear-gradient(
+    135deg,
+    rgba(64, 46, 50, 0.12),
+    rgba(64, 46, 50, 0.02)
+  );
   border-bottom: 1px solid rgba(64, 46, 50, 0.15);
 }
 
@@ -546,5 +630,4 @@ a.secondary {
     --button-secondary-hover: #c94d3d;
     --button-secondary-border: #de998b;
   }
-
 }

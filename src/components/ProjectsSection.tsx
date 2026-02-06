@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import ParallaxTitle from "./ParallaxTitle";
 import WhooshButton from "./WhooshButton";
@@ -16,8 +16,18 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const t = useTranslations();
   const [activeCategories, setActiveCategories] = useState<ProjectCategoryId[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [filterVersion, setFilterVersion] = useState(0);
+  const currentIndexRef = useRef(currentIndex);
+  useLayoutEffect(() => {
+    currentIndexRef.current = currentIndex;
+  }, [currentIndex]);
   const dragStartX = useRef<number | null>(null);
   const dragHasMoved = useRef(false);
+  const lastShiftTime = useRef(0);
+  const [prevFilteredProjects, setPrevFilteredProjects] = useState<Project[]>([]);
+  // Store active project ID in state to safely access during render for derived state updates
+  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
+  const [prevCurrentIndex, setPrevCurrentIndex] = useState(-1);
 
   const filteredProjects = useMemo(() => {
     const base =
@@ -29,9 +39,39 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     return Array.from(new Map(base.map((project) => [project.id, project])).values());
   }, [activeCategories, projects]);
 
-  useEffect(() => {
-    setCurrentIndex(0);
-  }, [filteredProjects.length]);
+  // Track the currently active project ID to preserve focus
+  // Use ref to avoid re-renders when filteredProjects doesn't change
+  // Sync activeProjectId when currentIndex changes (during render)
+  if (currentIndex !== prevCurrentIndex) {
+    setPrevCurrentIndex(currentIndex);
+    if (filteredProjects[currentIndex]) {
+       // Only update if actually different to minimize updates (though React handles same-value bailouts)
+       if (activeProjectId !== filteredProjects[currentIndex].id) {
+          setActiveProjectId(filteredProjects[currentIndex].id);
+       }
+    }
+  }
+
+  // Adjust index when filtered list changes (during render to fix lint error and avoid cascade)
+  if (filteredProjects !== prevFilteredProjects) {
+    setPrevFilteredProjects(filteredProjects);
+    if (filteredProjects.length === 0) {
+      if (currentIndex !== 0) setCurrentIndex(0);
+    } else {
+      const prevId = activeProjectId;
+      const newIndex = prevId 
+        ? filteredProjects.findIndex(p => p.id === prevId)
+        : -1;
+
+      if (newIndex !== -1) {
+        if (newIndex !== currentIndex) setCurrentIndex(newIndex);
+      } else {
+        const total = filteredProjects.length;
+        const startIndex = total <= 6 ? Math.floor(total / 2) : 0;
+        if (startIndex !== currentIndex) setCurrentIndex(startIndex);
+      }
+    }
+  }
 
   const techNameById = useMemo(() => {
     const entries = techStack.map((tech) => [tech.id, tech.name] as const);
@@ -48,6 +88,27 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     }
 
     const total = filteredProjects.length;
+    
+    // For small counts (≤6), keep cards in original array order for stable animations
+    // Positions shift based on which card is selected
+    if (total <= 6) {
+      const clampedIndex = Math.max(0, Math.min(currentIndex, total - 1));
+      const midpoint = Math.floor(total / 2);
+      
+      // Positions shift so the selected card is at position 3 (center)
+      const shift = midpoint - clampedIndex;
+      const positions = filteredProjects.map((_, i) => {
+        return 3 + (i - midpoint) + shift;
+      });
+      
+      return {
+        visibleProjects: filteredProjects,
+        activePositionIndex: clampedIndex,
+        positionMap: positions,
+      };
+    }
+
+    // For 7+ cards, use modulo wrapping
     const count = Math.min(total, 7);
     const midpoint = Math.floor(count / 2);
     const offsets = Array.from({ length: count }, (_, index) => index - midpoint);
@@ -66,9 +127,21 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   }, [currentIndex, filteredProjects]);
 
   const shiftIndex = (direction: 1 | -1) => {
+    // Throttle navigation to prevent rapid changes
+    const now = Date.now();
+    if (now - lastShiftTime.current < 600) return;
+    lastShiftTime.current = now;
+
     setCurrentIndex((current) => {
       const total = filteredProjects.length;
       if (total === 0) return 0;
+      
+      // For small counts, clamp to prevent wrap-around
+      if (total <= 6) {
+        const next = current + direction;
+        return Math.max(0, Math.min(next, total - 1));
+      }
+      
       const next = (current + direction + total) % total;
       return next;
     });
@@ -127,6 +200,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                     ? current.filter((item) => item !== category.id)
                     : [...current, category.id]
                 );
+                setFilterVersion(v => v + 1);
               }}
             />
           );
@@ -139,7 +213,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
         onPointerUp={handlePointerUp}
         onPointerLeave={handlePointerUp}
       >
-        <div className={styles.projectsStage}>
+        <div key={filterVersion} className={styles.projectsStage}>
           {visibleProjects.map((project, index) => (
             <article
               key={project.id}
