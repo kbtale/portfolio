@@ -4,8 +4,11 @@ import type { MouseEventHandler } from 'react'
 import styles from './WhooshButton.module.css'
 
 type WhooshButtonProps = {
-    label: string
+    label?: string
+    icon?: React.ReactNode
     href?: string
+    target?: string
+    rel?: string
     className?: string
     innerClassName?: string
     showDot?: boolean
@@ -15,7 +18,10 @@ type WhooshButtonProps = {
 
 export default function WhooshButton({
     label,
+    icon,
     href = '#',
+    target,
+    rel,
     className,
     innerClassName,
     showDot = true,
@@ -26,9 +32,10 @@ export default function WhooshButton({
     if (transparentBase) classes.push(styles.transparentBase)
     if (!showDot) classes.push(styles.noDot)
     if (className) classes.push(className)
+    if (icon) classes.push(styles.hasIcon)
 
     return (
-        <a href={href} className={classes.join(' ')} onClick={onClick}>
+        <a href={href} target={target} rel={rel} className={classes.join(' ')} onClick={onClick}>
             <span className={styles.buttonColorSwooshBg}>
                 <span
                     style={{ ['--index' as string]: 0 }}
@@ -45,7 +52,10 @@ export default function WhooshButton({
                     .filter(Boolean)
                     .join(' ')}
             >
-                <span className={styles.buttonColorSwooshText}>{label}</span>
+                {icon && <span className={styles.iconStatic}>{icon}</span>}
+                <span className={styles.buttonColorSwooshText}>
+                    {label}
+                </span>
                 {showDot ? <span className={styles.buttonColorSwooshDot} /> : null}
             </span>
         </a>
