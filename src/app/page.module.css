@@ -172,7 +172,7 @@
 }
 
 .projectsCarousel {
-  margin-top: 32px;
+  margin-top: 1vh;
   display: flex;
   justify-content: center;
   perspective: 1400px;
@@ -189,7 +189,7 @@
 .projectsStage {
   position: relative;
   width: min(100%, 1000px);
-  height: clamp(360px, 52vh, 480px);
+  height: clamp(440px, 55vh, 580px);
   transform-style: preserve-3d;
 }
 
@@ -198,7 +198,7 @@
   inset: 0;
   margin: auto;
   width: clamp(300px, 28vw, 400px);
-  min-height: clamp(300px, 38vh, 440px);
+  min-height: clamp(420px, 51vh, 540px);
   background: #fffcf8;
   border: 1px solid rgba(64, 46, 50, 0.5);
   box-shadow: 0 24px 48px rgba(64, 46, 50, 0.12);
@@ -340,7 +340,7 @@
 }
 
 .projectMedia {
-  height: clamp(140px, 20vh, 180px);
+  height: clamp(180px, 24vh, 220px);
   flex: 0 0 auto;
   background: linear-gradient(
     135deg,
@@ -375,6 +375,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   overflow: hidden;
 }
 
@@ -397,18 +398,19 @@
 
 .projectActionRow {
   display: flex;
-  gap: 8px;
+  gap: 6px; /* Set 6px gap as requested */
   width: 100%;
+  justify-content: flex-start; /* Align left */
 }
 
-.wideWhooshWrapper {
-  flex: 1;
-}
+/* .wideWhooshWrapper { flex: 1; } Removed so buttons size to content */
 
-/* Ensure WhooshButton takes full width of wrapper */
+/* Ensure WhooshButton takes size of content */
 .wideWhooshWrapper > a {
-  width: 100%;
+  display: inline-grid; /* Force content sizing */
+  width: auto;
   border-radius: 0;
+  justify-content: center; /* Center text within the button */
 }
 
 
@@ -744,3 +746,257 @@ a.secondary {
     --button-secondary-border: #de998b;
   }
 }
+
+/* ========================================
+   PROJECT DETAIL VIEW
+   ======================================== */
+
+/* Wrapper to stack Carousel and Detail view on top of each other during transitions */
+.projectsContentWrapper {
+  display: grid;
+  grid-template-areas: "stack";
+  width: 100%;
+  flex: 1; /* Take remaining space in workFilter */
+  position: relative;
+}
+
+/* Wrapper for carousel content that can animate out */
+.carouselWrapper {
+  display: flex !important; /* Override 'contents' to allow grid placement */
+  flex-direction: column;
+  gap: 16px; /* Match workFilter gap */
+  grid-area: stack;
+  width: 100%;
+}
+
+.carouselWrapper.exiting {
+  animation: riseOutBlur 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  pointer-events: none; /* Disable interaction when exiting */
+}
+
+/* Detail view container - matches carouselWrapper positioning */
+.projectDetail {
+  grid-area: stack;
+  width: 100%;
+  z-index: 10; /* Ensure detail is on top */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 16px; /* Match workFilter gap */
+  /* opacity: 0; REMOVED base opacity/transform to allow children to animate */
+  /* transform: translateY(-30px); REMOVED */
+}
+
+.projectDetail.entering .projectDetailHeader {
+  opacity: 0;
+  animation: slideInBlur 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.projectDetail.entering .projectDetailMedia {
+  opacity: 0;
+  animation: slideInBlur 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.1s forwards;
+}
+
+.projectDetail.entering .projectDetailInfo {
+  opacity: 0;
+  animation: slideInBlur 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) 0.2s forwards;
+}
+
+.projectDetail.exiting {
+  animation: riseOutBlur 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideInBlur {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.98);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes riseOutBlur {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.98);
+    filter: blur(10px);
+  }
+}
+
+@keyframes dropIn { /* Deprecated/Unused or kept for reference */
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes riseOut {
+  to {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+/* Back button and Title row */
+.projectDetailHeader {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.detailStarsBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border: 1px solid rgba(64, 46, 50, 0.2);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: rgba(255, 252, 248, 0.8);
+  margin-left: -12px;
+}
+
+/* Title */
+.projectDetailTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* Two-column content area */
+.projectDetailContent {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 32px;
+  flex: 1;
+  min-height: 0;
+  text-align: left; /* Ensure left alignment */
+}
+
+/* Left column: Video/Image */
+.projectDetailMedia {
+  background: rgba(64, 46, 50, 0.08);
+  border: 1px solid rgba(64, 46, 50, 0.15);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.projectDetailMedia video,
+.projectDetailMedia img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Changed to contain so full video/image is visible */
+}
+
+/* Right column: Info */
+.projectDetailInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 32px; /* Increased to separate About and Tech sections */
+  justify-content: flex-start;
+}
+
+.detailSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Subtitles matched to Button Text Size (0.95rem) */
+.projectDetailAboutTitle,
+.projectDetailTechTitle {
+  font-size: 0.95rem;
+  font-weight: 700; /* Bold like button text often is */
+  color: var(--text-primary);
+  margin: 0; /* Rely on gap */
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-family: inherit; /* Inherit global font, or Sanchez if needed */
+}
+
+.projectDetailDescription {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.projectDetailTechList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Actions Row */
+.projectDetailActions {
+  display: flex;
+  flex-direction: row; /* Row layout */
+  gap: 12px;
+  margin-top: auto;
+  justify-content: flex-start;
+}
+
+@media (max-width: 767px) {
+  .projectDetailContent {
+    grid-template-columns: 1fr;
+  }
+  
+  .projectDetailMedia {
+    height: 200px;
+  }
+}
+
+/* Dark Mode Overrides for Project Detail */
+@media (prefers-color-scheme: dark) {
+  .detailStarsBadge {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+  }
+
+  .projectDetailMedia {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Dark Mode Cards */
+  .projectCard {
+    background: #2c2022; /* Darker than background #402e32 */
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+  }
+
+  .projectCard::before {
+    background: linear-gradient(to right, #1e1416, #2c2022);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .projectCard::after {
+    background: linear-gradient(to left, #1e1416, #2c2022);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+

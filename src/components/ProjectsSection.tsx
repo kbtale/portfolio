@@ -29,6 +29,11 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   // Store active project ID in state to safely access during render for derived state updates
   const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
   const [prevCurrentIndex, setPrevCurrentIndex] = useState(-1);
+  
+  // Detail view state
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [viewMode, setViewMode] = useState<"carousel" | "detail" | "transitioning">("carousel");
+  const [isExiting, setIsExiting] = useState(false);
 
   const filteredProjects = useMemo(() => {
     const base =
@@ -170,6 +175,30 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     event.currentTarget.releasePointerCapture(event.pointerId);
   };
 
+  // Open the detail view for a project
+  const openDetailView = (project: Project) => {
+    setSelectedProject(project);
+    setIsExiting(true); // Start carousel exit animation
+    setViewMode("transitioning");
+    
+    // After carousel exits, show detail
+    setTimeout(() => {
+      setIsExiting(false);
+      setViewMode("detail");
+    }, 500); // Match CSS animation duration
+  };
+
+  // Close detail view and return to carousel
+  const closeDetailView = () => {
+    setIsExiting(true); // Detail exits
+    
+    setTimeout(() => {
+      setSelectedProject(null);
+      setIsExiting(false);
+      setViewMode("carousel");
+    }, 400); // Match riseOut animation
+  };
+
   return (
     <section className={styles.workFilter} id="projects" data-section="projects">
       <h2>
@@ -183,51 +212,195 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           spaceClassName={styles.projectsTitleSpace}
         />
       </h2>
-      <div className={styles.workCategories} aria-label={t("work.categoriesLabel")}>
-        {projectCategories.map((category) => {
-          const isActive = activeCategories.includes(category.id);
-          const label = t(`work.categories.${category.id}`);
-          return (
-            <WhooshButton
-              key={category.id}
-              label={label}
-              href="#"
-              showDot={false}
-              className={isActive ? styles.categoryActive : undefined}
-              onClick={(event) => {
-                event.preventDefault();
-                setActiveCategories((current) =>
-                  current.includes(category.id)
-                    ? current.filter((item) => item !== category.id)
-                    : [...current, category.id]
+      
+      <div className={styles.projectsContentWrapper}>
+        {/* Carousel content - hidden when detail view is open */}
+        {viewMode !== "detail" && (
+          <div className={`${styles.carouselWrapper} ${isExiting && viewMode === "transitioning" ? styles.exiting : ""}`}>
+            <div className={styles.workCategories} aria-label={t("work.categoriesLabel")}>
+              {projectCategories.map((category) => {
+                const isActive = activeCategories.includes(category.id);
+                const label = t(`work.categories.${category.id}`);
+                return (
+                  <WhooshButton
+                    key={category.id}
+                    label={label}
+                    href="#"
+                    showDot={false}
+                    className={isActive ? styles.categoryActive : undefined}
+                    onClick={(event) => {
+                      event.preventDefault();
+                      setActiveCategories((current) =>
+                        current.includes(category.id)
+                          ? current.filter((item) => item !== category.id)
+                          : [...current, category.id]
+                      );
+                      setFilterVersion(v => v + 1);
+                    }}
+                  />
                 );
-                setFilterVersion(v => v + 1);
-              }}
-            />
-          );
-        })}
-      </div>
-      <div
-        className={styles.projectsCarousel}
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerLeave={handlePointerUp}
-      >
-        <div key={filterVersion} className={styles.projectsStage}>
-          {visibleProjects.map((project, index) => (
-            <article
-              key={project.id}
-              className={styles.projectCard}
-              data-position={positionMap[index]}
-              data-active={index === activePositionIndex}
+              })}
+            </div>
+            <div
+              className={styles.projectsCarousel}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerLeave={handlePointerUp}
             >
-              <div className={styles.projectMedia} aria-hidden="true">
-                {project.media && project.media.url ? (
-                  project.media.type === "video" ? (
+          <div key={filterVersion} className={styles.projectsStage}>
+            {visibleProjects.map((project, index) => (
+              <article
+                key={project.id}
+                className={styles.projectCard}
+                data-position={positionMap[index]}
+                data-active={index === activePositionIndex}
+              >
+                <div className={styles.projectMedia} aria-hidden="true">
+                  {project.media && project.media.url ? (
+                    project.media.type === "video" ? (
+                      <video
+                        src={project.media.url}
+                        className={styles.projectVideo}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                      />
+                    ) : (
+                      <Image
+                        src={project.media.url}
+                        alt={project.title}
+                        className={styles.projectImage}
+                        draggable={false}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      />
+                    )
+                  ) : (
+                    <Image
+                      src="/images/placeholder.jpeg"
+                      alt=""
+                      className={styles.projectImage}
+                      draggable={false}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
+                  )}
+                  <div className={styles.projectBadges}>
+                    <a 
+                      href={project.githubUrl}
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className={styles.repoBadge}
+                      onPointerDown={(e) => e.stopPropagation()}
+                    >
+                      <svg
+                        height="16"
+                        aria-hidden="true"
+                        viewBox="0 0 16 16"
+                        version="1.1"
+                        width="16"
+                        fill="currentColor"
+                      >
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                      </svg>
+                      {project.stars !== null && project.stars > 0 && (
+                        <>
+                          <span className={styles.repoBadgeDivider}></span>
+                          <svg
+                            aria-hidden="true"
+                            height="16"
+                            viewBox="0 0 16 16"
+                            version="1.1"
+                            width="16"
+                            fill="currentColor"
+                          >
+                            <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
+                          </svg>
+                          <span>{project.stars}</span>
+                        </>
+                      )}
+                    </a>
+                  </div>
+                </div>
+                <div className={styles.projectBody}>
+                  <h3>{project.title}</h3>
+                  <p className={styles.projectDescription}>{project.description || "—"}</p>
+                  <div className={styles.projectStack}>
+                    {project.tech.length
+                      ? project.tech.map((tech) => (
+                          <span key={tech} className={styles.techBadge}>
+                            {techNameById[tech] ?? tech}
+                          </span>
+                        ))
+                      : "—"}
+                  </div>
+                  <div className={styles.projectActions}>
+                     <div className={styles.projectActionRow}>
+                       <div className={styles.wideWhooshWrapper} onPointerDown={(e) => e.stopPropagation()}>
+                         <WhooshButton 
+                           label="View Details"
+                           href="#"
+                           showDot={false}
+                           onClick={(e) => {
+                             e.preventDefault();
+                             openDetailView(project);
+                           }}
+                         />
+                       </div>
+                      {project.additionalLinks.type !== "none" && (
+                        <div className={styles.wideWhooshWrapper} onPointerDown={(e) => e.stopPropagation()}>
+                          <WhooshButton 
+                             label={project.additionalLinks.type === "installer" ? "Download" : "View Site →"}
+                             href={project.additionalLinks.link}
+                             target="_blank"
+                             rel="noopener noreferrer"
+                             showDot={false}
+                          />
+                        </div>
+                      )}
+                     </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+            </div>
+          </div>
+        )}
+
+        {/* Detail View - shown when a project is selected */}
+        {selectedProject && viewMode !== "carousel" && (
+          <div className={`${styles.projectDetail} ${isExiting ? styles.exiting : styles.entering}`}>
+            <div className={styles.projectDetailHeader}>
+              <WhooshButton 
+                label="← Back"
+                href="#"
+                showDot={false}
+                className={styles.detailBackButton}
+                onClick={(e) => {
+                  e.preventDefault();
+                  closeDetailView();
+                }}
+              />
+              <h3 className={styles.projectDetailTitle}>{selectedProject.title}</h3>
+              {selectedProject.stars !== null && selectedProject.stars > 0 && (
+                <div className={styles.detailStarsBadge}>
+                  <svg aria-hidden="true" height="14" viewBox="0 0 16 16" version="1.1" width="14" fill="currentColor">
+                    <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
+                  </svg>
+                  <span>{selectedProject.stars} Stars</span>
+                </div>
+              )}
+            </div>
+            <div className={styles.projectDetailContent}>
+              {/* Left: Video/Image */}
+              <div className={styles.projectDetailMedia}>
+                {selectedProject.media && selectedProject.media.url ? (
+                  selectedProject.media.type === "video" ? (
                     <video
-                      src={project.media.url}
-                      className={styles.projectVideo}
+                      src={selectedProject.media.url}
                       autoPlay
                       muted
                       loop
@@ -235,99 +408,67 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                     />
                   ) : (
                     <Image
-                      src={project.media.url}
-                      alt={project.title}
-                      className={styles.projectImage}
-                      draggable={false}
+                      src={selectedProject.media.url}
+                      alt={selectedProject.title}
                       fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      style={{ objectFit: "contain" }}
                     />
                   )
                 ) : (
                   <Image
                     src="/images/placeholder.jpeg"
                     alt=""
-                    className={styles.projectImage}
-                    draggable={false}
                     fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    style={{ objectFit: "contain" }}
                   />
                 )}
-                <div className={styles.projectBadges}>
-                  <a 
-                    href={project.githubUrl}
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className={styles.repoBadge}
-                    onPointerDown={(e) => e.stopPropagation()}
-                  >
-                    <svg
-                      height="16"
-                      aria-hidden="true"
-                      viewBox="0 0 16 16"
-                      version="1.1"
-                      width="16"
-                      fill="currentColor"
-                    >
-                      <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                    </svg>
-                    {project.stars !== null && project.stars > 0 && (
-                      <>
-                        <span className={styles.repoBadgeDivider}></span>
-                        <svg
-                          aria-hidden="true"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          version="1.1"
-                          width="16"
-                          fill="currentColor"
-                        >
-                          <path d="M8 .25a.75.75 0 01.673.418l1.882 3.815 4.21.612a.75.75 0 01.416 1.279l-3.046 2.97.719 4.192a.75.75 0 01-1.088.791L8 12.347l-3.766 1.98a.75.75 0 01-1.088-.79l.72-4.194L.818 6.374a.75.75 0 01.416-1.28l4.21-.611L7.327.668A.75.75 0 018 .25z"></path>
-                        </svg>
-                        <span>{project.stars}</span>
-                      </>
-                    )}
-                  </a>
-                </div>
               </div>
-              <div className={styles.projectBody}>
-                <h3>{project.title}</h3>
-                <p className={styles.projectDescription}>{project.description || "—"}</p>
-                <div className={styles.projectStack}>
-                  {project.tech.length
-                    ? project.tech.map((tech) => (
-                        <span key={tech} className={styles.techBadge}>
-                          {techNameById[tech] ?? tech}
-                        </span>
-                      ))
-                    : "—"}
+              {/* Right: Info */}
+              <div className={styles.projectDetailInfo}>
+                <div className={styles.detailSection}>
+                  <h4 className={styles.projectDetailAboutTitle}>About the Project</h4>
+                  <p className={styles.projectDetailDescription}>
+                    {selectedProject.description || "No description available."}
+                  </p>
                 </div>
-                <div className={styles.projectActions}>
-                   <div className={styles.projectActionRow}>
-                     <div className={styles.wideWhooshWrapper} onPointerDown={(e) => e.stopPropagation()}>
-                       <WhooshButton 
-                         label="View Details"
-                         href="#"
-                         showDot={false}
-                       />
-                     </div>
-                    {project.additionalLinks.type !== "none" && (
-                      <div className={styles.wideWhooshWrapper} onPointerDown={(e) => e.stopPropagation()}>
-                        <WhooshButton 
-                           label={project.additionalLinks.type === "installer" ? "Download" : "View Site"}
-                           href={project.additionalLinks.link}
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           showDot={false}
-                        />
-                      </div>
-                    )}
+                
+                <div className={styles.detailSection}>
+                  <h5 className={styles.projectDetailTechTitle}>Tech Stack</h5>
+                  <div className={styles.projectDetailTechList}>
+                    {selectedProject.tech.map((techId) => (
+                      <span key={techId} className={styles.techBadge}>
+                        {techNameById[techId] ?? techId}
+                      </span>
+                    ))}
                   </div>
                 </div>
+                <div className={styles.projectDetailActions}>
+                  {selectedProject.additionalLinks.type !== "none" && (
+                    <WhooshButton 
+                      label={selectedProject.additionalLinks.type === "installer" ? "Download" : "View Site →"}
+                      href={selectedProject.additionalLinks.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      showDot={false}
+                    />
+                  )}
+                  <WhooshButton 
+                    icon={
+                       <svg height="16" aria-hidden="true" viewBox="0 0 16 16" version="1.1" width="16" fill="currentColor">
+                         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+                       </svg>
+                    }
+                    label="GitHub Repo"
+                    href={selectedProject.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    showDot={false}
+                  />
+                </div>
               </div>
-            </article>
-          ))}
-        </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

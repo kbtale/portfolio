@@ -47,13 +47,14 @@ export default function WhooshButton({
                 ></span>
             </span>
             <span
-                data-text={!icon ? label : undefined}
+                data-text={label}
                 className={[styles.buttonColorSwooshInner, innerClassName]
                     .filter(Boolean)
                     .join(' ')}
             >
+                {icon && <span className={styles.iconStatic}>{icon}</span>}
                 <span className={styles.buttonColorSwooshText}>
-                    {icon ? icon : label}
+                    {label}
                 </span>
                 {showDot ? <span className={styles.buttonColorSwooshDot} /> : null}
             </span>

@@ -144,17 +144,26 @@
     opacity: 0;
   }
 
-  .buttonColorSwoosh.hasIcon:is(:hover, :focus-visible) .buttonColorSwooshText {
-    rotate: none;
-    translate: none;
-    opacity: 1;
-    color: var(--_theme---button-bg); /* Switch to background color on hover */
-  }
+/* Styling for static icon - placed absolute so text flow is unaffected */
+.iconStatic {
+  position: absolute;
+  top: 50%;
+  left: 1.25em;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  color: var(--_theme---button-text);
+  pointer-events: none;
+  transition: color .2s var(--color-ease);
+}
 
-  /* Adjust padding for icon-only buttons to be more square/fitted */
-  .hasIcon.noDot .buttonColorSwooshInner {
-    padding: 0.5em; /* Reduced from 0.8em to match text button height (using ~1.2em icon) */
-  }
+/* Ensure text animation works (removed blocking rule) */
+/* Adjust padding when icon is present */
+.hasIcon .buttonColorSwooshInner {
+  padding-left: 3.5em !important; /* Make room for icon */
+}
 
   .buttonColorSwoosh:is(:hover, :focus-visible) .buttonColorSwooshDot {
     background-color: var(--text-primary) !important;
