@@ -20,31 +20,33 @@ export default async function Home() {
       <StickyNavbar />
       <main className={styles.main}>
         <div className={styles.grid}>
-          <section className={styles.heroText} id="home" data-section="home">
-            <div className={styles.heroNameBlock}>
-              <h1>{t("hero.name")}</h1>
-            </div>
-            <div className={styles.heroSloganBlock}>
-              <p>{t("hero.slogan")}</p>
-            </div>
-            <div className={styles.heroCtas}>
-              <WhooshButton label={t("cta.viewWork") } href="#projects" />
-              <WhooshButton label={t("cta.getInTouch")} href="#contact" />
-            </div>
-          </section>
-          <section className={styles.heroFace} data-section="home">
-            <div className={styles.faceCanvas}>
-              <FaceWireframeCanvas />
-            </div>
-          </section>
-
-          <section className={styles.about} id="about" data-section="about">
-            <h2>{t("about.title")}</h2>
-            <h3>{t("about.subtitle")}</h3>
-            {t.raw("about.paragraphs").map((paragraph: string, index: number) => (
-              <p key={`${paragraph.slice(0, 16)}-${index}`}>{paragraph}</p>
-            ))}
-          </section>
+          {/* Sticky Track: Constrains the sticky behavior to Hero + About only */}
+          <div className={styles.stickyTrack}>
+            <section className={styles.heroFace} data-section="home">
+              <div className={styles.faceCanvas}>
+                <FaceWireframeCanvas />
+              </div>
+            </section>
+            <section className={styles.heroText} id="home" data-section="home">
+              <div className={styles.heroNameBlock}>
+                <h1>{t("hero.name")}</h1>
+              </div>
+              <div className={styles.heroSloganBlock}>
+                <p>{t("hero.slogan")}</p>
+              </div>
+              <div className={styles.heroCtas}>
+                <WhooshButton label={t("cta.viewWork") } href="#projects" />
+                <WhooshButton label={t("cta.getInTouch")} href="#contact" />
+              </div>
+            </section>
+            <section className={styles.about} id="about" data-section="about">
+              <h2>{t("about.title")}</h2>
+              <h3>{t("about.subtitle")}</h3>
+              {t.raw("about.paragraphs").map((paragraph: string, index: number) => (
+                <p key={`${paragraph.slice(0, 16)}-${index}`}>{paragraph}</p>
+              ))}
+            </section>
+          </div>
 
 
           <ProjectsSection 
