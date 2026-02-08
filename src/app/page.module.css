@@ -2,6 +2,7 @@
   --background: #fff5ec;
   --foreground: #ffffff;
   --nav-height: 64px;
+  --hero-top-offset: 19px;
   --hero-top-gap: 24px;
 
   --text-primary: #402e32;
@@ -57,21 +58,19 @@
   grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
   column-gap: var(--gutter);
   row-gap: var(--gutter);
-  padding: 0 var(--margin) 120px;
+  padding: 24px var(--margin) 120px;
   min-height: 100vh;
   color: var(--text-primary);
   position: relative;
   z-index: 1;
 }
 
-/* Sticky constraint wrapper - uses subgrid to preserve columns */
 .stickyTrack {
   grid-column: 1 / -1;
   grid-row: 1 / 3;
   display: grid;
   grid-template-columns: subgrid;
   grid-template-rows: subgrid;
-  padding-top: 24px; /* Top padding moved from grid */
 }
 
 .grid > section,
@@ -133,17 +132,16 @@
   color: var(--background);
 }
 
-/* Now inside stickyTrack subgrid */
 .stickyTrack > .heroFace {
   grid-column: 1 / 6;
-  grid-row: 1 / span 2; /* Span across Hero and About rows */
+  grid-row: 1 / span 2;
   
   height: calc(100vh - var(--nav-height) - var(--hero-top-gap));
   min-height: calc(100vh - var(--nav-height) - var(--hero-top-gap));
   
   /* Sticky Behavior */
   position: sticky;
-  top: var(--nav-height); /* Navbar height only */
+  top: calc(var(--nav-height) + var(--hero-top-offset));
   align-self: start;
   z-index: 10;
 
@@ -419,31 +417,25 @@
 
 .projectActionRow {
   display: flex;
-  gap: 6px; /* Set 6px gap as requested */
+  gap: 6px;
   width: 100%;
-  justify-content: flex-start; /* Align left */
+  justify-content: flex-start;
 }
 
-/* .wideWhooshWrapper { flex: 1; } Removed so buttons size to content */
-
-/* Ensure WhooshButton takes size of content */
 .wideWhooshWrapper > a {
-  display: inline-grid; /* Force content sizing */
+  display: inline-grid;
   width: auto;
   border-radius: 0;
-  justify-content: center; /* Center text within the button */
+  justify-content: center;
 }
 
-
-
-/* Badges Container - Top of Media */
 .projectBadges {
   position: absolute;
   top: 12px;
   left: 12px;
   right: 12px;
   display: flex;
-  justify-content: flex-start; /* Align left */
+  justify-content: flex-start;
   align-items: flex-start;
   z-index: 2;
   pointer-events: none;
@@ -466,7 +458,6 @@
   text-decoration: none;
   transition: opacity 0.3s ease, background 0.2s ease;
   
-  /* No rounded corners as requested */
   border-radius: 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
@@ -500,7 +491,6 @@
   background: rgba(64, 46, 50, 0.08);
   border: 1px solid rgba(64, 46, 50, 0.1);
   padding: 4px 8px;
-  /* No rounded corners */
   border-radius: 0;
   white-space: nowrap;
   font-weight: 500;
@@ -576,10 +566,9 @@
 }
 
 .about {
-  grid-column: 6 / 13; /* Same column as HeroText */
-  grid-row: 2;         /* Sit below HeroText */
+  grid-column: 6 / 13;
+  grid-row: 2;
   
-  /* Match HeroText sizing/layout */
   min-height: calc(100vh - var(--nav-height) - var(--hero-top-gap));
   display: flex;
   flex-direction: column;
@@ -668,12 +657,24 @@ a.secondary {
   }
 }
 
+/* Navbar height changes at 900px when hamburger menu appears */
+@media (max-width: 900px) {
+  .page {
+    --nav-height: 60px;
+    --hero-top-offset: 14px;
+  }
+}
+
 @media (max-width: 600px) {
   .grid {
     --columns: 4;
     --margin: 16px;
     --gutter: 16px;
     padding: 64px var(--margin);
+  }
+
+  .stickyTrack {
+    display: contents;
   }
 
   .heroText,
@@ -688,15 +689,18 @@ a.secondary {
     grid-column: 1 / -1;
   }
 
-  .heroFace {
+  .heroFace,
+  .stickyTrack > .heroFace {
     min-height: 40vh;
     height: auto;
     position: relative;
     top: auto;
+    z-index: 1;
+    grid-row: auto;
   }
 
   .heroText,
-  .heroFace {
+  .about {
     grid-row: auto;
   }
 
@@ -737,7 +741,7 @@ a.secondary {
     grid-column: 4 / 7;
   }
 
-  .heroFace {
+  .stickyTrack > .heroFace {
     grid-column: 1 / 4;
   }
 
@@ -745,11 +749,14 @@ a.secondary {
     grid-column: 1 / 7;
   }
 
+  .about {
+    grid-column: 4 / 7;
+  }
+
   .workA,
   .workB,
   .experienceDate,
   .experienceRole,
-  .about,
   .contact {
     grid-column: 1 / 7;
   }
@@ -804,20 +811,18 @@ a.secondary {
 
 .carouselWrapper.exiting {
   animation: riseOutBlur 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-  pointer-events: none; /* Disable interaction when exiting */
+  pointer-events: none;
 }
 
 /* Detail view container - matches carouselWrapper positioning */
 .projectDetail {
   grid-area: stack;
   width: 100%;
-  z-index: 10; /* Ensure detail is on top */
+  z-index: 10;
   display: flex;
   flex-direction: column;
   flex: 1;
   gap: 16px; /* Match workFilter gap */
-  /* opacity: 0; REMOVED base opacity/transform to allow children to animate */
-  /* transform: translateY(-30px); REMOVED */
 }
 
 .projectDetail.entering .projectDetailHeader {
@@ -865,7 +870,7 @@ a.secondary {
   }
 }
 
-@keyframes dropIn { /* Deprecated/Unused or kept for reference */
+@keyframes dropIn {
   from {
     opacity: 0;
     transform: translateY(-30px);

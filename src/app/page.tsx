@@ -20,7 +20,6 @@ export default async function Home() {
       <StickyNavbar />
       <main className={styles.main}>
         <div className={styles.grid}>
-          {/* Sticky Track: Constrains the sticky behavior to Hero + About only */}
           <div className={styles.stickyTrack}>
             <section className={styles.heroFace} data-section="home">
               <div className={styles.faceCanvas}>
