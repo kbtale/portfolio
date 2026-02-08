@@ -38,6 +38,14 @@ export default async function Home() {
             </div>
           </section>
 
+          <section className={styles.about} id="about" data-section="about">
+            <h2>{t("about.title")}</h2>
+            <h3>{t("about.subtitle")}</h3>
+            {t.raw("about.paragraphs").map((paragraph: string, index: number) => (
+              <p key={`${paragraph.slice(0, 16)}-${index}`}>{paragraph}</p>
+            ))}
+          </section>
+
 
           <ProjectsSection 
             projects={await Promise.all(
@@ -75,13 +83,7 @@ export default async function Home() {
             )
           )}
 
-          <section className={styles.about} id="about" data-section="about">
-            <h2>{t("about.title")}</h2>
-            <h3>{t("about.subtitle")}</h3>
-            {t.raw("about.paragraphs").map((paragraph: string, index: number) => (
-              <p key={`${paragraph.slice(0, 16)}-${index}`}>{paragraph}</p>
-            ))}
-          </section>
+
           <section className={styles.contact} id="contact" data-section="contact">
             <h2>{t("contact.title")}</h2>
             <p>{t("contact.email")}</p>

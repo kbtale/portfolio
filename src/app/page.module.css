@@ -122,10 +122,20 @@
   color: var(--background);
 }
 
-.heroFace {
+/* Specificity Boost: .grid > .heroFace (0-2-0) wins over .grid > section (0-1-1) */
+.grid > .heroFace {
   grid-column: 1 / 6;
-  grid-row: 1;
+  grid-row: 1 / span 2; /* Span across Hero and About rows */
+  
+  height: calc(100vh - var(--nav-height) - var(--hero-top-gap));
   min-height: calc(100vh - var(--nav-height) - var(--hero-top-gap));
+  
+  /* Sticky Behavior */
+  position: sticky;
+  top: 0;
+  align-self: start;
+  z-index: 10;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -555,7 +565,15 @@
 }
 
 .about {
-  grid-column: 1 / 7;
+  grid-column: 6 / 13; /* Same column as HeroText */
+  grid-row: 2;         /* Sit below HeroText */
+  
+  /* Match HeroText sizing/layout */
+  min-height: calc(100vh - var(--nav-height) - var(--hero-top-gap));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
 }
 
 .contact {
@@ -661,6 +679,9 @@ a.secondary {
 
   .heroFace {
     min-height: 40vh;
+    height: auto;
+    position: relative;
+    top: auto;
   }
 
   .heroText,
@@ -685,11 +706,12 @@ a.secondary {
     gap: 16px;
   }
 
-  .projectCard {
+  .projectCard,
+  .projectCard[data-position] {
     position: static;
     width: 100%;
     height: auto;
-    transform: none !important;
+    transform: none;
     opacity: 1;
   }
 }
@@ -762,7 +784,7 @@ a.secondary {
 
 /* Wrapper for carousel content that can animate out */
 .carouselWrapper {
-  display: flex !important; /* Override 'contents' to allow grid placement */
+  display: flex; /* Override 'contents' to allow grid placement */
   flex-direction: column;
   gap: 16px; /* Match workFilter gap */
   grid-area: stack;
