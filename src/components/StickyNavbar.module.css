@@ -129,17 +129,4 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .navInner {
-    background: rgba(64, 46, 50, 0.92);
-    border-bottom-color: rgba(246, 220, 214, 0.2);
-  }
 
-  .navMenu {
-    background: rgba(64, 46, 50, 0.98);
-  }
-
-  .navToggle {
-    border-color: rgba(246, 220, 214, 0.4);
-  }
-}

@@ -769,23 +769,7 @@ a.secondary {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
 
-  .page {
-    --background: #402e32;
-    --foreground: #402e32;
-
-    --text-primary: #fff5ec;
-    --text-secondary: #f6dcd6;
-
-    --button-primary-hover: #dc753c;
-    --button-secondary-hover: #c94d3d;
-    --button-secondary-border: #de998b;
-  }
-}
 
 /* ========================================
    PROJECT DETAIL VIEW
@@ -1007,34 +991,5 @@ a.secondary {
   }
 }
 
-/* Dark Mode Overrides for Project Detail */
-@media (prefers-color-scheme: dark) {
-  .detailStarsBadge {
-    border-color: rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.1);
-    color: var(--text-primary);
-  }
 
-  .projectDetailMedia {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-
-  /* Dark Mode Cards */
-  .projectCard {
-    background: #2c2022; /* Darker than background #402e32 */
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
-  }
-
-  .projectCard::before {
-    background: linear-gradient(to right, #1e1416, #2c2022);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .projectCard::after {
-    background: linear-gradient(to left, #1e1416, #2c2022);
-    border-color: rgba(255, 255, 255, 0.1);
-  }
-}
 
