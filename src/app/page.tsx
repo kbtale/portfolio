@@ -1,5 +1,5 @@
-import { Fragment } from "react";
 import { getTranslations } from "next-intl/server";
+import AboutHeader from "../components/AboutHeader";
 import FaceWireframeCanvas from "../components/FaceWireframeCanvas";
 import ParallaxTitle from "../components/ParallaxTitle";
 import ProjectsSection from "../components/ProjectsSection";
@@ -7,6 +7,7 @@ import StickyNavbar from "../components/StickyNavbar";
 import WhooshButton from "../components/WhooshButton";
 import WireframeGridCanvas from "../components/WireframeGridCanvas";
 import { fetchGitHubMeta, projects } from "../data/projects";
+import ExperienceTimeline, { ExperienceItem } from "../components/ExperienceTimeline";
 import styles from "./page.module.css";
 
 export default async function Home() {
@@ -39,8 +40,10 @@ export default async function Home() {
               </div>
             </section>
             <section className={styles.about} id="about" data-section="about">
-              <h2>{t("about.title")}</h2>
-              <h3>{t("about.subtitle")}</h3>
+              <AboutHeader 
+                title={t("about.title")} 
+                subtitle={t("about.subtitle")} 
+              />
               {t.raw("about.paragraphs").map((paragraph: string, index: number) => (
                 <p key={`${paragraph.slice(0, 16)}-${index}`}>{paragraph}</p>
               ))}
@@ -57,32 +60,7 @@ export default async function Home() {
             )} 
           />
 
-          {t.raw("experience.items").map(
-            (
-              item: {
-                date: string;
-                company: string;
-                role: string;
-                description: string;
-              },
-              index: number
-            ) => (
-              <Fragment key={`${item.company}-${index}`}>
-                <section
-                  className={styles.experienceDate}
-                  id={index === 0 ? "experience" : undefined}
-                  data-section="experience"
-                >
-                  <h3>{item.date}</h3>
-                  <p>{item.company}</p>
-                </section>
-                <section className={styles.experienceRole} data-section="experience">
-                  <h3>{item.role}</h3>
-                  <p>{item.description}</p>
-                </section>
-              </Fragment>
-            )
-          )}
+          <ExperienceTimeline items={t.raw("experience.items") as ExperienceItem[]} />
 
 
           <section className={styles.contact} id="contact" data-section="contact">
