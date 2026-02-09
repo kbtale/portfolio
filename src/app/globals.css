@@ -10,6 +10,7 @@ body {
   max-width: 100vw;
   scroll-padding-top: 80px;
   color-scheme: light; /* Force light mode */
+  scroll-behavior: smooth;
 }
 
 body {
@@ -41,6 +42,27 @@ h6 {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+/* Lenis Recommended CSS, I hate using !important but they recommend this... */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
 }
 
 

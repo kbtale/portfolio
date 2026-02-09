@@ -32,8 +32,6 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
       const container = containerRef.current;
       if (!track || !container) return;
 
-      const cards = gsap.utils.toArray(`.${styles.card}`, container) as HTMLElement[];
-
       // Calculate scroll amount
       const getScrollAmount = () => {
         const footer = container.querySelector(`.${styles.footerBox}`) as HTMLElement;
