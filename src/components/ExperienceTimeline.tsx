@@ -119,7 +119,12 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
   }, [items]);
 
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div 
+      className={styles.container} 
+      ref={containerRef}
+      id="experience"
+      data-section="experience"
+    >
       
       {/* HTML Draggable Layer */}
       <div className={styles.track} ref={trackRef}>

@@ -13,14 +13,16 @@
   user-select: none;
   touch-action: pan-y;
   display: flex;
-  align-items: center;
+  display: flex;
+  align-items: flex-start; /* Move content to top */
+  padding-top: 40px; /* Small top spacing */
   perspective: 1000px;
 }
 
 .track {
   display: flex;
   align-items: center;
-  height: 100%;
+  height: 600px; /* Definite height for the timeline area, pushing it to top */
   width: max-content;
   padding: 0 50vw 0 10vw;
   cursor: grab;
@@ -98,7 +100,6 @@
 
 /* CONTENT: Flex Positioning relative to 50% line */
 .itemContent {
-  /* We need this to sit above or below the 50% line */
   position: absolute;
   left: 0;
   width: 100%;
@@ -108,7 +109,6 @@
   transform-style: preserve-3d;
 }
 
-/* TOP Items: Bottom of content touches 50% line */
 .itemWrapper[data-position="top"] .itemContent {
   bottom: 50%; /* Bottom edge at 50% */
   padding-bottom: 0px; /* Dot covers gap */

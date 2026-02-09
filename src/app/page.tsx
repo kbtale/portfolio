@@ -22,7 +22,7 @@ export default async function Home() {
       <main className={styles.main}>
         <div className={styles.grid}>
           <div className={styles.stickyTrack}>
-            <section className={styles.heroFace} data-section="home">
+            <section className={styles.heroFace}>
               <div className={styles.faceCanvas}>
                 <FaceWireframeCanvas />
               </div>

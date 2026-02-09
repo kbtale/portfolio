@@ -99,13 +99,12 @@
 
 .heroNameBlock h1 {
   font-size: 6rem;
-  line-height: 40px;
+  line-height: calc(5rem);
   margin: 0;
 }
 
 .heroSloganBlock {
-  padding: 3px 0;
-  max-width: 75%;
+  max-width: 90%;
   font-size: 1.5rem;
   align-self: flex-start;
   color: var(--text-secondary);
@@ -572,7 +571,8 @@
   min-height: calc(100vh - var(--nav-height) - var(--hero-top-gap));
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Align to top like other sections */
+  padding-top: 40px; /* Consistent top spacing */
   gap: 20px;
 }
 
@@ -592,7 +592,7 @@
   max-width: 320px;
   font-size: 40px;
   font-weight: 600;
-  line-height: 48px;
+  line-height: calc(40px - 1rem);
   letter-spacing: -2.4px;
   text-wrap: balance;
   color: var(--text-primary);

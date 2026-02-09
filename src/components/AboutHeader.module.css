@@ -14,6 +14,11 @@
   line-height: 1.2;
 }
 
+.aboutTitleOverride {
+  justify-content: flex-start !important; /* Override .projectsTitle center */
+  text-align: left;
+}
+
 .subtitle {
   font-family: var(--font-averia), serif;
   font-size: 1.5rem; /* Matches h3 scale */
