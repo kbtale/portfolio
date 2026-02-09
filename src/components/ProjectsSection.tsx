@@ -372,7 +372,11 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
 
         {/* Detail View - shown when a project is selected */}
         {selectedProject && viewMode !== "carousel" && (
-          <div className={`${styles.projectDetail} ${isExiting ? styles.exiting : styles.entering}`}>
+          <div 
+            className={`${styles.projectDetail} ${
+              viewMode === "detail" && isExiting ? styles.exiting : styles.entering
+            }`}
+          >
             <div className={styles.projectDetailHeader}>
               <WhooshButton 
                 label="← Back"

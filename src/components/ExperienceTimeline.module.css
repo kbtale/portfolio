@@ -1,0 +1,349 @@
+/* ExperienceTimeline.module.css */
+
+.container {
+  grid-column: 1 / -1;
+  width: 100%;
+  height: 90vh; /* Taller */
+  min-height: 850px; /* Ensure enough room for tall cards + lines */
+  position: relative;
+  overflow-x: hidden; /* Mask horizontal */
+  overflow-y: visible; /* Allow pop-out if needed, though grid gap might limit */
+  background: transparent;
+  border: none;
+  user-select: none;
+  touch-action: pan-y;
+  display: flex;
+  display: flex;
+  align-items: flex-start; /* Move content to top */
+  padding-top: 40px; /* Small top spacing */
+  perspective: 1000px;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  height: 600px; /* Definite height for the timeline area, pushing it to top */
+  width: max-content;
+  padding: 0 50vw 0 10vw;
+  cursor: grab;
+  z-index: 10;
+  will-change: transform;
+  position: relative;
+  transform-style: preserve-3d;
+  background-color: transparent; /* Changed from explicit rgba(0,0,0,0) to standard transparent, relying on content? No, need hit area */
+  /* Actually, let's span full height to catch drags */
+  min-width: 100%; 
+  flex-shrink: 0; /* Prevent track from shrinking inside container */
+}
+
+.track:active {
+  cursor: grabbing;
+}
+
+/* Modular Axis Line (No global absolute) */
+.axisLine {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--text-primary);
+  transform: translateY(-50%);
+  z-index: 1; /* Behind dot(3) and potentially card(2) */
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Spacer Line to connect Title -> First Item */
+.lineSpacer {
+  height: 2px;
+  min-width: 80px; /* Fixed length spacing */
+  background: var(--text-primary);
+  opacity: 0.8;
+  flex-shrink: 0;
+  z-index: 1;
+  /* Vertically align in flex track */
+  align-self: center;
+}
+
+/* Item Wrapper */
+.itemWrapper {
+  position: relative;
+  width: 380px;
+  min-width: 300px; /* Allow shrinking if needed, but flex-shrink: 0 handles it. */
+  /* Ensure it fits on mobile */
+  flex-shrink: 0; 
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  pointer-events: none;
+  transform-style: preserve-3d;
+  
+  /* Ensure wrappers touch for continuous line */
+  margin: 0;
+}
+
+/* DOT: Absolute Center */
+.connectorDot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 10px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  z-index: 3;
+  border: 2px solid var(--background);
+}
+
+/* CONTENT: Flex Positioning relative to 50% line */
+.itemContent {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-style: preserve-3d;
+}
+
+.itemWrapper[data-position="top"] .itemContent {
+  bottom: 50%; /* Bottom edge at 50% */
+  padding-bottom: 0px; /* Dot covers gap */
+}
+.itemWrapper[data-position="top"] .connectorLine {
+  order: 2; /* Line below card */
+  height: 40px; /* Shorter stick default */
+  width: 1px;
+  background: var(--text-primary);
+  margin: 0 auto;
+}
+.itemWrapper[data-position="top"] .card {
+  order: 1;
+  margin-bottom: 0px; 
+}
+
+/* BOTTOM Items: Top of content touches 50% line */
+.itemWrapper[data-position="bottom"] .itemContent {
+  top: 50%; /* Top edge at 50% */
+  padding-top: 0px; 
+}
+.itemWrapper[data-position="bottom"] .connectorLine {
+  order: 1; /* Line above card */
+  height: 40px;
+  width: 1px;
+  background: var(--text-primary);
+  margin: 0 auto;
+}
+.itemWrapper[data-position="bottom"] .card {
+  order: 2;
+  margin-top: 0px;
+}
+
+
+/* CARD STYLES */
+.card {
+  pointer-events: auto;
+  width: 100%;
+  background: rgba(255, 245, 236, 0.95);
+  border: 1px solid rgba(64, 46, 50, 0.2); 
+  /* box-shadow: removed */
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  will-change: transform;
+  transform-origin: center center;
+}
+
+.card:hover {
+  border-color: rgba(64, 46, 50, 0.6);
+  /* box-shadow: removed */
+}
+
+.cardDate {
+  font-family: var(--font-averia), monospace;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(64, 46, 50, 0.1);
+  padding-bottom: 8px;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.cardHeader h3 {
+  font-family: var(--font-kameron), serif;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.cardHeader h4 {
+  font-family: var(--font-averia), sans-serif;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.cardDesc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+
+@media (max-width: 600px) {
+  .track {
+    padding-left: 5vw;
+  }
+  .itemWrapper {
+    width: 300px; /* Smaller default on mobile */
+    min-width: 280px;
+    margin-right: 10px;
+  }
+  .card {
+    padding: 16px;
+  }
+  .connectorLine {
+      height: 30px; /* Shorter sticks on mobile */
+  }
+}
+
+/* TITLE STYLES */
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  margin-right: 60px;
+  flex-shrink: 0;
+  z-index: 2;
+  padding-left: 5vw; 
+  position: relative;
+  /* Visual alignment */
+  width: auto;
+  min-width: 350px;
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .centralLine {
+    left: calc(5vw + 300px); /* Mobile offset */
+  }
+
+  .titleWrapper {
+    margin-right: 30px;
+    padding-left: 5vw;
+    min-width: 250px; /* Reduced for mobile font size */
+  }
+}
+
+.titleMy {
+  font-family: var(--font-kameron), serif; /* Matching serif style */
+  font-size: 2.2rem; /* Bigger */
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-bottom: 0px; 
+  color: var(--text-primary);
+  opacity: 1; /* Fully opaque */
+  font-weight: 700; /* Bold */
+}
+
+.titleExperience {
+  font-family: var(--font-kameron), serif; 
+  font-size: 4rem; /* Big */
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--accent-orange); /* Orange palette */
+  font-weight: 700; 
+  margin-left: -2px;
+}
+
+
+/* FOOTER BOX STYLES */
+.footerBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  
+  padding: 32px;
+  background: rgba(255, 245, 236, 0.95);
+  border: 1px solid rgba(64, 46, 50, 0.2);
+  
+  /* Removed margin-left: 60px; -> handled by lineSpacer now */
+  margin-right: 10vw; /* Padding at end of track */
+  
+  width: 380px; /* Match card width */
+  min-width: 300px;
+  max-width: 85vw;
+  
+  text-align: center;
+  flex-shrink: 0;
+  border-radius: 2px;
+  
+  will-change: transform;
+  transform-origin: center center;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+  position: relative; 
+  align-self: center; 
+  height: auto; 
+}
+
+.footerBox:hover {
+  transform: translateY(-4px);
+  /* box-shadow: removed */
+  border-color: var(--accent-orange);
+}
+
+.footerText {
+  font-family: var(--font-averia), sans-serif;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.footerLink {
+  /* "It should just be text that is underlined when you hover over" */
+  font-weight: 400; /* Normal weight */
+  color: var(--text-primary);
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block; 
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+
+@media (max-width: 600px) {
+  .titleWrapper {
+    margin-right: 30px;
+    padding-left: 5vw;
+  }
+  .titleMy {
+    font-size: 1.2rem;
+  }
+  .titleExperience {
+    font-size: 2.8rem;
+  }
+  
+  .footerBox {
+    /* margin-left: 30px; -> Handled by spacer */
+    width: 280px;
+    padding: 24px;
+    margin-right: 5vw;
+  }
+}

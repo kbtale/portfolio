@@ -13,9 +13,9 @@ export default function StickyNavbar() {
   const items = useMemo(
     () => [
       { id: "home", label: t("home") },
+      { id: "about", label: t("about") },
       { id: "projects", label: t("projects") },
       { id: "experience", label: t("experience") },
-      { id: "about", label: t("about") },
       { id: "contact", label: t("contact") },
     ],
     [t]
@@ -25,47 +25,54 @@ export default function StickyNavbar() {
     let rafId: number | null = null;
 
     const updateActive = () => {
+      // Use a threshold line (e.g., 30% from the top of the viewport)
+      // The active section is the one that crosses this line.
+      // If multiple cross, pick the one that started most recently (visually lowest top value that is above threshold).
+      
       const viewportHeight = window.innerHeight || 1;
-      const viewportWidth = window.innerWidth || 1;
-      const viewportArea = viewportHeight * viewportWidth;
+      const threshold = viewportHeight * 0.3;
 
-      const candidates = items
-        .map((item) => {
-          const elements = Array.from(
-            document.querySelectorAll(`[data-section="${item.id}"]`)
-          ) as HTMLElement[];
+      let bestCandidateId: string | null = null;
+      let maxTop = -Infinity;
 
-          if (!elements.length) return null;
+      items.forEach((item) => {
+        const elements = Array.from(
+          document.querySelectorAll(`[data-section="${item.id}"]`)
+        ) as HTMLElement[];
 
-          let top = Infinity;
-          let bottom = -Infinity;
-          let left = Infinity;
-          let right = -Infinity;
+        elements.forEach((element) => {
+          const rect = element.getBoundingClientRect();
+          
+          // Check if the element overlaps the threshold range slightly or at least is "active"
+          // Conditions:
+          // 1. Top is above the threshold (rect.top <= threshold)
+          // 2. Bottom is below the nav height (rect.bottom > navHeight) - ensures it hasn't scrolled off top fully
+          //    Actually, simpler: rect.bottom > threshold. ensuring it's still covering the line.
+          
+          if (rect.top <= threshold && rect.bottom > threshold) {
+            // This section is currently covering the threshold line.
+            // If multiple sections cover the line (e.g. nested or overlapping),
+            // we typically want the one that started *last* (highest top value),
+            // as that corresponds to the most specific/recent section scrolled into.
+            // OR in standard document flow, they might not overlap much.
+            // Let's take the one with the largest 'top' value that is still <= threshold.
+            
+            if (rect.top > maxTop) {
+              maxTop = rect.top;
+              bestCandidateId = item.id;
+            }
+          }
+        });
+      });
 
-          elements.forEach((element) => {
-            const rect = element.getBoundingClientRect();
-            top = Math.min(top, rect.top);
-            bottom = Math.max(bottom, rect.bottom);
-            left = Math.min(left, rect.left);
-            right = Math.max(right, rect.right);
-          });
-
-          const visibleHeight = Math.min(bottom, viewportHeight) - Math.max(top, 0);
-          const visibleWidth = Math.min(right, viewportWidth) - Math.max(left, 0);
-          const area = Math.max(0, visibleHeight) * Math.max(0, visibleWidth);
-
-          return { id: item.id, ratio: area / viewportArea };
-        })
-        .filter(Boolean) as Array<{ id: string; ratio: number }>;
-
-      if (!candidates.length) {
-        setActiveId(null);
-        return;
-      }
-
-      candidates.sort((a, b) => b.ratio - a.ratio);
-      const topCandidate = candidates[0];
-      setActiveId(topCandidate.id);
+      // Fallback: If nothing intersects the threshold (e.g. fast scroll in giant gap?), 
+      // check if we are at the very top or bottom? 
+      // Or just keep previous? 
+      // Let's add a "closest to threshold" fallback if null? 
+      // Actually, if we are at top of page (scrollY=0), Home should be active.
+      // Home top is ~80px. Threshold is 300px. 80 <= 300. Matches.
+      
+      setActiveId(bestCandidateId);
     };
 
     const scheduleUpdate = () => {

@@ -50,7 +50,7 @@
 }
 
 .navWhoosh {
-  max-width: 140px;
+  max-width: 180px;
   overflow: hidden;
   transition:
     opacity 0.3s ease,

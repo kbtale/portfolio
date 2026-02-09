@@ -2,7 +2,7 @@
   "nav": {
     "home": "Home",
     "projects": "My Work",
-    "experience": "Experience",
+    "experience": "My Experience",
     "about": "About",
     "contact": "Contact"
   },
@@ -72,7 +72,7 @@
         "date": "Dec 2025 – Present",
         "company": "Openrise",
         "role": "Lead Developer",
-        "description": "Designing open source tools focused on technical efficiency."
+        "description": "Leading a group of developers designing open source tools to help the software development community."
       },
       {
         "date": "Jul 2018 – Present",
@@ -103,6 +103,12 @@
         "company": "Centro Venezolano Americano del Zulia",
         "role": "IT Academic Analyst",
         "description": "Led digital transformation initiatives, conducting advanced data analysis (Pareto/Ishikawa) to identify bottlenecks and developing web tools to increase processing efficiency by 500%."
+      },
+      {
+        "date": "Sep 2021 – Feb 2022",
+        "company": "Centro Venezolano Americano del Zulia",
+        "role": "IT Analyst",
+        "description": "Automated systems and administrative tasks by developing and deploying PowerShell and Python scripts. Also maintained the institution's server infrastructure using VMWare."
       }
     ]
   },

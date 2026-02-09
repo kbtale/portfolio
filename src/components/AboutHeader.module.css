@@ -1,0 +1,29 @@
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Standard spacing, can be adjusted */
+  margin-bottom: 24px; /* Space before paragraphs */
+}
+
+/* Inherit global font settings but allow specific overrides */
+.title {
+  font-family: var(--font-kameron), serif;
+  font-size: 2rem; /* Reasonable default, matches h2 */
+  margin: 0;
+  line-height: 1.2;
+}
+
+.aboutTitleOverride {
+  justify-content: flex-start !important; /* Override .projectsTitle center */
+  text-align: left;
+}
+
+.subtitle {
+  font-family: var(--font-averia), serif;
+  font-size: 1.5rem; /* Matches h3 scale */
+  color: var(--text-secondary); /* Matches previous logic */
+  margin: 0;
+  line-height: 1.4;
+  margin-top: 8px;
+}
