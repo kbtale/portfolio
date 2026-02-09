@@ -1,21 +1,14 @@
-'use client';
+"use client";
 
 import React, { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { Draggable } from 'gsap/all';
-import { InertiaPlugin } from 'gsap/InertiaPlugin'; 
-// Note: Depending on GSAP version/bundle, InertiaPlugin might be a default or named export.
-// If 'gsap/all' was used, it's usually named. 
-// But Draggable is often default from 'gsap/Draggable'.
-// Let's try the safest "dist" approach or check if 'all' works best. 
-// actually, let's use the UMD/Global approach for safety if registered.
-// But imports are standard. Let's try removing Destructuring for plugins if possible or just use gsap.custom options.
+import { ScrollTrigger, Draggable } from 'gsap/all';
 
 import styles from './ExperienceTimeline.module.css';
 
 // Register plugins safely
 if (typeof window !== 'undefined') {
-  gsap.registerPlugin(Draggable, InertiaPlugin);
+  gsap.registerPlugin(ScrollTrigger, Draggable);
 }
 
 export interface ExperienceItem {
@@ -41,82 +34,80 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
 
       const cards = gsap.utils.toArray(`.${styles.card}`, container) as HTMLElement[];
 
-      const updateTilt = () => {
-        // Fallback or safe tracking
-        let velocity = 0;
-        
-        // Check if InertiaPlugin is available and tracking the target
-        // InertiaPlugin tracks the property "x" on the Draggable target
-        try {
-             // getVelocity returns 0 if not tracked or plugin missing
-             velocity = InertiaPlugin.getVelocity(track, "x");
-        } catch {
-            // Fallback: If plugin acts up, ignore tilt
-            velocity = 0;
+      // Calculate scroll amount
+      const getScrollAmount = () => {
+        const footer = container.querySelector(`.${styles.footerBox}`) as HTMLElement;
+        if (!footer) {
+             const trackWidth = track.scrollWidth;
+             const containerWidth = container.clientWidth;
+             return -(trackWidth - containerWidth);
         }
-
-        // Clamp rotation
-        const rotation = gsap.utils.clamp(-10, 10, velocity / -150);
         
-        gsap.to(cards, {
-          rotateY: rotation,
-          duration: 0.5,
-          ease: "power2.out",
-          overwrite: "auto"
-        });
-      };
-
-      const resetTilt = () => {
-        gsap.to(cards, {
-          rotateY: 0,
-          duration: 1,
-          ease: "elastic.out(1, 0.5)"
-        });
-      };
-
-      // Calculate bounds so the last item (Footer) stops at the center of the screen
-      // minX (max scroll left) = 
-      //   (containerCenter) - (footerCenter relative to track start)
-      //   (containerWidth / 2) - (trackWidth - paddingRight - footerWidth / 2)
-      
-      const footer = container.querySelector(`.${styles.footerBox}`) as HTMLElement;
-      
-      let minX = container.clientWidth - track.scrollWidth; // Default fallback
-      
-      if (footer) {
+        // x + FooterCenter = ContainerCenter
+        // x = ContainerCenter - FooterCenter
+        
         const containerWidth = container.clientWidth;
+        const footerCenter = footer.offsetLeft + (footer.offsetWidth / 2);
+        const containerCenter = containerWidth / 2;
         
-        // Footer position relative to the track's start
-        // Using offsetLeft is more reliable in a flex container than scrollWidth math
-        const footerCenterInTrack = footer.offsetLeft + (footer.offsetWidth / 2);
+        let targetX = containerCenter - footerCenter;
         
-        // We want that center point to align with container center (containerWidth / 2)
-        // Translation needed = TargetPos - CurrentPos
-        // If footer is at 2000px, and center is 500px, we need -1500px translation.
-        minX = (containerWidth / 2) - footerCenterInTrack;
+        // Ensure we don't scroll past the start (positive x)
+        if (targetX > 0) targetX = 0;
         
-        // Ensure we don't pull it positively (gap at start) - clamp to 0 max
-        if (minX > 0) minX = 0;
-      }
-      
-      Draggable.create(track, {
-        type: "x",
-        inertia: true,
-        bounds: { 
-            minX: minX, 
-            maxX: 0 
-        },
-        edgeResistance: 0.65,
-        dragClickables: true,
-        zIndexBoost: false, 
-        onDrag: updateTilt,
-        onThrowUpdate: updateTilt,
-        onThrowComplete: resetTilt,
+        return targetX;
+      };
+
+      // Horizontal Scroll via ScrollTrigger (Pin & Scrub)
+      const tween = gsap.to(track, {
+        x: getScrollAmount,
+        ease: "none",
+        scrollTrigger: {
+          trigger: container,
+          pin: true,
+          scrub: 1,
+          end: () => `+=${Math.abs(getScrollAmount())}`, // Scroll length matches the distance we move
+          invalidateOnRefresh: true,
+        }
       });
+      
+      // Drag Logic
+      const proxy = document.createElement("div");
+      
+      Draggable.create(proxy, {
+        trigger: track,
+        type: "x",
+        inertia: true, 
+        onPress() {
+          this.startScroll = window.scrollY;
+          // Capture bounds of the pinning ScrollTrigger
+          const st = tween.scrollTrigger;
+          if (st) {
+            this.minScroll = st.start;
+            this.maxScroll = st.end;
+          }
+        },
+        onDrag() {
+          const st = tween.scrollTrigger;
+          if (!st) return;
+
+          // Dragging Left (negative delta) -> Scroll Down (positive)
+          const rawScroll = this.startScroll - (this.x - this.startX) * 1.5;
+          
+          // Clamp to the section's scroll bounds
+          const clampedScroll = gsap.utils.clamp(this.minScroll, this.maxScroll, rawScroll);
+          
+          window.scrollTo(0, clampedScroll);
+        }
+      });
+
+      // Tilt effect (optional, hooked into the tween update if needed, or simple scroll velocity)
+      
     }, containerRef);
 
     return () => ctx.revert();
   }, [items]);
+
 
   return (
     <div 
@@ -126,7 +117,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
       data-section="experience"
     >
       
-      {/* HTML Draggable Layer */}
+      {/* Track Layer */}
       <div className={styles.track} ref={trackRef}>
         
         {/* TITLE BLOCK */}
@@ -204,27 +195,13 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
              target="_blank" 
              rel="noopener noreferrer"
              className={styles.footerLink}
-             onPointerDown={(e) => e.stopPropagation()} // Prevent drag start on link click
+             onPointerDown={(e) => e.stopPropagation()} 
            >
              Add me on LinkedIn
            </a>
         </div>
       </div>
     
-    {/* Hint */}
-     <div className={styles.dragHint} style={{ 
-        position: 'absolute', 
-        bottom: '20px', 
-        left: '50%', 
-        transform: 'translateX(-50%)', 
-        fontFamily: 'var(--font-averia)',
-        opacity: 0.6,
-        pointerEvents: 'none',
-        zIndex: 5
-      }}>
-        <span>DRAG TO EXPLORE</span>
-      </div>
-
     </div>
   );
 }
