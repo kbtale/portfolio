@@ -98,7 +98,7 @@ export function InteractiveGrid() {
         }
       }}
     >
-      <planeGeometry args={[24, 24, 256, 256]} /> 
+      <planeGeometry args={[24, 24, 128, 128]} /> 
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}

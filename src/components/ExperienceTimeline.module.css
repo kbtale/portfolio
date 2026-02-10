@@ -153,6 +153,7 @@
   position: relative;
   will-change: transform;
   transform-origin: center center;
+  will-change: transform;
 }
 
 .card:hover {

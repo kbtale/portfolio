@@ -1,10 +1,11 @@
 "use client";
 
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import ParallaxTitle from "./ParallaxTitle";
 import WhooshButton from "./WhooshButton";
 import Image from "next/image";
+import ProjectVideo from "./ProjectVideo";
 import type { Project, ProjectCategoryId } from "../data/projects";
 import { projectCategories, techStack } from "../data/projects";
 import styles from "../app/page.module.css";
@@ -199,8 +200,32 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     }, 400); // Match riseOut animation
   };
 
+  // Track if the section is in view to pause all videos when scrolled away
+  const sectionRef = useRef<HTMLElement>(null);
+  const [sectionInView, setSectionInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setSectionInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // 10% visibility is enough to start prepping
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.workFilter} id="projects" data-section="projects">
+    <section 
+      ref={sectionRef}
+      className={styles.workFilter} 
+      id="projects" 
+      data-section="projects"
+    >
       <h2>
         <ParallaxTitle
           text={t("work.animatedTitle")}
@@ -249,7 +274,12 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
               onPointerLeave={handlePointerUp}
             >
           <div key={filterVersion} className={styles.projectsStage}>
-            {visibleProjects.map((project, index) => (
+            {visibleProjects.map((project, index) => {
+              const position = positionMap[index];
+              // Positions 1, 2, 3, 4, 5 are visible. 0 and 6 are opacity 0.
+              const isVisible = position >= 1 && position <= 5;
+
+              return (
               <article
                 key={project.id}
                 className={styles.projectCard}
@@ -259,13 +289,10 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                 <div className={styles.projectMedia} aria-hidden="true">
                   {project.media && project.media.url ? (
                     project.media.type === "video" ? (
-                      <video
+                      <ProjectVideo 
                         src={project.media.url}
-                        className={styles.projectVideo}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
+                        isVisible={isVisible}
+                        sectionInView={sectionInView}
                       />
                     ) : (
                       <Image
@@ -364,7 +391,8 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   </div>
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
             </div>
           </div>
