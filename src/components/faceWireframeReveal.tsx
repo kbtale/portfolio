@@ -13,6 +13,13 @@ type FaceGLTF = GLTF & {
   }
 }
 
+const orangeWireframe = new THREE.Color('#DC753C')
+const skinColor = new THREE.Color('#C47F5B')
+
+const CLIP_PROGRESS = 0.70
+const CLIP_Y_ROTATION = -Math.PI / 180 * 15
+const CLIP_Z_ROTATION = -Math.PI / 180 * -33
+
 export function FaceWireframeReveal() {
   const { nodes, scene } = useGLTF('/models/face3.glb') as FaceGLTF
   const groupRef = useRef<THREE.Group>(null)
@@ -27,14 +34,8 @@ export function FaceWireframeReveal() {
   } | null>(null)
   const worldMatrixRef = useRef(new THREE.Matrix4())
 
-  const orangeWireframe = new THREE.Color('#DC753C')
-  const skinColor = new THREE.Color('#C47F5B')
-
-  const clipPlane = useRef(new THREE.Plane(new THREE.Vector3(1, 0, 0), 0))
+  const clipPlaneRef = useRef(new THREE.Plane(new THREE.Vector3(1, 0, 0), 0))
   const boundsRef = useRef<{ minX: number; maxX: number } | null>(null)
-  const CLIP_PROGRESS = 0.70
-  const CLIP_Y_ROTATION = -Math.PI / 180 * 15
-  const CLIP_Z_ROTATION = -Math.PI / 180 * -33
   const clipProgressRef = useRef(CLIP_PROGRESS)
 
   useEffect(() => {
@@ -43,24 +44,26 @@ export function FaceWireframeReveal() {
     const maxX = bounds.max.x
     boundsRef.current = { minX, maxX }
     const xPos = THREE.MathUtils.lerp(maxX, minX, CLIP_PROGRESS)
-    clipPlane.current.constant = -xPos
-    clipPlane.current.normal
+    clipPlaneRef.current.constant = -xPos
+    clipPlaneRef.current.normal
       .set(1, 0, 0)
       .applyAxisAngle(new THREE.Vector3(0, 1, 0), CLIP_Y_ROTATION)
       .applyAxisAngle(new THREE.Vector3(0, 0, 1), CLIP_Z_ROTATION)
   }, [scene])
 
-  useEffect(() => {
-    if (!groupRef.current) return
-    groupRef.current.updateWorldMatrix(true, true)
-    worldMatrixRef.current.copy(groupRef.current.matrixWorld)
-    const bounds = new THREE.Box3().setFromObject(groupRef.current)
-    const sizeVec = new THREE.Vector3()
-    const centerVec = new THREE.Vector3()
-    bounds.getSize(sizeVec)
-    bounds.getCenter(centerVec)
-    setBoundsData({ bounds, sizeVec, centerVec })
-  }, [scene])
+  // Ensure bounds are captured if useEffect missed it (e.g. groupRef not ready)
+  useFrame(() => {
+    if (groupRef.current && !boundsData) {
+      groupRef.current.updateWorldMatrix(true, true)
+      worldMatrixRef.current.copy(groupRef.current.matrixWorld)
+      const bounds = new THREE.Box3().setFromObject(groupRef.current)
+      const sizeVec = new THREE.Vector3()
+      const centerVec = new THREE.Vector3()
+      bounds.getSize(sizeVec)
+      bounds.getCenter(centerVec)
+      setBoundsData({ bounds, sizeVec, centerVec })
+    }
+  })
 
   useEffect(() => {
     const handleMove = (event: MouseEvent) => {
@@ -74,6 +77,17 @@ export function FaceWireframeReveal() {
     window.addEventListener('mousemove', handleMove)
     return () => window.removeEventListener('mousemove', handleMove)
   }, [size.width, size.height])
+
+  const sceneBoundsData = useMemo(() => {
+    const bounds = new THREE.Box3().setFromObject(scene)
+    const sizeVec = new THREE.Vector3()
+    const centerVec = new THREE.Vector3()
+    bounds.getSize(sizeVec)
+    bounds.getCenter(centerVec)
+    return { bounds, sizeVec, centerVec }
+  }, [scene])
+
+  const effectiveBounds = boundsData ?? sceneBoundsData
 
   useFrame((_, delta) => {
     if (!groupRef.current) return
@@ -107,7 +121,7 @@ export function FaceWireframeReveal() {
         delta
       )
       const xPos = THREE.MathUtils.lerp(bounds.maxX, bounds.minX, clipProgressRef.current)
-      clipPlane.current.constant = -xPos
+      clipPlaneRef.current.constant = -xPos
     }
   })
 
@@ -127,22 +141,12 @@ export function FaceWireframeReveal() {
     return found
   }, [nodes, scene])
 
-  const sceneBoundsData = useMemo(() => {
-    const bounds = new THREE.Box3().setFromObject(scene)
-    const sizeVec = new THREE.Vector3()
-    const centerVec = new THREE.Vector3()
-    bounds.getSize(sizeVec)
-    bounds.getCenter(centerVec)
-    return { bounds, sizeVec, centerVec }
-  }, [scene])
-
-  const effectiveBounds = boundsData ?? sceneBoundsData
-
   const geometry = baseMesh?.geometry ?? null
   const edges = useMemo(() => {
     if (!geometry) return null
     return new THREE.EdgesGeometry(geometry, 1)
   }, [geometry])
+
   const fadeRange = useMemo(() => {
     const bounds = effectiveBounds.bounds
     const sizeVec = effectiveBounds.sizeVec
@@ -153,17 +157,15 @@ export function FaceWireframeReveal() {
     const center = effectiveBounds.centerVec.clone()
     return { start, end, radius, roundness, center }
   }, [effectiveBounds])
-  const baseMaterial = baseMesh?.material ?? null
 
   const filledMaterial = useMemo(() => {
-    if (!baseMaterial) return null
-    const cloned = (Array.isArray(baseMaterial)
-      ? baseMaterial[0]
-      : baseMaterial
-    ).clone() as THREE.Material
+    if (!baseMesh?.material) return null
+    const baseMat = baseMesh.material
+    const cloned = (Array.isArray(baseMat) ? baseMat[0] : baseMat).clone() as THREE.Material
+    
     if ("clippingPlanes" in cloned) {
       const standard = cloned as THREE.MeshStandardMaterial
-      standard.clippingPlanes = [clipPlane.current]
+      // standard.clippingPlanes set in ref callback
       standard.side = THREE.DoubleSide
       standard.transparent = true
       standard.depthWrite = true
@@ -196,39 +198,38 @@ export function FaceWireframeReveal() {
       standard.needsUpdate = true
     }
     return cloned
-  }, [baseMaterial, fadeRange, clipPlane])
+  }, [baseMesh, fadeRange]) 
 
   const wireMaterial = useMemo(() => {
-    const material = new THREE.LineBasicMaterial({
-      color: orangeWireframe,
-      depthWrite: false,
-      transparent: true,
-    })
-
-    material.onBeforeCompile = (shader) => {
-      shader.uniforms.uFadeStart = { value: fadeRange.start }
-      shader.uniforms.uFadeEnd = { value: fadeRange.end }
-      wireUniformsRef.current = {
-        start: shader.uniforms.uFadeStart,
-        end: shader.uniforms.uFadeEnd,
+      const material = new THREE.LineBasicMaterial({
+        color: orangeWireframe,
+        depthWrite: false,
+        transparent: true,
+      })
+  
+      material.onBeforeCompile = (shader) => {
+        shader.uniforms.uFadeStart = { value: fadeRange.start }
+        shader.uniforms.uFadeEnd = { value: fadeRange.end }
+        wireUniformsRef.current = {
+          start: shader.uniforms.uFadeStart,
+          end: shader.uniforms.uFadeEnd,
+        }
+        shader.uniforms.uFadeCenter = { value: fadeRange.center }
+        shader.uniforms.uFadeRadius = { value: fadeRange.radius }
+        shader.uniforms.uFadeRoundness = { value: fadeRange.roundness }
+        shader.vertexShader = `varying vec3 vWorldPosition;\n${shader.vertexShader}`
+        shader.vertexShader = shader.vertexShader.replace(
+          "#include <project_vertex>",
+          "#include <project_vertex>\n  vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;"
+        )
+        shader.fragmentShader = `uniform float uFadeStart;\nuniform float uFadeEnd;\nuniform vec3 uFadeCenter;\nuniform float uFadeRadius;\nuniform float uFadeRoundness;\nvarying vec3 vWorldPosition;\n${shader.fragmentShader}`
+        shader.fragmentShader = shader.fragmentShader.replace(
+          "#include <dithering_fragment>",
+          "#include <dithering_fragment>\n  vec2 dxz = vWorldPosition.xz - uFadeCenter.xz;\n  float radial = clamp(length(dxz) / uFadeRadius, 0.0, 1.0);\n  float curve = uFadeRoundness * (1.0 - radial);\n  float start = uFadeStart - curve;\n  float end = uFadeEnd - curve;\n  float fade = smoothstep(start, end, vWorldPosition.y);\n  gl_FragColor.a *= fade;"
+        )
       }
-      shader.uniforms.uFadeCenter = { value: fadeRange.center }
-      shader.uniforms.uFadeRadius = { value: fadeRange.radius }
-      shader.uniforms.uFadeRoundness = { value: fadeRange.roundness }
-      shader.vertexShader = `varying vec3 vWorldPosition;\n${shader.vertexShader}`
-      shader.vertexShader = shader.vertexShader.replace(
-        "#include <project_vertex>",
-        "#include <project_vertex>\n  vWorldPosition = (modelMatrix * vec4(position, 1.0)).xyz;"
-      )
-      shader.fragmentShader = `uniform float uFadeStart;\nuniform float uFadeEnd;\nuniform vec3 uFadeCenter;\nuniform float uFadeRadius;\nuniform float uFadeRoundness;\nvarying vec3 vWorldPosition;\n${shader.fragmentShader}`
-      shader.fragmentShader = shader.fragmentShader.replace(
-        "#include <dithering_fragment>",
-        "#include <dithering_fragment>\n  vec2 dxz = vWorldPosition.xz - uFadeCenter.xz;\n  float radial = clamp(length(dxz) / uFadeRadius, 0.0, 1.0);\n  float curve = uFadeRoundness * (1.0 - radial);\n  float start = uFadeStart - curve;\n  float end = uFadeEnd - curve;\n  float fade = smoothstep(start, end, vWorldPosition.y);\n  gl_FragColor.a *= fade;"
-      )
-    }
-
-    return material
-  }, [fadeRange, orangeWireframe])
+      return material
+    }, [fadeRange])
 
   if (!geometry || !edges) return null
 
@@ -244,13 +245,23 @@ export function FaceWireframeReveal() {
 
       <mesh geometry={geometry} renderOrder={1}>
         {filledMaterial ? (
-          <primitive object={filledMaterial} attach="material" />
+          <primitive 
+            object={filledMaterial} 
+            attach="material" 
+            ref={(node: THREE.Material | null) => {
+               if (node && 'clippingPlanes' in node) {
+                 (node as THREE.MeshStandardMaterial).clippingPlanes = [clipPlaneRef.current]
+               }
+            }}
+          />
         ) : (
           <meshStandardMaterial
+            ref={(node) => {
+              if (node) node.clippingPlanes = [clipPlaneRef.current]
+            }}
             color={skinColor}
             roughness={0.5}
             metalness={0.1}
-            clippingPlanes={[clipPlane.current]}
             side={THREE.DoubleSide}
             polygonOffset
             polygonOffsetFactor={-1}

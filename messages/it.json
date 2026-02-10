@@ -106,6 +106,10 @@
       }
     ]
   },
+  "timeline": {
+    "titleMy": "La mia",
+    "titleExperience": "Esperienza"
+  },
   "about": {
     "title": "Chi sono",
     "subtitle": "Full Stack Engineer orientato al prodotto e leader operativo.",

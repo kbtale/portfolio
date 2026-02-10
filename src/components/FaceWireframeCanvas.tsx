@@ -2,6 +2,7 @@
 
 import { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
+import { InteractiveGrid } from "./InteractiveGrid";
 import { FaceWireframeReveal } from "./faceWireframeReveal";
 
 export default function FaceWireframeCanvas() {
@@ -16,6 +17,7 @@ export default function FaceWireframeCanvas() {
       <directionalLight position={[3, 3, 3]} intensity={1.4} />
       <directionalLight position={[-3, 2, 2]} intensity={0.6} />
       <Suspense fallback={null}>
+        <InteractiveGrid />
         <FaceWireframeReveal />
       </Suspense>
     </Canvas>

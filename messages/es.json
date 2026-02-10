@@ -106,6 +106,10 @@
       }
     ]
   },
+  "timeline": {
+    "titleMy": "Mi",
+    "titleExperience": "Experiencia"
+  },
   "about": {
     "title": "Sobre mí",
     "subtitle": "Full Stack Engineer y líder de operaciones orientado al producto.",

@@ -1,0 +1,63 @@
+.container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 0;
+  z-index: 100;
+}
+
+.trigger {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  margin: 0;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 8px;
+  /* Match StickyNavbar .navInner background */
+  background: rgba(255, 245, 236, 0.92);
+  border: 1px solid rgba(64, 46, 50, 0.2);
+  border-radius: 0; 
+  border-radius: 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  min-width: 60px;
+  backdrop-filter: blur(8px);
+  /* Removed animation: fadeIn */
+}
+
+/* Option wrapper */
+.option {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 4px 8px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  
+  font-family: inherit;
+  font-weight: 400; /* Non-bold */
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: opacity 0.2s ease;
+}
+
+.option:hover {
+  text-decoration: underline;
+  opacity: 0.8;
+}

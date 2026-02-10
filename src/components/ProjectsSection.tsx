@@ -58,7 +58,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     }
   }
 
-  // Adjust index when filtered list changes (during render to fix lint error and avoid cascade)
+  // Adjust index when filtered list changes
   if (filteredProjects !== prevFilteredProjects) {
     setPrevFilteredProjects(filteredProjects);
     if (filteredProjects.length === 0) {
