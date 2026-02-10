@@ -5,7 +5,6 @@ import { Canvas, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 function GridPlane() {
-  const { camera } = useThree();
 
   const material = useMemo(() => {
     return new THREE.ShaderMaterial({
@@ -67,7 +66,7 @@ export default function WireframeGridCanvas() {
     <Canvas
       camera={{ position: [0, 6, 8], fov: 45, near: 0.1, far: 80 }}
       gl={{ antialias: true, alpha: true }}
-      frameloop="always"
+      frameloop="demand"
     >
       <ambientLight intensity={0.6} />
       <GridPlane />

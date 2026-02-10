@@ -277,7 +277,7 @@
   background: rgba(255, 245, 236, 0.95);
   border: 1px solid rgba(64, 46, 50, 0.2);
   
-  /* Removed margin-left: 60px; -> handled by lineSpacer now */
+
   margin-right: 10vw; /* Padding at end of track */
   
   width: 380px; /* Match card width */
@@ -310,7 +310,7 @@
 }
 
 .footerLink {
-  /* "It should just be text that is underlined when you hover over" */
+
   font-weight: 400; /* Normal weight */
   color: var(--text-primary);
   text-decoration: none;
@@ -337,7 +337,7 @@
   }
   
   .footerBox {
-    /* margin-left: 30px; -> Handled by spacer */
+
     width: 280px;
     padding: 24px;
     margin-right: 5vw;

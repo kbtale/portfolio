@@ -1,19 +1,4 @@
 .page {
-  --background: #fff5ec;
-  --foreground: #ffffff;
-  --nav-height: 64px;
-  --hero-top-offset: 19px;
-  --hero-top-gap: 24px;
-
-  --text-primary: #402e32;
-  --text-secondary: #de998b;
-
-  --button-primary-hover: #c94d3d;
-  --button-secondary-hover: #302e2e;
-  --button-secondary-border: #de998b;
-  --accent-orange: #dc753c;
-  --accent-pink: #f6dcd6;
-
   display: block;
   min-height: 100vh;
   font-family: var(--font-sanchez);

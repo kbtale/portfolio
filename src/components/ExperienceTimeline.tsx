@@ -102,7 +102,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
         }
       });
 
-      // Tilt effect (optional, hooked into the tween update if needed, or simple scroll velocity)
+
       
     }, containerRef);
 

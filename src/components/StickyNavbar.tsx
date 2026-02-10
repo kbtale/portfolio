@@ -26,10 +26,7 @@ export default function StickyNavbar() {
     let rafId: number | null = null;
 
     const updateActive = () => {
-      // Use a threshold line (e.g., 30% from the top of the viewport)
-      // The active section is the one that crosses this line.
-      // If multiple cross, pick the one that started most recently (visually lowest top value that is above threshold).
-      
+      // Update active section based on threshold intersection
       const viewportHeight = window.innerHeight || 1;
       const threshold = viewportHeight * 0.3;
 
@@ -44,20 +41,8 @@ export default function StickyNavbar() {
         elements.forEach((element) => {
           const rect = element.getBoundingClientRect();
           
-          // Check if the element overlaps the threshold range slightly or at least is "active"
-          // Conditions:
-          // 1. Top is above the threshold (rect.top <= threshold)
-          // 2. Bottom is below the nav height (rect.bottom > navHeight) - ensures it hasn't scrolled off top fully
-          //    Actually, simpler: rect.bottom > threshold. ensuring it's still covering the line.
-          
           if (rect.top <= threshold && rect.bottom > threshold) {
-            // This section is currently covering the threshold line.
-            // If multiple sections cover the line (e.g. nested or overlapping),
-            // we typically want the one that started *last* (highest top value),
-            // as that corresponds to the most specific/recent section scrolled into.
-            // OR in standard document flow, they might not overlap much.
-            // Let's take the one with the largest 'top' value that is still <= threshold.
-            
+            // Pick the section starting closest to the threshold without passing it
             if (rect.top > maxTop) {
               maxTop = rect.top;
               bestCandidateId = item.id;
@@ -65,13 +50,6 @@ export default function StickyNavbar() {
           }
         });
       });
-
-      // Fallback: If nothing intersects the threshold (e.g. fast scroll in giant gap?), 
-      // check if we are at the very top or bottom? 
-      // Or just keep previous? 
-      // Let's add a "closest to threshold" fallback if null? 
-      // Actually, if we are at top of page (scrollY=0), Home should be active.
-      // Home top is ~80px. Threshold is 300px. 80 <= 300. Matches.
       
       setActiveId(bestCandidateId);
     };
