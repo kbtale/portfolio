@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useLayoutEffect, useRef } from 'react';
+import { useTranslations } from 'next-intl';
 import gsap from 'gsap';
 import { ScrollTrigger, Draggable } from 'gsap/all';
 
@@ -23,6 +24,7 @@ interface ExperienceTimelineProps {
 }
 
 export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
+  const t = useTranslations("timeline");
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
@@ -62,6 +64,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
         ease: "none",
         scrollTrigger: {
           trigger: container,
+          start: "center center",
           pin: true,
           scrub: 1,
           end: () => `+=${Math.abs(getScrollAmount())}`, // Scroll length matches the distance we move
@@ -120,8 +123,8 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
         
         {/* TITLE BLOCK */}
         <div className={styles.titleWrapper}>
-           <div className={styles.titleMy}>My</div>
-           <div className={styles.titleExperience}>Experience</div>
+           <div className={styles.titleMy}>{t('titleMy')}</div>
+           <div className={styles.titleExperience}>{t('titleExperience')}</div>
         </div>
         
         {/* Spacer between Title and First Item */}

@@ -28,6 +28,9 @@ export const metadata: Metadata = {
 };
 
 import SmoothScroller from "../components/SmoothScroller";
+import LanguageTransitionProvider from "../components/LanguageTransition";
+
+// ... existing code ...
 
 export default async function RootLayout({
   children,
@@ -41,8 +44,10 @@ export default async function RootLayout({
     <html lang={locale}>
       <body className={`${kameron.variable} ${averiaSerifLibre.variable} ${sanchez.variable}`}>
         <NextIntlClientProvider messages={messages}>
-          <SmoothScroller />
-          {children}
+          <LanguageTransitionProvider>
+            <SmoothScroller />
+            {children}
+          </LanguageTransitionProvider>
         </NextIntlClientProvider>
       </body>
     </html>

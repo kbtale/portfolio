@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import WhooshButton from "./WhooshButton";
+import LanguageSwitcher from "./LanguageSwitcher";
 import styles from "./StickyNavbar.module.css";
 
 export default function StickyNavbar() {
@@ -146,7 +147,9 @@ export default function StickyNavbar() {
           <span />
           <span />
           <span />
+          <span />
         </button>
+        <LanguageSwitcher />
       </div>
     </nav>
   );

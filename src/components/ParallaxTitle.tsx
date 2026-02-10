@@ -60,7 +60,7 @@ export default function ParallaxTitle({
       tl.scrollTrigger?.kill();
       tl.kill();
     };
-  }, [triggerSelector]);
+  }, [triggerSelector, text]); // Re-run when text changes (translation)
 
   return (
     <span

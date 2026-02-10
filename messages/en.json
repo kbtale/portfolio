@@ -112,6 +112,10 @@
       }
     ]
   },
+  "timeline": {
+    "titleMy": "My",
+    "titleExperience": "Experience"
+  },
   "about": {
     "title": "About",
     "subtitle": "Product-minded Full Stack Engineer & Operations Leader.",

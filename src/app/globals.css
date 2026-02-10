@@ -1,9 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: #fff5ec;
   --foreground: #402e32;
+  --text-primary: var(--foreground);
 }
-
-
 
 html,
 body {
@@ -19,6 +22,7 @@ body {
   font-family: var(--font-sanchez), serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 h1,
@@ -44,7 +48,7 @@ a {
   text-decoration: none;
 }
 
-/* Lenis Recommended CSS, I hate using !important but they recommend this... */
+/* Lenis Recommended CSS */
 html.lenis, html.lenis body {
   height: auto;
 }
@@ -64,7 +68,3 @@ html.lenis, html.lenis body {
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
-
-
-
-
