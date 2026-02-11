@@ -72,7 +72,8 @@
         "date": "Dec 2025 – Present",
         "company": "Openrise",
         "role": "Lead Developer",
-        "description": "Leading a group of developers designing open source tools to help the software development community."
+        "description": "Leading a group of developers designing open source tools to help the software development community.",
+        "url": "https://www.openrise.tech/"
       },
       {
         "date": "Jul 2018 – Present",
@@ -84,31 +85,36 @@
         "date": "Apr 2025 – Nov 2025",
         "company": "BetterWorld Technology",
         "role": "Service Desk Team Lead (Technical)",
-        "description": "Led automated reporting workflows using Node.js and API integrations. Achieved record-breaking CSAT scores for 4 consecutive months through data-driven strategy and team restructuring."
+        "description": "Led automated reporting workflows using Node.js and API integrations. Achieved record-breaking CSAT scores for 4 consecutive months through data-driven strategy and team restructuring.",
+        "url": "https://www.betterworldtechnology.com/"
       },
       {
         "date": "Jan 2024 – Mar 2025",
         "company": "BetterWorld Technology",
         "role": "IT Services Delivery Associate",
-        "description": "Managed complex network configurations and infrastructure projects. Developed Python automation scripts for data migration and custom Chrome Extensions to streamline engineering operations."
+        "description": "Managed complex network configurations and infrastructure projects. Developed Python automation scripts for data migration and custom Chrome Extensions to streamline engineering operations.",
+        "url": "https://www.betterworldtechnology.com/"
       },
       {
         "date": "Apr 2023 – Dec 2023",
         "company": "Inglés en Español",
         "role": "Technical Support Associate",
-        "description": "Managed technical maintenance of web platforms (Wix/Velo) and standardized digital evaluation tools to optimize organizational intake processes."
+        "description": "Managed technical maintenance of web platforms (Wix/Velo) and standardized digital evaluation tools to optimize organizational intake processes.",
+        "url": "https://aprendeinglesenespanol.com/"
       },
       {
         "date": "Feb 2022 – Feb 2023",
         "company": "Centro Venezolano Americano del Zulia",
         "role": "IT Academic Analyst",
-        "description": "Led digital transformation initiatives, conducting advanced data analysis (Pareto/Ishikawa) to identify bottlenecks and developing web tools to increase processing efficiency by 500%."
+        "description": "Led digital transformation initiatives, conducting advanced data analysis (Pareto/Ishikawa) to identify bottlenecks and developing web tools to increase processing efficiency by 500%.",
+        "url": "https://www.cevaz.org/"
       },
       {
         "date": "Sep 2021 – Feb 2022",
         "company": "Centro Venezolano Americano del Zulia",
         "role": "IT Analyst",
-        "description": "Automated systems and administrative tasks by developing and deploying PowerShell and Python scripts. Also maintained the institution's server infrastructure using VMWare."
+        "description": "Automated systems and administrative tasks by developing and deploying PowerShell and Python scripts. Also maintained the institution's server infrastructure using VMWare.",
+        "url": "https://www.cevaz.org/"
       }
     ]
   },

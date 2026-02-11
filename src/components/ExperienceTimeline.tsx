@@ -17,6 +17,7 @@ export interface ExperienceItem {
   company: string;
   role: string;
   description: string;
+  url?: string;
 }
 
 interface ExperienceTimelineProps {
@@ -151,14 +152,31 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                  {/* Top Item: Card first, then line down to center */
                   isTop && (
                     <>
-                      <div className={styles.card}>
-                        <div className={styles.cardHeader}>
-                          <div className={styles.cardDate}>{item.date}</div>
-                          <h3>{item.role}</h3>
-                          <h4>{item.company}</h4>
+                      {item.url ? (
+                        <a 
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.card}
+                          onPointerDown={(e) => e.stopPropagation()} // Prevent drag conflict
+                        >
+                           <div className={styles.cardHeader}>
+                             <div className={styles.cardDate}>{item.date}</div>
+                             <h3>{item.role}</h3>
+                             <h4>{item.company}</h4>
+                           </div>
+                           <p className={styles.cardDesc}>{item.description}</p>
+                        </a>
+                      ) : (
+                        <div className={styles.card}>
+                          <div className={styles.cardHeader}>
+                            <div className={styles.cardDate}>{item.date}</div>
+                            <h3>{item.role}</h3>
+                            <h4>{item.company}</h4>
+                          </div>
+                          <p className={styles.cardDesc}>{item.description}</p>
                         </div>
-                        <p className={styles.cardDesc}>{item.description}</p>
-                      </div>
+                      )}
                       <div className={styles.connectorLine} />
                     </>
                   )
@@ -168,14 +186,31 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                   !isTop && (
                     <>
                       <div className={styles.connectorLine} />
-                      <div className={styles.card}>
-                        <div className={styles.cardHeader}>
-                          <div className={styles.cardDate}>{item.date}</div>
-                          <h3>{item.role}</h3>
-                          <h4>{item.company}</h4>
+                      {item.url ? (
+                        <a 
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={styles.card}
+                          onPointerDown={(e) => e.stopPropagation()} // Prevent drag conflict
+                        >
+                           <div className={styles.cardHeader}>
+                             <div className={styles.cardDate}>{item.date}</div>
+                             <h3>{item.role}</h3>
+                             <h4>{item.company}</h4>
+                           </div>
+                           <p className={styles.cardDesc}>{item.description}</p>
+                        </a>
+                      ) : (
+                        <div className={styles.card}>
+                          <div className={styles.cardHeader}>
+                            <div className={styles.cardDate}>{item.date}</div>
+                            <h3>{item.role}</h3>
+                            <h4>{item.company}</h4>
+                          </div>
+                          <p className={styles.cardDesc}>{item.description}</p>
                         </div>
-                        <p className={styles.cardDesc}>{item.description}</p>
-                      </div>
+                      )}
                     </>
                   )
                  }

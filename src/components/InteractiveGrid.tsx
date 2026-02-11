@@ -84,7 +84,7 @@ export function InteractiveGrid() {
     materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime()
     
     // Smoothly interpolate current uMouse to targetMouse
-    materialRef.current.uniforms.uMouse.value.lerp(targetMouse.current, 0.1)
+    materialRef.current.uniforms.uMouse.value.lerp(targetMouse.current, 0.05)
   })
 
   return (
