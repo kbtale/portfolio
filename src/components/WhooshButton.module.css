@@ -22,8 +22,6 @@
   );
   --smooth-ease: cubic-bezier(.32, .72, 0, 1);
   --color-ease: cubic-bezier(.215, .61, .355, 1);
-  --_theme---button-bg: var(--background);
-  --_theme---button-text: var(--text-primary);
   --_colors---swatch--silver: var(--accent-pink);
   --_colors---swatch--orange: var(--accent-orange);
   --_colors---swatch--black: var(--text-primary);
@@ -59,7 +57,8 @@
 
 .buttonColorSwooshBg {
   transition: scale .45s var(--smooth-ease), background-color .2s var(--color-ease);
-  background-color: var(--_theme---button-bg);
+  /* Default to --background if theme var is not set */
+  background-color: var(--_theme---button-bg, var(--background));
   grid-area: 1 / 1;
   display: grid;
   overflow: clip;
@@ -88,7 +87,8 @@
 }
 
 .buttonColorSwooshInner {
-  color: var(--_theme---button-text);
+  /* Default to --text-primary if theme var is not set */
+  color: var(--_theme---button-text, var(--text-primary));
   white-space: pre;
   z-index: 2;
   grid-gap: .5rem;
