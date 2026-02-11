@@ -1,10 +1,11 @@
 "use client";
 
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import ParallaxTitle from "./ParallaxTitle";
 import WhooshButton from "./WhooshButton";
 import Image from "next/image";
+import ProjectVideo from "./ProjectVideo";
 import type { Project, ProjectCategoryId } from "../data/projects";
 import { projectCategories, techStack } from "../data/projects";
 import styles from "../app/page.module.css";
@@ -25,11 +26,9 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const dragStartX = useRef<number | null>(null);
   const dragHasMoved = useRef(false);
   const lastShiftTime = useRef(0);
-  const [prevFilteredProjects, setPrevFilteredProjects] = useState<Project[]>([]);
-  // Store active project ID in state to safely access during render for derived state updates
-  const [activeProjectId, setActiveProjectId] = useState<string | null>(null);
-  const [prevCurrentIndex, setPrevCurrentIndex] = useState(-1);
-  
+  // Keep track of the currently viewed project ID using state pattern to avoid ref-in-render or effect-state-update lint errors
+  const [lastActiveProjectId, setLastActiveProjectId] = useState<string | null>(null);
+
   // Detail view state
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [viewMode, setViewMode] = useState<"carousel" | "detail" | "transitioning">("carousel");
@@ -45,37 +44,44 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     return Array.from(new Map(base.map((project) => [project.id, project])).values());
   }, [activeCategories, projects]);
 
-  // Track the currently active project ID to preserve focus
-  // Use ref to avoid re-renders when filteredProjects doesn't change
-  // Sync activeProjectId when currentIndex changes (during render)
-  if (currentIndex !== prevCurrentIndex) {
-    setPrevCurrentIndex(currentIndex);
-    if (filteredProjects[currentIndex]) {
-       // Only update if actually different to minimize updates (though React handles same-value bailouts)
-       if (activeProjectId !== filteredProjects[currentIndex].id) {
-          setActiveProjectId(filteredProjects[currentIndex].id);
-       }
-    }
-  }
 
-  // Adjust index when filtered list changes
+  // Track previous filtered projects to detect changes during render
+  const [prevFilteredProjects, setPrevFilteredProjects] = useState(filteredProjects);
+
+  // When filters change (resulting in a new filteredProjects array), adjust currentIndex
   if (filteredProjects !== prevFilteredProjects) {
     setPrevFilteredProjects(filteredProjects);
-    if (filteredProjects.length === 0) {
-      if (currentIndex !== 0) setCurrentIndex(0);
-    } else {
-      const prevId = activeProjectId;
-      const newIndex = prevId 
-        ? filteredProjects.findIndex(p => p.id === prevId)
-        : -1;
+    
+    // Use the snapshot ID from the previous stable render to find our place
+    const prevId = lastActiveProjectId;
+    let newIndex = -1;
 
+    if (filteredProjects.length > 0) {
+      if (prevId) {
+        newIndex = filteredProjects.findIndex(p => p.id === prevId);
+      }
+      
       if (newIndex !== -1) {
-        if (newIndex !== currentIndex) setCurrentIndex(newIndex);
+        setCurrentIndex(newIndex);
+        setLastActiveProjectId(filteredProjects[newIndex].id);
       } else {
+        // Reset to center for balanced look, or start if preferred
         const total = filteredProjects.length;
         const startIndex = total <= 6 ? Math.floor(total / 2) : 0;
-        if (startIndex !== currentIndex) setCurrentIndex(startIndex);
+        setCurrentIndex(startIndex);
+        setLastActiveProjectId(filteredProjects[startIndex]?.id || null);
       }
+    } else {
+      setCurrentIndex(0);
+      setLastActiveProjectId(null);
+    }
+  } else {
+    // Stable render phase (filters match)
+    const currentProject = filteredProjects[currentIndex];
+    const currentId = currentProject?.id || null;
+    
+    if (currentId !== lastActiveProjectId) {
+      setLastActiveProjectId(currentId);
     }
   }
 
@@ -114,8 +120,34 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
       };
     }
 
-    // For 7+ cards, use modulo wrapping
-    const count = Math.min(total, 7);
+    // With exactly 7 items, unique keys are required for each virtual position.
+    // This stops the card from "flying" across the screen when it wraps around, because React treats it as a new instance.
+    if (total === 7) {
+      const count = 7;
+      const midpoint = 3;
+      const offsets = Array.from({ length: count }, (_, index) => index - midpoint);
+      
+      const mappedItems = offsets.map((offset) => {
+        const virtualIndex = currentIndex + offset;
+        const dataIndex = ((virtualIndex % total) + total) % total;
+        return {
+          project: filteredProjects[dataIndex],
+          key: `${filteredProjects[dataIndex].id}-${virtualIndex}`
+        };
+      });
+
+      const mappedPositions = offsets.map((offset) => offset + 3);
+
+      return {
+        visibleProjects: mappedItems, // Returns { project, key } objects
+        activePositionIndex: 3,
+        positionMap: mappedPositions,
+      };
+    }
+
+    // For 8 or more items, the standard logic works effectively because items naturally unmount/mount as they scroll out of view.
+    // The project ID serves as a sufficient key here.
+    const count = 7; // Max visible is still 7
     const midpoint = Math.floor(count / 2);
     const offsets = Array.from({ length: count }, (_, index) => index - midpoint);
     const baseIndices = offsets.map(
@@ -126,7 +158,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     const activeIndex = offsets.indexOf(0);
 
     return {
-      visibleProjects: baseIndices.map((index) => filteredProjects[index]),
+      visibleProjects: baseIndices.map((index) => filteredProjects[index]), // Returns Project[]
       activePositionIndex: activeIndex === -1 ? midpoint : activeIndex,
       positionMap: mappedPositions,
     };
@@ -147,7 +179,13 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
         const next = current + direction;
         return Math.max(0, Math.min(next, total - 1));
       }
+
+      // Special handling for exactly 7: Allow the index to grow indefinitely to support unique virtual keys.
+      if (total === 7) {
+        return current + direction;
+      }
       
+      // Otherwise, wrap the index around the total count.
       const next = (current + direction + total) % total;
       return next;
     });
@@ -199,8 +237,32 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     }, 400); // Match riseOut animation
   };
 
+  // Track if the section is in view to pause all videos when scrolled away
+  const sectionRef = useRef<HTMLElement>(null);
+  const [sectionInView, setSectionInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setSectionInView(entry.isIntersecting);
+      },
+      { threshold: 0.1 } // 10% visibility is enough to start prepping
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className={styles.workFilter} id="projects" data-section="projects">
+    <section 
+      ref={sectionRef}
+      className={styles.workFilter} 
+      id="projects" 
+      data-section="projects"
+    >
       <h2>
         <ParallaxTitle
           text={t("work.animatedTitle")}
@@ -249,9 +311,28 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
               onPointerLeave={handlePointerUp}
             >
           <div key={filterVersion} className={styles.projectsStage}>
-            {visibleProjects.map((project, index) => (
+            {visibleProjects.map((item, index) => {
+              // Handle both "Simple Project" (<=6) and "Wrapped Project" (7+) structures
+              let project: Project;
+              let uniqueKey: string;
+
+              if ('project' in item) {
+                // 7+ items structure
+                project = item.project;
+                uniqueKey = item.key;
+              } else {
+                // <=6 items structure
+                project = item as Project;
+                uniqueKey = project.id;
+              }
+
+              const position = positionMap[index];
+              // Positions 1, 2, 3, 4, 5 are visible. 0 and 6 are opacity 0.
+              const isVisible = position >= 1 && position <= 5;
+
+              return (
               <article
-                key={project.id}
+                key={uniqueKey}
                 className={styles.projectCard}
                 data-position={positionMap[index]}
                 data-active={index === activePositionIndex}
@@ -259,13 +340,10 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                 <div className={styles.projectMedia} aria-hidden="true">
                   {project.media && project.media.url ? (
                     project.media.type === "video" ? (
-                      <video
+                      <ProjectVideo 
                         src={project.media.url}
-                        className={styles.projectVideo}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
+                        isVisible={isVisible}
+                        sectionInView={sectionInView}
                       />
                     ) : (
                       <Image
@@ -364,7 +442,8 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   </div>
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
             </div>
           </div>

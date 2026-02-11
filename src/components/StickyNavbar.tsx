@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslations } from "next-intl";
 import WhooshButton from "./WhooshButton";
 import LanguageSwitcher from "./LanguageSwitcher";
+import StaggeredMenu from "./StaggeredMenu";
 import styles from "./StickyNavbar.module.css";
 
 export default function StickyNavbar() {
@@ -21,6 +22,17 @@ export default function StickyNavbar() {
     ],
     [t]
   );
+
+  const staggeredItems = useMemo(() => items.map(item => ({
+    label: item.label,
+    link: `#${item.id}`,
+    ariaLabel: `Go to ${item.label} section`
+  })), [items]);
+
+  const socialItems = [
+    { label: 'GitHub', link: 'https://github.com/kbtale' },
+    { label: 'LinkedIn', link: 'https://linkedin.com/in/carlos-alejandro-bolivar' }
+  ];
 
   useEffect(() => {
     let rafId: number | null = null;
@@ -114,19 +126,20 @@ export default function StickyNavbar() {
             ))}
           </ul>
         </div>
-        <button
-          type="button"
-          className={styles.navToggle}
-          aria-label="Toggle navigation"
-          aria-expanded={isOpen}
-          aria-controls="primary-navigation"
-          onClick={() => setIsOpen((open) => !open)}
-        >
-          <span />
-          <span />
-          <span />
-          <span />
-        </button>
+        <div className={styles.mobileMenuWrapper}>
+          <StaggeredMenu
+            items={staggeredItems}
+            socialItems={socialItems}
+            displaySocials
+            displayItemNumbering={true}
+            menuButtonColor="#402E32"
+            openMenuButtonColor="#402E32"
+            changeMenuColorOnOpen={false}
+            colors={['#C47F5B', '#C94D3D', '#DC753C', '#DE998B']}
+            accentColor="#DC753C"
+            logoUrl={undefined}
+          />
+        </div>
         <LanguageSwitcher />
       </div>
     </nav>

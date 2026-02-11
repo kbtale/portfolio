@@ -1,13 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import AboutHeader from "../components/AboutHeader";
-import FaceWireframeCanvas from "../components/FaceWireframeCanvas";
 import ParallaxTitle from "../components/ParallaxTitle";
 import ProjectsSection from "../components/ProjectsSection";
 import StickyNavbar from "../components/StickyNavbar";
 import WhooshButton from "../components/WhooshButton";
-import WireframeGridCanvas from "../components/WireframeGridCanvas";
 import { fetchGitHubMeta, projects } from "../data/projects";
 import ExperienceTimeline, { ExperienceItem } from "../components/ExperienceTimeline";
+import LazyFaceCanvas from "../components/LazyFaceCanvas";
+import LazyGridCanvas from "../components/LazyGridCanvas";
 import styles from "./page.module.css";
 
 export default async function Home() {
@@ -16,7 +16,7 @@ export default async function Home() {
   return (
     <div className={styles.page}>
       <div className={styles.wireframeCanvas} aria-hidden="true">
-        <WireframeGridCanvas />
+        <LazyGridCanvas />
       </div>
       <StickyNavbar />
       <main className={styles.main}>
@@ -24,7 +24,7 @@ export default async function Home() {
           <div className={styles.stickyTrack}>
             <section className={styles.heroFace}>
               <div className={styles.faceCanvas}>
-                <FaceWireframeCanvas />
+                <LazyFaceCanvas />
               </div>
             </section>
             <section className={styles.heroText} id="home" data-section="home">

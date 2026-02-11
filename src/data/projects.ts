@@ -91,7 +91,7 @@ export const projects: Project[] = [
     },
     media: {
       type: "video",
-      url: "https://github.com/user-attachments/assets/a6e10484-587e-466a-a8de-b02ac710de9a"
+      url: "/videos/findthagame_compressed_2.mp4"
     }
   },
   {
@@ -109,7 +109,7 @@ export const projects: Project[] = [
     },
     media: {
       type: "image",
-      url: "https://raw.githubusercontent.com/kbtale/ocr-to-txt/refs/heads/master/src/media/Interface.png"
+      url: "/images/ocr-to-txt_compressed.png"
     }
   },
   {
@@ -127,7 +127,7 @@ export const projects: Project[] = [
     },
     media: {
       type: "video",
-      url: "https://github.com/user-attachments/assets/8eb97ecf-a650-4fab-9aaa-3ae42a62de68"
+      url: "/videos/leasesentinel_compressed.mp4"
     }
   },
   {
@@ -163,7 +163,7 @@ export const projects: Project[] = [
     },
     media: {
       type: "video",
-      url: "https://github.com/user-attachments/assets/5c94e22a-642a-4c0e-bade-804216c247e6"
+      url: "/videos/shellc_compressed_4.mp4"
     }
   },
   {
@@ -181,7 +181,7 @@ export const projects: Project[] = [
     },
     media: {
       type: "video",
-      url: "https://github.com/user-attachments/assets/2c9199db-4307-46bf-8844-423c49e5076d"
+      url: "/videos/retronotes_compressed.mp4"
     }
   },
   {
@@ -235,7 +235,7 @@ export const projects: Project[] = [
     },
     media: {
       type: "video",
-      url: "https://github.com/user-attachments/assets/51981cd9-b120-4d6b-837c-63ee0acef9e7"
+      url: "/videos/civy_compressed.mp4"
     }
   },
   {
@@ -253,7 +253,7 @@ export const projects: Project[] = [
     },
     media: {
       type: "video",
-      url: "https://github.com/user-attachments/assets/43bda4d2-65b5-476e-99c7-2fdace0dcccf"
+      url: "/videos/threejs-react-text_compressed.mp4"
     }
   },
   {
@@ -271,7 +271,7 @@ export const projects: Project[] = [
     },
     media: {
       type: "video",
-      url: "https://github.com/user-attachments/assets/04a59354-78a5-4060-909e-0c75b265982a"
+      url: "/videos/openrise-landing_compressed.mp4"
     }
   },
   {

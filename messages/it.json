@@ -72,7 +72,8 @@
         "date": "Dic 2025 – Presente",
         "company": "Openrise",
         "role": "Lead Developer",
-        "description": "Progetto strumenti open source focalizzati sull'efficienza tecnica."
+        "description": "Progetto strumenti open source focalizzati sull'efficienza tecnica.",
+        "url": "https://www.openrise.tech/"
       },
       {
         "date": "Lug 2018 – Presente",
@@ -84,25 +85,29 @@
         "date": "Apr 2025 – Nov 2025",
         "company": "BetterWorld Technology",
         "role": "Service Desk Team Lead (Technical)",
-        "description": "Ho guidato flussi di report automatizzati usando Node.js e integrazioni API. Ho ottenuto record di CSAT per 4 mesi consecutivi attraverso strategia basata sui dati e ristrutturazione del team."
+        "description": "Ho guidato flussi di report automatizzati usando Node.js e integrazioni API. Ho ottenuto record di CSAT per 4 mesi consecutivi attraverso strategia basata sui dati e ristrutturazione del team.",
+        "url": "https://www.betterworldtechnology.com/"
       },
       {
         "date": "Gen 2024 – Mar 2025",
         "company": "BetterWorld Technology",
         "role": "IT Services Delivery Associate",
-        "description": "Ho gestito configurazioni di rete e progetti infrastrutturali. Ho sviluppato script di automazione in Python per migrazione dati e estensioni Chrome per ottimizzare le operazioni di ingegneria."
+        "description": "Ho gestito configurazioni di rete e progetti infrastrutturali. Ho sviluppato script di automazione in Python per migrazione dati e estensioni Chrome per ottimizzare le operazioni di ingegneria.",
+        "url": "https://www.betterworldtechnology.com/"
       },
       {
         "date": "Apr 2023 – Dic 2023",
         "company": "Inglés en Español",
         "role": "Technical Support Associate",
-        "description": "Ho gestito la manutenzione tecnica di piattaforme web (Wix/Velo) e standardizzato strumenti di valutazione digitale per ottimizzare i processi di intake."
+        "description": "Ho gestito la manutenzione tecnica di piattaforme web (Wix/Velo) e standardizzato strumenti di valutazione digitale per ottimizzare i processi di intake.",
+        "url": "https://aprendeinglesenespanol.com/"
       },
       {
         "date": "Feb 2022 – Feb 2023",
         "company": "Centro Venezolano Americano del Zulia",
         "role": "IT Academic Analyst",
-        "description": "Ho guidato iniziative di trasformazione digitale, conducendo analisi avanzate (Pareto/Ishikawa) per individuare colli di bottiglia e sviluppando strumenti web che hanno aumentato l'efficienza del 500%."
+        "description": "Ho guidato iniziative di trasformazione digitale, conducendo analisi avanzate (Pareto/Ishikawa) per individuare colli di bottiglia e sviluppando strumenti web che hanno aumentato l'efficienza del 500%.",
+        "url": "https://www.cevaz.org/"
       }
     ]
   },

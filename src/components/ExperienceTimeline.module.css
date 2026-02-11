@@ -143,6 +143,8 @@
 .card {
   pointer-events: auto;
   width: 100%;
+  text-decoration: none;
+  color: inherit;
   background: rgba(255, 245, 236, 0.95);
   border: 1px solid rgba(64, 46, 50, 0.2); 
   /* box-shadow: removed */
@@ -153,6 +155,7 @@
   position: relative;
   will-change: transform;
   transform-origin: center center;
+  will-change: transform;
 }
 
 .card:hover {
@@ -259,7 +262,7 @@
   text-transform: uppercase;
   line-height: 0.9;
   letter-spacing: -0.02em;
-  color: var(--accent-orange); /* Orange palette */
+  color: var(--text-secondary);
   font-weight: 700; 
   margin-left: -2px;
 }
@@ -290,16 +293,14 @@
   
   will-change: transform;
   transform-origin: center center;
-  transition: transform 0.3s ease, border-color 0.3s ease;
+  transition: border-color 0.3s ease;
   position: relative; 
   align-self: center; 
   height: auto; 
 }
 
 .footerBox:hover {
-  transform: translateY(-4px);
-  /* box-shadow: removed */
-  border-color: var(--accent-orange);
+  border-color: rgba(64, 46, 50, 0.6);
 }
 
 .footerText {

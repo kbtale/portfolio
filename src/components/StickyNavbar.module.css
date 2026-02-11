@@ -89,28 +89,32 @@
   border-radius: 0;
 }
 
+
 .navToggle span {
   display: block;
   width: 18px;
-  height: 2px;
-  background: var(--text-primary);
 }
 
+/* Default state: Hidden on desktop */
+.mobileMenuWrapper {
+  display: none;
+}
+
+
 @media (max-width: 900px) {
-  .navInner {
-    padding: 10px 16px;
+  .navbar {
+    width: 100%;
+    margin: 0;
   }
 
+  .navInner {
+    padding: 10px 16px 10px 0;
+    width: 100%;
+  }
+
+  /* Hide default nav items */
   .navMenu {
-    position: fixed;
-    inset: 60px 16px auto 16px;
-    background: rgba(255, 245, 236, 0.98);
-    border: 1px solid rgba(64, 46, 50, 0.2);
-    padding: 16px;
-    transform: translateY(-12px);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    display: none; 
   }
 
   .navList {
@@ -118,15 +122,69 @@
     align-items: stretch;
   }
 
-  .navToggle {
-    display: inline-flex;
+  /* Show Wrapper */
+  .mobileMenuWrapper {
+    display: block;
+    /* Ensure wrapper doesn't collapse */
+    width: auto; 
+    height: auto;
   }
 
-  .navbar[data-open="true"] .navMenu {
-    opacity: 1;
-    transform: translateY(0);
+  /* --- Staggered Menu --- */
+  
+  /* Reset Header Layout so button sits in Navbar flow */
+  .mobileMenuWrapper :global(.staggered-menu-header) {
+    position: relative;
+    z-index: 200;
+    width: auto;
+    height: auto;
+    padding: 0;
+    justify-content: flex-start;
+    background: transparent;
     pointer-events: auto;
   }
+
+  .mobileMenuWrapper :global(.sm-logo) {
+    display: none;
+  }
+
+  /* Style the Toggle Button */
+  .mobileMenuWrapper :global(.sm-toggle) {
+    color: var(--text-primary);
+    padding: 8px 8px 8px 1.25em;
+  }
+
+  /* Force Panel to be Fixed Fullscreen */
+  .mobileMenuWrapper :global(.staggered-menu-panel),
+  .mobileMenuWrapper :global(.sm-prelayers) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+  }
+
+  /* Reduce panel padding on mobile */
+  .mobileMenuWrapper :global(.staggered-menu-panel) {
+    padding: 4.5em 1.25em 1.25em 1.25em;
+  }
+
+  /* Smaller text for mobile so items fit on one line */
+  .mobileMenuWrapper :global(.sm-panel-item) {
+    font-size: 2.4rem;
+  }
+
+  .mobileMenuWrapper :global(.sm-prelayers) {
+    z-index: 99;
+  }
+
+  /* Hide language switcher when menu is open */
+  .mobileMenuWrapper:has(:global([data-open])) ~ * {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
 }
-
-

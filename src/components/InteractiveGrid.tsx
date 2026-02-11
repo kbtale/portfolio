@@ -84,7 +84,7 @@ export function InteractiveGrid() {
     materialRef.current.uniforms.uTime.value = state.clock.getElapsedTime()
     
     // Smoothly interpolate current uMouse to targetMouse
-    materialRef.current.uniforms.uMouse.value.lerp(targetMouse.current, 0.1)
+    materialRef.current.uniforms.uMouse.value.lerp(targetMouse.current, 0.05)
   })
 
   return (
@@ -98,7 +98,7 @@ export function InteractiveGrid() {
         }
       }}
     >
-      <planeGeometry args={[24, 24, 256, 256]} /> 
+      <planeGeometry args={[24, 24, 128, 128]} /> 
       <shaderMaterial
         ref={materialRef}
         vertexShader={vertexShader}
