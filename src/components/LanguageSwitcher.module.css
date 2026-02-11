@@ -61,3 +61,9 @@
   text-decoration: underline;
   opacity: 0.8;
 }
+
+@media (max-width: 900px) {
+  .container {
+    z-index: 50;
+  }
+}
