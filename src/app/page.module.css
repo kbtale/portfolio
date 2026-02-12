@@ -64,8 +64,10 @@
   z-index: 1;
   padding: 16px;
   border: 1px solid rgba(64, 46, 50, 0.9);
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(2px);
+  background: rgba(var(--background-rgb), 0.6);
+  backdrop-filter: blur(3px);
+  transform: translateZ(0);
+  isolation: isolate;
 }
 
 .heroText {

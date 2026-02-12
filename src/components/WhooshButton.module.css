@@ -24,7 +24,7 @@
   --color-ease: cubic-bezier(.215, .61, .355, 1);
   --_colors---swatch--silver: var(--accent-pink);
   --_colors---swatch--orange: var(--accent-orange);
-  --_colors---swatch--black: var(--text-primary);
+  --_colors---swatch--black: var(--text-on-accent);
 
   transition: transform .45s var(--elastic-ease-out);
   -webkit-tap-highlight-color: transparent;
@@ -166,7 +166,7 @@
 }
 
   .buttonColorSwoosh:is(:hover, :focus-visible) .buttonColorSwooshDot {
-    background-color: var(--text-primary) !important;
+    background-color: var(--text-on-accent) !important;
   }
 
   .buttonColorSwoosh:is(:hover, :focus-visible) .buttonColorSwooshInner::after {
