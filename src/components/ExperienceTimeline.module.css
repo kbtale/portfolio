@@ -145,9 +145,8 @@
   width: 100%;
   text-decoration: none;
   color: inherit;
-  background: rgba(255, 245, 236, 0.95);
+  background: rgba(var(--background-rgb), 0.95);
   border: 1px solid rgba(64, 46, 50, 0.2); 
-  /* box-shadow: removed */
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -277,8 +276,8 @@
   gap: 12px;
   
   padding: 32px;
-  background: rgba(255, 245, 236, 0.95);
-  border: 1px solid rgba(64, 46, 50, 0.2);
+  background: rgba(var(--background-rgb), 0.95);
+  border: 1px solid rgba(var(--foreground-rgb), 0.2);
   
 
   margin-right: 10vw; /* Padding at end of track */

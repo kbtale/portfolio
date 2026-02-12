@@ -27,8 +27,8 @@
   right: 0;
   margin-top: 8px;
   /* Match StickyNavbar .navInner background */
-  background: rgba(255, 245, 236, 0.92);
-  border: 1px solid rgba(64, 46, 50, 0.2);
+  background: rgba(var(--background-rgb), 0.92);
+  border: 1px solid rgba(var(--foreground-rgb), 0.2);
   border-radius: 0; 
   border-radius: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

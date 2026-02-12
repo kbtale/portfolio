@@ -15,7 +15,7 @@
   gap: 16px;
   padding: 12px 24px;
   width: fit-content;
-  background: rgba(255, 245, 236, 0.92);
+  background: rgba(var(--background-rgb), 0.92);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(64, 46, 50, 0);
   transition: border-color 0.42s ease-in-out;

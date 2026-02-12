@@ -4,11 +4,13 @@ import { Suspense, useRef, useState, useEffect } from "react";
 import { Canvas } from "@react-three/fiber";
 import { InteractiveGrid } from "./InteractiveGrid";
 import { FaceWireframeReveal } from "./faceWireframeReveal";
+import { useTheme } from "./ThemeContext";
 
 
 export default function FaceWireframeCanvas() {
   const [isInView, setIsInView] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
+  const { nextPalette } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -26,7 +28,11 @@ export default function FaceWireframeCanvas() {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ width: '100%', height: '100%' }}>
+    <div 
+      ref={containerRef} 
+      style={{ width: '100%', height: '100%', cursor: 'pointer' }}
+      onClick={nextPalette}
+    >
       <Canvas
         frameloop={isInView ? "always" : "never"}
         dpr={[1, 1.5]}

@@ -5,6 +5,7 @@ import { useGLTF } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import * as THREE from 'three'
 import type { GLTF } from 'three-stdlib'
+import { useTheme } from './ThemeContext'
 
 type FaceGLTF = GLTF & {
   nodes: {
@@ -13,7 +14,6 @@ type FaceGLTF = GLTF & {
   }
 }
 
-const orangeWireframe = new THREE.Color('#DC753C')
 const skinColor = new THREE.Color('#C47F5B')
 
 const CLIP_PROGRESS = 0.70
@@ -21,7 +21,9 @@ const CLIP_Y_ROTATION = -Math.PI / 180 * 15
 const CLIP_Z_ROTATION = -Math.PI / 180 * -33
 
 export function FaceWireframeReveal() {
+  const { currentPalette } = useTheme()
   const { nodes, scene } = useGLTF('/models/face3.glb') as FaceGLTF
+  const orangeWireframe = useMemo(() => new THREE.Color(currentPalette.accent_1), [currentPalette.accent_1])
   const groupRef = useRef<THREE.Group>(null)
   const pointerRef = useRef({ x: 0, y: 0 })
   const { size, camera } = useThree()
@@ -229,7 +231,7 @@ export function FaceWireframeReveal() {
         )
       }
       return material
-    }, [fadeRange])
+    }, [fadeRange, orangeWireframe])
 
   if (!geometry || !edges) return null
 

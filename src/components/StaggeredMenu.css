@@ -55,7 +55,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #e9e9ef;
+  color: var(--text-primary);
   font-weight: 500;
   line-height: 1;
   font-family: var(--font-kameron), serif;
@@ -137,7 +137,7 @@
   right: 0;
   width: clamp(260px, 38vw, 420px);
   height: 100%;
-  background: white;
+  background: var(--background);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   display: flex;
@@ -238,7 +238,7 @@
 .sm-socials-link {
   font-size: 1.2rem;
   font-weight: 500;
-  color: #111;
+  color: var(--text-primary);
   text-decoration: none;
   position: relative;
   padding: 2px 0;
@@ -271,7 +271,7 @@
 
 .sm-panel-item {
   position: relative;
-  color: #000;
+  color: var(--text-primary);
   font-weight: 600;
   font-size: 2.4rem;
   cursor: pointer;
