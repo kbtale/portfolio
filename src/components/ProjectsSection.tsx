@@ -26,7 +26,6 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const dragStartX = useRef<number | null>(null);
   const dragHasMoved = useRef(false);
   const lastShiftTime = useRef(0);
-  // Keep track of the currently viewed project ID using state pattern to avoid ref-in-render or effect-state-update lint errors
   const [lastActiveProjectId, setLastActiveProjectId] = useState<string | null>(null);
 
   // Detail view state
@@ -65,7 +64,6 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
         setCurrentIndex(newIndex);
         setLastActiveProjectId(filteredProjects[newIndex].id);
       } else {
-        // Reset to center for balanced look, or start if preferred
         const total = filteredProjects.length;
         const startIndex = total <= 6 ? Math.floor(total / 2) : 0;
         setCurrentIndex(startIndex);

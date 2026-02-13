@@ -7,7 +7,7 @@ import { ScrollTrigger, Draggable } from 'gsap/all';
 
 import styles from './ExperienceTimeline.module.css';
 
-// Register plugins safely
+
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger, Draggable);
 }
@@ -35,7 +35,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
       const container = containerRef.current;
       if (!track || !container) return;
 
-      // Calculate scroll amount
+
       const getScrollAmount = () => {
         const footer = container.querySelector(`.${styles.footerBox}`) as HTMLElement;
         if (!footer) {
@@ -44,8 +44,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
              return -(trackWidth - containerWidth);
         }
         
-        // x + FooterCenter = ContainerCenter
-        // x = ContainerCenter - FooterCenter
+
         
         const containerWidth = container.clientWidth;
         const footerCenter = footer.offsetLeft + (footer.offsetWidth / 2);
@@ -53,13 +52,12 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
         
         let targetX = containerCenter - footerCenter;
         
-        // Ensure we don't scroll past the start (positive x)
         if (targetX > 0) targetX = 0;
         
         return targetX;
       };
 
-      // Horizontal Scroll via ScrollTrigger (Pin & Scrub)
+
       const tween = gsap.to(track, {
         x: getScrollAmount,
         ease: "none",
@@ -68,21 +66,21 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           start: "center center",
           pin: true,
           scrub: 1,
-          end: () => `+=${Math.abs(getScrollAmount())}`, // Scroll length matches the distance we move
+          end: () => `+=${Math.abs(getScrollAmount())}`,
           invalidateOnRefresh: true,
         }
       });
       
-      // Drag Logic
+
       const proxy = document.createElement("div");
       
       Draggable.create(proxy, {
         trigger: track,
         type: "x",
-        inertia: true, 
+        inertia: true,
         onPress() {
           this.startScroll = window.scrollY;
-          // Capture bounds of the pinning ScrollTrigger
+
           const st = tween.scrollTrigger;
           if (st) {
             this.minScroll = st.start;
@@ -93,10 +91,10 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           const st = tween.scrollTrigger;
           if (!st) return;
 
-          // Dragging Left (negative delta) -> Scroll Down (positive)
+
           const rawScroll = this.startScroll - (this.x - this.startX) * 1.5;
           
-          // Clamp to the section's scroll bounds
+
           const clampedScroll = gsap.utils.clamp(this.minScroll, this.maxScroll, rawScroll);
           
           window.scrollTo(0, clampedScroll);
@@ -119,16 +117,16 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
       data-section="experience"
     >
       
-      {/* Track Layer */}
+
       <div className={styles.track} ref={trackRef}>
         
-        {/* TITLE BLOCK */}
+
         <div className={styles.titleWrapper}>
            <div className={styles.titleMy}>{t('titleMy')}</div>
            <div className={styles.titleExperience}>{t('titleExperience')}</div>
         </div>
         
-        {/* Spacer between Title and First Item */}
+
         <div className={styles.lineSpacer} />
 
         {items.map((item, index) => {
@@ -140,17 +138,17 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
               className={styles.itemWrapper}
               data-position={isTop ? 'top' : 'bottom'}
             >
-              {/* Modular Axis Line running through this item's slot */}
+
               <div className={styles.axisLine} />
               
-              {/* Dot: Absolute Centered */}
+
               <div className={styles.connectorDot} />
 
-              {/* Content: Positioned Absolute relative to center */}
+
               <div className={styles.itemContent}>
                  
-                 {/* Top Item: Card first, then line down to center */
-                  isTop && (
+                 {
+                   isTop && (
                     <>
                       {item.url ? (
                         <a 
@@ -158,7 +156,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           className={styles.card}
-                          onPointerDown={(e) => e.stopPropagation()} // Prevent drag conflict
+                          onPointerDown={(e) => e.stopPropagation()}
                         >
                            <div className={styles.cardHeader}>
                              <div className={styles.cardDate}>{item.date}</div>
@@ -182,8 +180,9 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                   )
                  }
 
-                 {/* Bottom Item: Line up from center, then card */
-                  !isTop && (
+
+                 {
+                   !isTop && (
                     <>
                       <div className={styles.connectorLine} />
                       {item.url ? (
@@ -192,7 +191,7 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
                           target="_blank"
                           rel="noopener noreferrer"
                           className={styles.card}
-                          onPointerDown={(e) => e.stopPropagation()} // Prevent drag conflict
+                          onPointerDown={(e) => e.stopPropagation()}
                         >
                            <div className={styles.cardHeader}>
                              <div className={styles.cardDate}>{item.date}</div>
@@ -220,10 +219,10 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
           );
         })}
 
-        {/* Spacer between Last Item and Footer */}
+
         <div className={styles.lineSpacer} style={{ minWidth: '60px' }} />
 
-        {/* FOOTER BLOCK */}
+
         <div className={styles.footerBox}>
            <p className={styles.footerText}>Want to know more about my experience?</p>
            <a 

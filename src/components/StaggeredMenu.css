@@ -118,17 +118,15 @@
   top: 50%;
   width: 100%;
   height: 2px;
-  background: var(--text-primary, #402E32); /* Force color */
+  background: var(--text-primary, #402E32);
   border-radius: 2px;
   will-change: transform;
 }
 
-.sm-icon-line-v {
-  /* Handled by JS */
-}
 
-.sm-line {
-  display: none !important;
+
+.sm-line.sm-line {
+  display: none;
 }
 
 .staggered-menu-panel {

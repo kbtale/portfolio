@@ -214,7 +214,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
   const playOpen = useCallback(() => {
     if (busyRef.current) return;
     busyRef.current = true;
-    // Show elements before animating
+
     const panel = panelRef.current;
     const layers = preLayerElsRef.current;
     if (panel) gsap.set(panel, { display: 'flex' });
@@ -262,7 +262,7 @@ export const StaggeredMenu: React.FC<StaggeredMenuProps> = ({
         const socialLinks = Array.from(panel.querySelectorAll('.sm-socials-link')) as HTMLElement[];
         if (socialTitle) gsap.set(socialTitle, { opacity: 0 });
         if (socialLinks.length) gsap.set(socialLinks, { y: 25, opacity: 0 });
-        // Fully hide from layout when closed
+
         gsap.set([panel, ...layers], { display: 'none' });
         busyRef.current = false;
       }

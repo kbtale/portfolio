@@ -1,9 +1,9 @@
-/* ExperienceTimeline.module.css */
+
 
 .container {
   grid-column: 1 / -1;
   width: 100%;
-  height: auto; /* Dynamic */
+  height: auto;
   min-height: 200px;
   position: relative;
   overflow-x: hidden;
@@ -13,7 +13,7 @@
   user-select: none;
   touch-action: pan-y;
   display: flex;
-  align-items: center; /* Center track vertically */
+  align-items: center;
   padding-top: 0;
   perspective: 1000px;
 }
@@ -21,7 +21,7 @@
 .track {
   display: flex;
   align-items: stretch;
-  height: auto; /* Dynamic */
+  height: auto;
   width: max-content;
   padding: 0 50vw 0 10vw;
   cursor: grab;
@@ -38,7 +38,7 @@
   cursor: grabbing;
 }
 
-/* Modular Axis Line */
+
 .axisLine {
   position: absolute;
   top: 50%;
@@ -52,7 +52,7 @@
   pointer-events: none;
 }
 
-/* Spacer Line */
+
 .lineSpacer {
   height: 2px;
   min-width: 80px;
@@ -63,21 +63,21 @@
   align-self: center;
 }
 
-/* Item Wrapper: Uses Grid to define center axis */
+
 .itemWrapper {
   position: relative;
   width: 380px;
   min-width: 300px;
   flex-shrink: 0; 
-  height: auto; /* Allow growth */
+  height: auto;
   display: grid;
-  grid-template-rows: 1fr 1fr; /* Two equal rows define center */
+  grid-template-rows: 1fr 1fr;
   pointer-events: none;
   transform-style: preserve-3d;
   margin: 0;
 }
 
-/* DOT: Absolute Center of Wrapper */
+
 .connectorDot {
   position: absolute;
   top: 50%;
@@ -91,7 +91,7 @@
   border: 2px solid var(--background);
 }
 
-/* CONTENT: Relative Flow inside Grid Rows */
+
 .itemContent {
   position: relative;
   width: 100%;
@@ -99,10 +99,10 @@
   flex-direction: column;
   align-items: center;
   transform-style: preserve-3d;
-  height: 100%; /* Fill the grid row */
+  height: 100%;
 }
 
-/* TOP Items: In Row 1, aligned to bottom */
+
 .itemWrapper[data-position="top"] .itemContent {
   grid-row: 1;
   justify-content: flex-end;
@@ -120,7 +120,7 @@
   margin-bottom: 0px; 
 }
 
-/* BOTTOM Items: In Row 2, aligned to top */
+
 .itemWrapper[data-position="bottom"] .itemContent {
   grid-row: 2;
   justify-content: flex-start;
@@ -139,7 +139,7 @@
 }
 
 
-/* CARD STYLES */
+
 .card {
   pointer-events: auto;
   width: 100%;
@@ -159,7 +159,6 @@
 
 .card:hover {
   border-color: rgba(64, 46, 50, 0.6);
-  /* box-shadow: removed */
 }
 
 .cardDate {
@@ -202,7 +201,7 @@
     padding-left: 5vw;
   }
   .itemWrapper {
-    width: 300px; /* Smaller default on mobile */
+    width: 300px;
     min-width: 280px;
     margin-right: 10px;
   }
@@ -210,11 +209,11 @@
     padding: 16px;
   }
   .connectorLine {
-      height: 30px; /* Shorter sticks on mobile */
+      height: 30px;
   }
 }
 
-/* TITLE STYLES */
+
 .titleWrapper {
   display: flex;
   flex-direction: column;
@@ -225,7 +224,7 @@
   z-index: 2;
   padding-left: 5vw; 
   position: relative;
-  /* Visual alignment */
+
   width: auto;
   min-width: 350px;
   white-space: nowrap;
@@ -233,31 +232,31 @@
 
 @media (max-width: 600px) {
   .centralLine {
-    left: calc(5vw + 300px); /* Mobile offset */
+    left: calc(5vw + 300px);
   }
 
   .titleWrapper {
     margin-right: 30px;
     padding-left: 5vw;
-    min-width: 250px; /* Reduced for mobile font size */
+    min-width: 250px;
   }
 }
 
 .titleMy {
-  font-family: var(--font-kameron), serif; /* Matching serif style */
-  font-size: 2.2rem; /* Bigger */
+  font-family: var(--font-kameron), serif;
+  font-size: 2.2rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
   line-height: 1;
   margin-bottom: 0px; 
   color: var(--text-primary);
-  opacity: 1; /* Fully opaque */
-  font-weight: 700; /* Bold */
+  opacity: 1;
+  font-weight: 700;
 }
 
 .titleExperience {
   font-family: var(--font-kameron), serif; 
-  font-size: 4rem; /* Big */
+  font-size: 4rem;
   text-transform: uppercase;
   line-height: 0.9;
   letter-spacing: -0.02em;
@@ -267,7 +266,7 @@
 }
 
 
-/* FOOTER BOX STYLES */
+
 .footerBox {
   display: flex;
   flex-direction: column;
@@ -275,31 +274,30 @@
   align-items: center;
   gap: 12px;
   
-  padding: 32px;
+  padding: 24px;
   background: rgba(var(--background-rgb), 0.95);
-  border: 1px solid rgba(var(--foreground-rgb), 0.2);
+  border: 1px solid rgba(64, 46, 50, 0.2);
   
 
-  margin-right: 10vw; /* Padding at end of track */
+  margin-right: 10vw;
   
-  width: 380px; /* Match card width */
+  width: 380px;
   min-width: 300px;
   max-width: 85vw;
   
   text-align: center;
   flex-shrink: 0;
-  border-radius: 2px;
+  border-radius: 0;
   
   will-change: transform;
   transform-origin: center center;
-  transition: border-color 0.3s ease; /* Removed 0.5s delay */
   position: relative; 
   align-self: center; 
   height: auto; 
 }
 
 .footerBox:hover {
-  border-color: rgba(var(--foreground-rgb), 0.2); /* Kept solid/subtle, no glow */
+  border-color: rgba(64, 46, 50, 0.6);
 }
 
 .footerText {
@@ -331,9 +329,15 @@
   }
   .titleMy {
     font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
   .titleExperience {
     font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
   }
   
   .footerBox {

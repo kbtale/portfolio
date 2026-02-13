@@ -57,7 +57,6 @@
 
 .buttonColorSwooshBg {
   transition: scale .45s var(--smooth-ease), background-color .2s var(--color-ease);
-  /* Default to --background if theme var is not set */
   background-color: var(--_theme---button-bg, var(--background));
   grid-area: 1 / 1;
   display: grid;
@@ -87,7 +86,6 @@
 }
 
 .buttonColorSwooshInner {
-  /* Default to --text-primary if theme var is not set */
   color: var(--_theme---button-text, var(--text-primary));
   white-space: pre;
   z-index: 2;
@@ -144,7 +142,7 @@
     opacity: 0;
   }
 
-/* Styling for static icon - placed absolute so text flow is unaffected */
+
 .iconStatic {
   position: absolute;
   top: 50%;
@@ -159,14 +157,14 @@
   transition: color .2s var(--color-ease);
 }
 
-/* Ensure text animation works (removed blocking rule) */
-/* Adjust padding when icon is present */
-.hasIcon .buttonColorSwooshInner {
-  padding-left: 3.5em !important; /* Make room for icon */
+
+
+.hasIcon.hasIcon .buttonColorSwooshInner {
+  padding-left: 3.5em;
 }
 
-  .buttonColorSwoosh:is(:hover, :focus-visible) .buttonColorSwooshDot {
-    background-color: var(--text-on-accent) !important;
+  .buttonColorSwoosh:is(:hover, :focus-visible).buttonColorSwoosh .buttonColorSwooshDot {
+    background-color: var(--text-on-accent);
   }
 
   .buttonColorSwoosh:is(:hover, :focus-visible) .buttonColorSwooshInner::after {

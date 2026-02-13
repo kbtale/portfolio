@@ -26,10 +26,8 @@
   top: 100%;
   right: 0;
   margin-top: 8px;
-  /* Match StickyNavbar .navInner background */
   background: rgba(var(--background-rgb), 0.92);
   border: 1px solid rgba(var(--foreground-rgb), 0.2);
-  border-radius: 0; 
   border-radius: 0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 4px;
@@ -37,10 +35,9 @@
   flex-direction: column;
   min-width: 60px;
   backdrop-filter: blur(8px);
-  /* Removed animation: fadeIn */
 }
 
-/* Option wrapper */
+
 .option {
   width: 100%;
   display: flex;
@@ -51,7 +48,7 @@
   cursor: pointer;
   
   font-family: inherit;
-  font-weight: 400; /* Non-bold */
+  font-weight: 400;
   font-size: 1rem;
   color: var(--text-primary);
   transition: opacity 0.2s ease;

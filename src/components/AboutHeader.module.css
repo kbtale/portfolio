@@ -2,27 +2,35 @@
 .header {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* Standard spacing, can be adjusted */
-  margin-bottom: 24px; /* Space before paragraphs */
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
-/* Inherit global font settings but allow specific overrides */
 .title {
   font-family: var(--font-kameron), serif;
-  font-size: 2rem; /* Reasonable default, matches h2 */
+  font-size: 2rem;
   margin: 0;
   line-height: 1.2;
 }
 
-.aboutTitleOverride {
-  justify-content: flex-start !important; /* Override .projectsTitle center */
+.header .aboutTitleOverride {
+  justify-content: flex-start;
   text-align: left;
+}
+
+@media (max-width: 600px) {
+  .header .aboutTitleOverride {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
 }
 
 .subtitle {
   font-family: var(--font-averia), serif;
-  font-size: 1.5rem; /* Matches h3 scale */
-  color: var(--text-secondary); /* Matches previous logic */
+  font-size: 1.5rem;
+  color: var(--text-secondary);
   margin: 0;
   line-height: 1.4;
   margin-top: 8px;
