@@ -6,8 +6,10 @@ import WhooshButton from "./WhooshButton";
 import LanguageSwitcher from "./LanguageSwitcher";
 import StaggeredMenu from "./StaggeredMenu";
 import styles from "./StickyNavbar.module.css";
+import { useTheme } from "./ThemeContext";
 
 export default function StickyNavbar() {
+  const { currentPalette } = useTheme();
   const t = useTranslations("nav");
   const [activeId, setActiveId] = useState<string | null>("home");
   const [isOpen, setIsOpen] = useState(false);
@@ -132,11 +134,11 @@ export default function StickyNavbar() {
             socialItems={socialItems}
             displaySocials
             displayItemNumbering={true}
-            menuButtonColor="#402E32"
-            openMenuButtonColor="#402E32"
+            menuButtonColor={currentPalette.text}
+            openMenuButtonColor={currentPalette.text}
             changeMenuColorOnOpen={false}
-            colors={['#C47F5B', '#C94D3D', '#DC753C', '#DE998B']}
-            accentColor="#DC753C"
+            colors={[currentPalette.background, currentPalette.accent_1, currentPalette.accent_2, currentPalette.sub_neutral]}
+            accentColor={currentPalette.accent_1}
             logoUrl={undefined}
           />
         </div>

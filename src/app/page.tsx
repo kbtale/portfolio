@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import AboutHeader from "../components/AboutHeader";
-import ParallaxTitle from "../components/ParallaxTitle";
 import ProjectsSection from "../components/ProjectsSection";
 import StickyNavbar from "../components/StickyNavbar";
 import WhooshButton from "../components/WhooshButton";
@@ -8,6 +7,7 @@ import { fetchGitHubMeta, projects } from "../data/projects";
 import ExperienceTimeline, { ExperienceItem } from "../components/ExperienceTimeline";
 import LazyFaceCanvas from "../components/LazyFaceCanvas";
 import LazyGridCanvas from "../components/LazyGridCanvas";
+import CertificationsSection from "../components/CertificationsSection";
 import styles from "./page.module.css";
 
 export default async function Home() {
@@ -61,6 +61,8 @@ export default async function Home() {
           />
 
           <ExperienceTimeline items={t.raw("experience.items") as ExperienceItem[]} />
+
+          <CertificationsSection />
 
 
           <section className={styles.contact} id="contact" data-section="contact">

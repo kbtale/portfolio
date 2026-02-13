@@ -3,15 +3,17 @@
 import { useMemo } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import * as THREE from "three";
+import { useTheme } from "./ThemeContext";
 
 function GridPlane() {
+  const { currentPalette } = useTheme();
 
   const material = useMemo(() => {
     return new THREE.ShaderMaterial({
       transparent: true,
       depthWrite: false,
       uniforms: {
-        lineColor: { value: new THREE.Color("#f6dcd6") },
+        lineColor: { value: new THREE.Color(currentPalette.accent_1) },
         gridSize: { value: 1.4 },
         lineWidth: { value: 1.0 },
         gridDepth: { value: 30.0 },
@@ -52,7 +54,7 @@ function GridPlane() {
         }
       `,
     });
-  }, []);
+  }, [currentPalette.accent_1]);
 
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} material={material}>
