@@ -292,14 +292,14 @@
   
   will-change: transform;
   transform-origin: center center;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease; /* Removed 0.5s delay */
   position: relative; 
   align-self: center; 
   height: auto; 
 }
 
 .footerBox:hover {
-  border-color: rgba(64, 46, 50, 0.6);
+  border-color: rgba(var(--foreground-rgb), 0.2); /* Kept solid/subtle, no glow */
 }
 
 .footerText {

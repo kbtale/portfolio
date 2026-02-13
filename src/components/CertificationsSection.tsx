@@ -56,8 +56,8 @@ export default function CertificationsSection() {
             Want to see all my certifications? Check my Credly and LinkedIn profiles.
           </p>
           <div className={styles.certCtaButtons}>
-            <WhooshButton label="Check my Credly" href="https://www.credly.com/users/carlos-bolivar.dcd997b6/" target="_blank" />
-            <WhooshButton label="LinkedIn Profile" href="https://www.linkedin.com/in/carlos-alejandro-bolivar" target="_blank" />
+            <WhooshButton label="Credly" href="https://www.credly.com/users/carlos-bolivar.dcd997b6/" target="_blank" />
+            <WhooshButton label="LinkedIn" href="https://www.linkedin.com/in/carlos-alejandro-bolivar" target="_blank" />
           </div>
         </div>
       </div>

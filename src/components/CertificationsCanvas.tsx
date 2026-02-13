@@ -64,7 +64,6 @@ export default function CertificationsCanvas({ progress }: CertificationsCanvasP
               </div>
               <div className={styles.certCardInfo}>
                 <div className={styles.certCardHeader}>
-                  <span className={styles.certCardDate}>{cert.Date}</span>
                   <div className={styles.certInstituteLogoContainer}>
                     <Image 
                       src={cert.InstituteLogo} 
@@ -75,6 +74,7 @@ export default function CertificationsCanvas({ progress }: CertificationsCanvasP
                       style={{ objectFit: "contain" }}
                     />
                   </div>
+                  <span className={styles.certCardDate}>{cert.Date}</span>
                 </div>
                 <h3 className={styles.certCardRole}>{cert.CertificationName}</h3>
                 <p className={styles.certCardIssuer}>{cert.InstituteName}</p>

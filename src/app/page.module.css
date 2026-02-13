@@ -1046,15 +1046,14 @@ a.secondary {
   user-select: none;
 }
 
-/* Brutalist Alignment - Solid version of .projectCard */
 .certCard {
   display: flex;
   flex-direction: column;
   background: rgb(var(--background-rgb)); 
-  border: 1px solid rgba(var(--foreground-rgb), 0.5); 
+  border: 1px solid rgba(64, 46, 50, 0.2); /* Matching .projectCard border */
   padding: 0; 
-  width: 400px; /* Increased from 320px */
-  box-shadow: 0 24px 48px rgba(var(--foreground-rgb), 0.12);
+  width: 400px;
+  box-shadow: none; 
   transition: transform 0.3s ease;
   border-radius: 0 !important;
   z-index: 20;
@@ -1080,16 +1079,12 @@ a.secondary {
 .certCardImageContainer {
   position: relative;
   width: 100%;
-  height: clamp(160px, 20vh, 200px); /* Slightly smaller than projects but proportional */
+  height: clamp(160px, 20vh, 200px);
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
-    135deg,
-    rgba(64, 46, 50, 0.12),
-    rgba(64, 46, 50, 0.02)
-  );
-  border-bottom: 1px solid rgba(64, 46, 50, 0.15);
+  background: rgba(var(--foreground-rgb), 0.03); 
+  border-bottom: 1px solid rgba(64, 46, 50, 0.2); /* Matching .projectCard border */
   overflow: hidden;
   border-radius: 0;
   flex-shrink: 0;
@@ -1098,7 +1093,7 @@ a.secondary {
 .certCardImage {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Full bleed */
+  object-fit: cover;
 }
 
 .certCardInfo {
@@ -1113,17 +1108,18 @@ a.secondary {
 
 .certCardHeader {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
-  border-bottom: 1px solid rgba(64, 46, 50, 0.1);
+  gap: 12px;
+  border-bottom: 1px solid rgba(64, 46, 50, 0.2); /* Matching .projectCard border */
   padding-bottom: 8px;
 }
 
 .certCardDate {
   font-family: var(--font-averia), monospace;
   font-weight: 700;
-  font-size: 0.8rem;
-  color: var(--text-secondary);
+  font-size: 0.85rem;
+  color: var(--accent);
   text-transform: uppercase;
 }
 
@@ -1154,6 +1150,8 @@ a.secondary {
   font-size: 0.95rem;
   text-transform: uppercase;
   color: var(--text-primary);
+  opacity: 0.8;
+  letter-spacing: 0.05em;
 }
 
 .certTitleContainer {
