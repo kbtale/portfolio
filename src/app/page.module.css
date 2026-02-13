@@ -978,5 +978,208 @@ a.secondary {
   }
 }
 
+.certScrollTrigger {
+  grid-column: 1 / -1;
+  position: relative;
+  z-index: 2;
+  border: none !important;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.certStickyWrapper {
+  position: sticky;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: transparent;
+}
+
+.certCanvasContainer {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.certCta {
+  position: absolute;
+  bottom: 8%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 10;
+  width: 100%;
+  padding: 0 20px;
+  pointer-events: auto;
+  transition: opacity 0.5s ease;
+}
+
+.certCta p {
+  font-family: var(--font-sanchez), serif;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+
+.certCtaButtons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* 3D Title Replacement (if needed in 3D scene) */
+.cert3DTitle {
+  font-family: var(--font-kameron), serif;
+  font-size: 8rem;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Brutalist Alignment - Solid version of .projectCard */
+.certCard {
+  display: flex;
+  flex-direction: column;
+  background: rgb(var(--background-rgb)); 
+  border: 1px solid rgba(var(--foreground-rgb), 0.5); 
+  padding: 0; 
+  width: 400px; /* Increased from 320px */
+  box-shadow: 0 24px 48px rgba(var(--foreground-rgb), 0.12);
+  transition: transform 0.3s ease;
+  border-radius: 0 !important;
+  z-index: 20;
+  overflow: hidden;
+}
+
+.certCard.clickable {
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.certCard.clickable:hover {
+  background: rgba(var(--background-rgb), 1);
+  transform: translateY(-5px);
+}
+
+.certCardContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.certCardImageContainer {
+  position: relative;
+  width: 100%;
+  height: clamp(160px, 20vh, 200px); /* Slightly smaller than projects but proportional */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    135deg,
+    rgba(64, 46, 50, 0.12),
+    rgba(64, 46, 50, 0.02)
+  );
+  border-bottom: 1px solid rgba(64, 46, 50, 0.15);
+  overflow: hidden;
+  border-radius: 0;
+  flex-shrink: 0;
+}
+
+.certCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Full bleed */
+}
+
+.certCardInfo {
+  padding: 16px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgb(var(--background-rgb));
+  color: var(--text-primary);
+}
+
+.certCardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(64, 46, 50, 0.1);
+  padding-bottom: 8px;
+}
+
+.certCardDate {
+  font-family: var(--font-averia), monospace;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.certInstituteLogoContainer {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.8;
+}
+
+.certInstituteLogo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.certCardRole {
+  font-family: var(--font-kameron), serif;
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.certCardIssuer {
+  font-family: var(--font-averia), sans-serif;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.certTitleContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.certTitle {
+  font-family: var(--font-kameron), serif;
+  font-size: 8vw;
+  font-weight: 900;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+  line-height: 0.8;
+  text-align: center;
+}
+
 
 
