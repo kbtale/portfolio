@@ -983,6 +983,9 @@ a.secondary {
 }
 
 .certScrollTrigger.certScrollTrigger {
+  grid-column: 1 / -1;
+  position: relative;
+  z-index: 2;
   border: none;
   background: transparent;
   backdrop-filter: none;
