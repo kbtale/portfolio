@@ -20,6 +20,7 @@ export default function StickyNavbar() {
       { id: "about", label: t("about") },
       { id: "projects", label: t("projects") },
       { id: "experience", label: t("experience") },
+      { id: "certifications", label: t("certifications") },
       { id: "contact", label: t("contact") },
     ],
     [t]
@@ -40,7 +41,6 @@ export default function StickyNavbar() {
     let rafId: number | null = null;
 
     const updateActive = () => {
-      // Update active section based on threshold intersection
       const viewportHeight = window.innerHeight || 1;
       const threshold = viewportHeight * 0.3;
 
@@ -56,7 +56,6 @@ export default function StickyNavbar() {
           const rect = element.getBoundingClientRect();
           
           if (rect.top <= threshold && rect.bottom > threshold) {
-            // Pick the section starting closest to the threshold without passing it
             if (rect.top > maxTop) {
               maxTop = rect.top;
               bestCandidateId = item.id;

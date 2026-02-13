@@ -21,7 +21,7 @@ export default function CertificationsSection() {
 
     const st = ScrollTrigger.create({
       trigger: trigger,
-      start: "top bottom", // Starts as soon as it enters the viewport
+      start: "top bottom",
       end: "bottom bottom",
       onUpdate: (self) => {
         setProgress(self.progress);
@@ -38,13 +38,18 @@ export default function CertificationsSection() {
   }, []);
 
   return (
-    <div ref={triggerRef} className={styles.certScrollTrigger} style={{ height: "300vh" }}>
+    <div 
+      ref={triggerRef} 
+      className={styles.certScrollTrigger} 
+      style={{ height: "300vh" }}
+      id="certifications"
+      data-section="certifications"
+    >
       <div className={styles.certStickyWrapper}>
         <div className={styles.certCanvasContainer}>
           <CertificationsCanvas progress={progress} />
         </div>
         
-        {/* CTA Footer - Progressively reveals at the very end */}
         <div 
           className={styles.certCta} 
           style={{ 

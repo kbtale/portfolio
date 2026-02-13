@@ -125,7 +125,7 @@
   height: calc(100vh - var(--nav-height) - var(--hero-top-gap));
   min-height: calc(100vh - var(--nav-height) - var(--hero-top-gap));
   
-  /* Sticky Behavior */
+
   position: sticky;
   top: calc(var(--nav-height) + var(--hero-top-offset));
   align-self: start;
@@ -225,7 +225,7 @@
   }
 }
 
-/* 3D Side Edge - Left spine (for left-side cards) */
+
 .projectCard::before {
   content: "";
   position: absolute;
@@ -243,7 +243,7 @@
   transition: opacity 0.85s ease;
 }
 
-/* 3D Side Edge - Right spine (for right-side cards) */
+
 .projectCard::after {
   content: "";
   position: absolute;
@@ -265,7 +265,7 @@
   pointer-events: none;
 }
 
-/* Extended positions for small card counts */
+
 .projectCard[data-position="-2"] {
   transform: translateX(-800px) rotateY(55deg) scale(0.58);
   opacity: 0;
@@ -322,14 +322,14 @@
   opacity: 0;
 }
 
-/* Show LEFT edge (::before) on LEFT-side cards */
+
 .projectCard[data-position="0"]::before,
 .projectCard[data-position="1"]::before,
 .projectCard[data-position="2"]::before {
   opacity: 1;
 }
 
-/* Show RIGHT edge (::after) on RIGHT-side cards */
+
 .projectCard[data-position="4"]::after,
 .projectCard[data-position="5"]::after,
 .projectCard[data-position="6"]::after {
@@ -448,7 +448,7 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Only show and enable clicks when hovering the ACTIVE card */
+
 .projectCard[data-active="true"]:hover .repoBadge {
   opacity: 1;
   pointer-events: auto;
@@ -483,10 +483,10 @@
   color: var(--text-primary);
 }
 
-/* Target the inner elements cleanly */
-.githubBadgeInner {
-  padding: 6px 10px !important;
-  border-radius: 20px !important;
+
+.githubBadgeInner.githubBadgeInner {
+  padding: 6px 10px;
+  border-radius: 20px;
 }
 
 .projectsTitle {
@@ -716,6 +716,13 @@ a.secondary {
     transform: none;
     opacity: 1;
   }
+
+  .projectsTitle {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -758,24 +765,22 @@ a.secondary {
 
 
 
-/* ========================================
-   PROJECT DETAIL VIEW
-   ======================================== */
 
-/* Wrapper to stack Carousel and Detail view on top of each other during transitions */
+
+
 .projectsContentWrapper {
   display: grid;
   grid-template-areas: "stack";
   width: 100%;
-  flex: 1; /* Take remaining space in workFilter */
+  flex: 1;
   position: relative;
 }
 
-/* Wrapper for carousel content that can animate out */
+
 .carouselWrapper {
-  display: flex; /* Override 'contents' to allow grid placement */
+  display: flex;
   flex-direction: column;
-  gap: 16px; /* Match workFilter gap */
+  gap: 16px;
   grid-area: stack;
   width: 100%;
 }
@@ -785,7 +790,7 @@ a.secondary {
   pointer-events: none;
 }
 
-/* Detail view container - matches carouselWrapper positioning */
+
 .projectDetail {
   grid-area: stack;
   width: 100%;
@@ -917,14 +922,14 @@ a.secondary {
 .projectDetailMedia img {
   width: 100%;
   height: 100%;
-  object-fit: contain; /* Changed to contain so full video/image is visible */
+  object-fit: contain;
 }
 
 /* Right column: Info */
 .projectDetailInfo {
   display: flex;
   flex-direction: column;
-  gap: 32px; /* Increased to separate About and Tech sections */
+  gap: 32px;
   justify-content: flex-start;
 }
 
@@ -934,16 +939,15 @@ a.secondary {
   gap: 8px;
 }
 
-/* Subtitles matched to Button Text Size (0.95rem) */
 .projectDetailAboutTitle,
 .projectDetailTechTitle {
   font-size: 0.95rem;
-  font-weight: 700; /* Bold like button text often is */
+  font-weight: 700;
   color: var(--text-primary);
   margin: 0; /* Rely on gap */
   text-transform: uppercase;
   letter-spacing: -0.01em;
-  font-family: inherit; /* Inherit global font, or Sanchez if needed */
+  font-family: inherit;
 }
 
 .projectDetailDescription {
@@ -978,15 +982,12 @@ a.secondary {
   }
 }
 
-.certScrollTrigger {
-  grid-column: 1 / -1;
-  position: relative;
-  z-index: 2;
-  border: none !important;
-  background: transparent !important;
-  backdrop-filter: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
+.certScrollTrigger.certScrollTrigger {
+  border: none;
+  background: transparent;
+  backdrop-filter: none;
+  padding: 0;
+  margin: 0;
 }
 
 .certStickyWrapper {
@@ -1034,7 +1035,6 @@ a.secondary {
   justify-content: center;
 }
 
-/* 3D Title Replacement (if needed in 3D scene) */
 .cert3DTitle {
   font-family: var(--font-kameron), serif;
   font-size: 8rem;
@@ -1050,108 +1050,84 @@ a.secondary {
   display: flex;
   flex-direction: column;
   background: rgb(var(--background-rgb)); 
-  border: 1px solid rgba(64, 46, 50, 0.2); /* Matching .projectCard border */
-  padding: 0; 
-  width: 400px;
+  border: 1px solid rgba(var(--foreground-rgb), 0.5);
+  padding: 20px; 
+  left: var(--cert-left-desktop);
+  width: 480px;
   box-shadow: none; 
   transition: transform 0.3s ease;
-  border-radius: 0 !important;
+  border-radius: 0;
   z-index: 20;
   overflow: hidden;
+  color: var(--text-primary);
 }
 
-.certCard.clickable {
-  cursor: pointer;
-  pointer-events: auto;
-}
-
-.certCard.clickable:hover {
-  background: rgba(var(--background-rgb), 1);
-  transform: translateY(-5px);
-}
-
-.certCardContent {
+.certCardTop {
   display: flex;
-  flex-direction: column;
-  gap: 20px;
+  gap: 16px;
+  margin-bottom: 20px;
+  align-items: flex-start;
 }
 
 .certCardImageContainer {
   position: relative;
-  width: 100%;
-  height: clamp(160px, 20vh, 200px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(var(--foreground-rgb), 0.03); 
-  border-bottom: 1px solid rgba(64, 46, 50, 0.2); /* Matching .projectCard border */
-  overflow: hidden;
-  border-radius: 0;
+  width: 240px; 
+  height: 150px;
+  background: transparent;
+  align-self: flex-start;
   flex-shrink: 0;
 }
 
-.certCardImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.certCardInfo {
-  padding: 16px;
-  text-align: left;
+.certCardRightInfo {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  background: rgb(var(--background-rgb));
-  color: var(--text-primary);
+  gap: 12px;
+  flex: 1;
 }
 
 .certCardHeader {
   display: flex;
-  flex-direction: row;
   align-items: center;
   gap: 12px;
-  border-bottom: 1px solid rgba(64, 46, 50, 0.2); /* Matching .projectCard border */
-  padding-bottom: 8px;
+}
+
+.certInstituteLogoContainer {
+  width: 48px; 
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
 }
 
 .certCardDate {
   font-family: var(--font-averia), monospace;
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 1.1rem; 
   color: var(--accent);
   text-transform: uppercase;
 }
 
-.certInstituteLogoContainer {
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.certCardIssuer {
+  font-family: var(--font-averia), sans-serif;
+  font-size: 1.1rem; 
+  line-height: 1.1;
+  font-weight: 600;
+  color: var(--text-primary);
   opacity: 0.8;
 }
 
-.certInstituteLogo {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
+.certCardBottom {
+  width: 100%;
 }
 
 .certCardRole {
   font-family: var(--font-kameron), serif;
-  font-size: 1.3rem;
-  line-height: 1.2;
+  font-size: 1.8rem; 
+  line-height: 1.1;
   color: var(--text-primary);
-}
-
-.certCardIssuer {
-  font-family: var(--font-averia), sans-serif;
-  font-size: 0.95rem;
-  text-transform: uppercase;
-  color: var(--text-primary);
-  opacity: 0.8;
-  letter-spacing: 0.05em;
+  margin-top: 16px; 
+  word-wrap: break-word;
 }
 
 .certTitleContainer {
@@ -1171,7 +1147,7 @@ a.secondary {
   font-family: var(--font-kameron), serif;
   font-size: 8vw;
   font-weight: 900;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: -0.05em;
   white-space: nowrap;
@@ -1179,5 +1155,50 @@ a.secondary {
   text-align: center;
 }
 
+@media (max-width: 900px) {
+  .certTitle {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    white-space: normal;
+  }
+  
+  .certCard {
+    width: 95%;
+    left: 50%; 
+    transform: translateX(-50%);
+    padding: 20px;
+  }
+  
+  .certCardTop {
+    flex-direction: row; 
+    gap: 16px;
+  }
+  
+  .certCardImageContainer {
+    width: 200px;
+    height: 125px;
+  }
 
+  .certCardRole {
+    font-size: 1.6rem; 
+  }
+}
 
+@media (max-width: 460px) {
+  .certCardTop {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .certCardImageContainer {
+    width: 100%;
+    height: 180px;
+    align-self: stretch;
+  }
+
+  .certCardRole {
+    margin-top: 0;
+  }
+}

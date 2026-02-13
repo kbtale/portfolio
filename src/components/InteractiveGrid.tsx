@@ -14,15 +14,15 @@ void main() {
   vUv = uv;
   vec3 pos = position;
   
-  // Large Rolling Wave (Low Frequency, High Amplitude)
+
   float bigWaveX = sin(pos.x * 0.5 + uTime * 0.2);
   float bigWaveY = cos(pos.y * 0.3 + uTime * 0.15);
   float baseElevation = bigWaveX * bigWaveY * 1.5; // High amplitude
   
-  // Secondary detail wave
+
   float detailWave = sin(pos.x * 2.0 + uTime * 0.5) * cos(pos.y * 2.0 + uTime * 0.5) * 0.2;
   
-  // Interactive Swell (Mouse Interaction via UV)
+
   float d = distance(uv, uMouse);
   float interaction = exp(-pow(d * 5.0, 2.0)) * 2.0; // Strong, sharper lift
   
@@ -43,7 +43,7 @@ const fragmentShader = `
   varying float vElevation;
 
   void main() {
-    // Grid Settings
+
     float gridLines = 60.0;
     float lineThickness = 0.015;
     
@@ -52,16 +52,16 @@ const fragmentShader = `
     float lineY = smoothstep(0.5 - lineThickness, 0.5, abs(gridUV.y - 0.5));
     float grid = max(lineX, lineY);
     
-    // Circular Vignette Fade
+
     float distFromCenter = distance(vUv, vec2(0.5));
     float alphaFade = 1.0 - smoothstep(0.1, 0.5, distFromCenter);
     
-    // Height based opacity
+
     float elevationAlpha = smoothstep(-1.0, 2.0, vElevation);
     
     float finalAlpha = grid * alphaFade * (0.2 + elevationAlpha * 0.8);
     
-    // Color modulation: Theme-neutral glow for visual depth
+
     vec3 finalColor = uColor + vec3(0.08) * elevationAlpha;
     
     gl_FragColor = vec4(finalColor, finalAlpha);
@@ -96,7 +96,7 @@ export function InteractiveGrid() {
   })
 
   return (
-    // Tilted plane behind head
+
     <mesh 
       ref={meshRef}
       position={[0, -2, -5]} 

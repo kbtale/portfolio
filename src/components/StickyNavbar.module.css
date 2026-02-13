@@ -95,7 +95,7 @@
   width: 18px;
 }
 
-/* Default state: Hidden on desktop */
+
 .mobileMenuWrapper {
   display: none;
 }
@@ -130,9 +130,9 @@
     height: auto;
   }
 
-  /* --- Staggered Menu --- */
+
   
-  /* Reset Header Layout so button sits in Navbar flow */
+
   .mobileMenuWrapper :global(.staggered-menu-header) {
     position: relative;
     z-index: 200;
@@ -148,13 +148,13 @@
     display: none;
   }
 
-  /* Style the Toggle Button */
+
   .mobileMenuWrapper :global(.sm-toggle) {
     color: var(--text-primary);
     padding: 8px 8px 8px 1.25em;
   }
 
-  /* Force Panel to be Fixed Fullscreen */
+
   .mobileMenuWrapper :global(.staggered-menu-panel),
   .mobileMenuWrapper :global(.sm-prelayers) {
     position: fixed;
@@ -167,12 +167,12 @@
     z-index: 100;
   }
 
-  /* Reduce panel padding on mobile */
+
   .mobileMenuWrapper :global(.staggered-menu-panel) {
     padding: 4.5em 1.25em 1.25em 1.25em;
   }
 
-  /* Smaller text for mobile so items fit on one line */
+
   .mobileMenuWrapper :global(.sm-panel-item) {
     font-size: 2.4rem;
   }
@@ -181,7 +181,7 @@
     z-index: 99;
   }
 
-  /* Hide language switcher when menu is open */
+
   .mobileMenuWrapper:has(:global([data-open])) ~ * {
     visibility: hidden;
     pointer-events: none;
