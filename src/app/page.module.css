@@ -85,8 +85,8 @@
 }
 
 .heroNameBlock h1 {
-  font-size: 6rem;
-  line-height: calc(5rem);
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: clamp(2.5rem, 8vw, 5rem);
   margin: 0;
 }
 
@@ -684,7 +684,14 @@ a.secondary {
     grid-row: auto;
   }
 
-  .heroText,
+  .heroText {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: auto;
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+
   .about {
     grid-row: auto;
   }
@@ -875,12 +882,11 @@ a.secondary {
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  border: 1px solid rgba(64, 46, 50, 0.2);
+  border: 1px solid var(--foreground);
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-secondary);
-  background: rgba(255, 252, 248, 0.8);
   margin-left: -12px;
 }
 
@@ -903,6 +909,10 @@ a.secondary {
   flex: 1;
   min-height: 0;
   text-align: left;
+}
+
+.projectDetailContent > * {
+  min-width: 0;
 }
 
 /* Left column: Video/Image */
@@ -967,12 +977,41 @@ a.secondary {
 }
 
 @media (max-width: 767px) {
+  .projectDetailHeader {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .projectDetailTitle {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    width: 100%;
+    order: 2;
+  }
+
+  .detailBackButton {
+    order: 1;
+  }
+
+  .detailStarsBadge {
+    order: 3;
+    margin-left: 0;
+  }
+
   .projectDetailContent {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
   }
   
   .projectDetailMedia {
-    height: 200px;
+    height: auto;
+    min-height: 200px;
+  }
+
+  .projectDetailInfo {
+    width: 100%;
+    overflow: hidden;
   }
 }
 
@@ -1166,6 +1205,7 @@ a.secondary {
     left: 50%; 
     transform: translateX(-50%);
     padding: 20px;
+    min-height: 280px;
   }
   
   .certCardTop {

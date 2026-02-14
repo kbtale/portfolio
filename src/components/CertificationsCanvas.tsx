@@ -36,7 +36,8 @@ export default function CertificationsCanvas({ progress }: CertificationsCanvasP
         {certifications.slice(0, 5).map((cert, index) => {
           const leftPos = index % 2 === 0 ? "calc(50% - 520px)" : "calc(50% + 20px)";
           
-          const stagger = index * 60;
+          const isMobile = typeof window !== 'undefined' && window.innerWidth < 900;
+          const stagger = index * (isMobile ? 80 : 60);
           
           return (
             <div 

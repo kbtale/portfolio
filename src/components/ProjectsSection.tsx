@@ -216,6 +216,11 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     setSelectedProject(project);
     setIsExiting(true); // Start carousel exit animation
     setViewMode("transitioning");
+
+    // Smooth scroll to top of section on mobile
+    if (window.innerWidth < 768 && sectionRef.current) {
+      sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
     
     // After carousel exits, show detail
     setTimeout(() => {
