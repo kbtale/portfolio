@@ -30,7 +30,7 @@ export default function FaceWireframeCanvas() {
   return (
     <div 
       ref={containerRef} 
-      style={{ width: '100%', height: '100%', cursor: 'pointer' }}
+      style={{ width: '100%', height: '100%', cursor: 'pointer', minHeight: 0, minWidth: 0 }}
       onClick={nextPalette}
     >
       <Canvas
