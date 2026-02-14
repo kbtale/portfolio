@@ -133,5 +133,20 @@
     "linkedin": "LinkedIn: /in/carlos-alejandro-bolivar",
     "github": "GitHub: github.com/kbtale",
     "location": "Località: Maracaibo, Venezuela"
+  },
+  "footer": {
+    "sectionTitle": "Contatto",
+    "headline": "Hai un progetto in mente? Costruiamo qualcosa di grande insieme.",
+    "emailLabel": "Email",
+    "email": "carlosabolivart@gmail.com",
+    "locationLabel": "Località",
+    "location": "Maracaibo, Venezuela",
+    "socialsLabel": "Social",
+    "linkedin": "/in/carlos-alejandro-bolivar",
+    "linkedinLabel": "LinkedIn",
+    "github": "github.com/kbtale",
+    "githubLabel": "GitHub",
+    "copyright": "© 2026 Carlos Bolívar. Tutti i diritti riservati.",
+    "tagline": "Progetto sistemi. Automatizzo la crescita."
   }
 }

@@ -140,5 +140,22 @@
     "linkedin": "LinkedIn: /in/carlos-alejandro-bolivar",
     "github": "GitHub: github.com/kbtale",
     "location": "Location: Maracaibo, Venezuela"
+  },
+  "footer": {
+    "sectionTitle": "Contact",
+    "headline": "Have a project in mind? Let's build something great together.",
+    "emailLabel": "Email",
+    "email": "carlosabolivart@gmail.com",
+    "locationLabel": "Location",
+    "location": "Maracaibo, Venezuela",
+    "socialsLabel": "Socials",
+    "linkedin": "/in/carlos-alejandro-bolivar",
+    "linkedinLabel": "LinkedIn",
+    "github": "github.com/kbtale",
+    "githubLabel": "GitHub",
+    "tiktokLabel": "TikTok (+65k followers)",
+    "repoLabel": "Star the repo of this portfolio!",
+    "copyright": "© 2026 Carlos Bolívar. All rights reserved.",
+    "tagline": "Architecting Systems. Automating Growth."
   }
 }

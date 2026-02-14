@@ -43,7 +43,7 @@
   grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
   column-gap: var(--gutter);
   row-gap: var(--gutter);
-  padding: 24px var(--margin) 120px;
+  padding: 24px var(--margin) 24px;
   min-height: 100vh;
   color: var(--text-primary);
   position: relative;
@@ -145,12 +145,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.faceCanvas canvas {
-  width: 95%;
-  height: 95%;
-  display: block;
 }
 
 .workFilter {
@@ -654,10 +648,10 @@ a.secondary {
 
 @media (max-width: 600px) {
   .grid {
-    --columns: 4;
+    --columns: 5;
     --margin: 16px;
     --gutter: 16px;
-    padding: 64px var(--margin);
+    padding: 24px var(--margin);
   }
 
   .stickyTrack {
