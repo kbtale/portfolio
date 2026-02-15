@@ -1096,6 +1096,7 @@ a.secondary {
   z-index: 20;
   overflow: hidden;
   color: var(--text-primary);
+  --cert-stagger: 60vh;
 }
 
 .certCardTop {
@@ -1206,6 +1207,7 @@ a.secondary {
     transform: translateX(-50%);
     padding: 20px;
     min-height: 280px;
+    --cert-stagger: 80vh;
   }
   
   .certCardTop {

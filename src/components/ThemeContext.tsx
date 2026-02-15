@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, useMemo, useSyncExternalStore } from "react";
+import ThemeToast from "./ThemeToast";
 
 export type Palette = {
   name: string;
@@ -15,7 +16,7 @@ export type Palette = {
 
 const palettes: Palette[] = [
   {
-    name: "Terracotta (Original)",
+    name: "Clawd",
     background: "#FFF5EC",
     text: "#402E32",
     sub_neutral: "#F6DCD6",
@@ -25,7 +26,7 @@ const palettes: Palette[] = [
     on_accent: "#402E32",
   },
   {
-    name: "Bumblebee (High Contrast)",
+    name: "Vulpimancer",
     background: "#111111",
     text: "#FFFFFF",
     sub_neutral: "#333333",
@@ -35,7 +36,7 @@ const palettes: Palette[] = [
     on_accent: "#111111",
   },
   {
-    name: "Cyberpunk Neon (Dark)",
+    name: "Neon",
     background: "#0b0c15",
     text: "#E0E0E0",
     sub_neutral: "#2A2D3E",
@@ -45,7 +46,7 @@ const palettes: Palette[] = [
     on_accent: "#0b0c15",
   },
   {
-    name: "Midnight Solar (Dark)",
+    name: "Midnight Eclipse",
     background: "#002B36",
     text: "#93A1A1",
     sub_neutral: "#073642",
@@ -55,7 +56,7 @@ const palettes: Palette[] = [
     on_accent: "#002B36",
   },
   {
-    name: "Deep Forest (Dark)",
+    name: "Dark Forest",
     background: "#1A1D1A",
     text: "#E8F5E9",
     sub_neutral: "#2C3E2E",
@@ -65,7 +66,7 @@ const palettes: Palette[] = [
     on_accent: "#E8F5E9",
   },
   {
-    name: "Royal Luxury (Dark)",
+    name: "Wololo",
     background: "#121212",
     text: "#FCFCFC",
     sub_neutral: "#2D2D2D",
@@ -75,7 +76,7 @@ const palettes: Palette[] = [
     on_accent: "#FCFCFC",
   },
   {
-    name: "Vampire (Dark)",
+    name: "The Vampire Diaries",
     background: "#282A36",
     text: "#F8F8F2",
     sub_neutral: "#44475A",
@@ -85,7 +86,7 @@ const palettes: Palette[] = [
     on_accent: "#F8F8F2",
   },
   {
-    name: "Oceanic Depth (Dark)",
+    name: "Europa Moon",
     background: "#0F1C24",
     text: "#E0F7FA",
     sub_neutral: "#1E333E",
@@ -95,7 +96,7 @@ const palettes: Palette[] = [
     on_accent: "#E0F7FA",
   },
   {
-    name: "Lavender Haze (Pop)",
+    name: "Lavender Haze",
     background: "#F3E5F5",
     text: "#4A148C",
     sub_neutral: "#E1BEE7",
@@ -105,7 +106,7 @@ const palettes: Palette[] = [
     on_accent: "#F3E5F5",
   },
   {
-    name: "Brutalist (Contrast)",
+    name: "Thailand",
     background: "#FFFFFF",
     text: "#000000",
     sub_neutral: "#E0E0E0",
@@ -115,7 +116,7 @@ const palettes: Palette[] = [
     on_accent: "#FFFFFF",
   },
   {
-    name: "Terminal (Retro)",
+    name: "Matrix",
     background: "#0D0D0D",
     text: "#33FF00",
     sub_neutral: "#1A1A1A",
@@ -125,7 +126,7 @@ const palettes: Palette[] = [
     on_accent: "#0D0D0D",
   },
   {
-    name: "Cherry Blossom (Soft)",
+    name: "Cherry Blossom",
     background: "#FFF0F5",
     text: "#5C2C35",
     sub_neutral: "#FFC0CB",
@@ -135,7 +136,7 @@ const palettes: Palette[] = [
     on_accent: "#5C2C35",
   },
   {
-    name: "Slate & Orange (Dark)",
+    name: "Hellboy",
     background: "#27272A",
     text: "#FAFAFA",
     sub_neutral: "#3F3F46",
@@ -145,7 +146,7 @@ const palettes: Palette[] = [
     on_accent: "#FAFAFA",
   },
   {
-    name: "Fintech Blue (Light)",
+    name: "Hospital",
     background: "#F0F4F8",
     text: "#102A43",
     sub_neutral: "#BCCCDC",
@@ -155,7 +156,7 @@ const palettes: Palette[] = [
     on_accent: "#F0F4F8",
   },
   {
-    name: "Nordic Snow (Minimal)",
+    name: "Nordic Snow",
     background: "#FFFFFF",
     text: "#2E3440",
     sub_neutral: "#ECEFF4",
@@ -165,7 +166,7 @@ const palettes: Palette[] = [
     on_accent: "#FFFFFF",
   },
   {
-    name: "Synthwave Sunset (Dark)",
+    name: "Katana Zero",
     background: "#241235",
     text: "#FFEEBB",
     sub_neutral: "#432C58",
@@ -193,8 +194,9 @@ const hexToRgb = (hex: string): string => {
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [index, setIndex] = useState(0);
+  const [showToast, setShowToast] = useState(false);
 
-  // Synchronize with system dark mode preference using modern useSyncExternalStore
+  // Sync with system dark mode preference with useSyncExternalStore
   const isSystemDark = useSyncExternalStore(
     (callback) => {
       const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
@@ -202,14 +204,14 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       return () => mediaQuery.removeEventListener("change", callback);
     },
     () => window.matchMedia("(prefers-color-scheme: dark)").matches,
-    () => false // Default to light mode (Terracotta) on server
+    () => false // Default to light mode (Clawd) on server
   );
 
   // Compute actual palette order based on preference
   const orderedPalettes = useMemo(() => {
     if (!isSystemDark) return palettes;
     const newPalettes = [...palettes];
-    // Swapping index 0 (Terracotta) and 1 (Bumblebee)
+    // Swapping index 0 (Clawd) and 1 (Vulpimancer)
     const [a, b] = [newPalettes[0], newPalettes[1]];
     newPalettes[0] = b;
     newPalettes[1] = a;
@@ -218,6 +220,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const nextPalette = () => {
     setIndex((prev) => (prev + 1) % orderedPalettes.length);
+    setShowToast(true);
   };
 
   const currentPalette = orderedPalettes[index];
@@ -231,7 +234,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.style.setProperty("--text-primary", currentPalette.text);
     root.style.setProperty("--text-secondary", currentPalette.accent_2);
     root.style.setProperty("--accent-primary", currentPalette.accent_1);
+    root.style.setProperty("--accent-primary-rgb", hexToRgb(currentPalette.accent_1));
     root.style.setProperty("--accent-secondary", currentPalette.accent_2);
+    root.style.setProperty("--accent-secondary-rgb", hexToRgb(currentPalette.accent_2));
     root.style.setProperty("--accent-orange", currentPalette.accent_1);
     root.style.setProperty("--accent-pink", currentPalette.sub_neutral);
     root.style.setProperty("--button-primary-hover", currentPalette.action_hover);
@@ -246,6 +251,11 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   return (
     <ThemeContext.Provider value={{ currentPalette, paletteIndex: index, nextPalette }}>
       {children}
+      <ThemeToast 
+        palette={currentPalette} 
+        isVisible={showToast} 
+        onClose={() => setShowToast(false)} 
+      />
     </ThemeContext.Provider>
   );
 };
