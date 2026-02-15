@@ -8,6 +8,7 @@ import ExperienceTimeline, { ExperienceItem } from "../components/ExperienceTime
 import LazyFaceCanvas from "../components/LazyFaceCanvas";
 import LazyGridCanvas from "../components/LazyGridCanvas";
 import CertificationsSection from "../components/CertificationsSection";
+import ContactFooter from "../components/ContactFooter";
 import styles from "./page.module.css";
 
 export default async function Home() {
@@ -64,14 +65,7 @@ export default async function Home() {
 
           <CertificationsSection />
 
-
-          <section className={styles.contact} id="contact" data-section="contact">
-            <h2>{t("contact.title")}</h2>
-            <p>{t("contact.email")}</p>
-            <p>{t("contact.linkedin")}</p>
-            <p>{t("contact.github")}</p>
-            <p>{t("contact.location")}</p>
-          </section>
+          <ContactFooter />
         </div>
       </main>
     </div>

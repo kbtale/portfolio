@@ -1,0 +1,85 @@
+.toastContainer {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast {
+  background: rgba(var(--background-rgb), 0.9);
+  background-image: linear-gradient(
+    135deg, 
+    rgba(var(--accent-primary-rgb), 0.05) 0%, 
+    transparent 100%
+  );
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(var(--foreground-rgb), 0.2);
+  padding: 16px 20px;
+  border-radius: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 260px;
+  pointer-events: auto;
+  border-left: 4px solid var(--accent-primary);
+}
+
+.toastHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.themeName {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.toastBody {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.swatches {
+  display: flex;
+  gap: 4px;
+}
+
+.swatch {
+  width: 14px;
+  height: 14px;
+  border: 1px solid rgba(var(--foreground-rgb), 0.2);
+}
+
+.colorDetails {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hexValue {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-primary);
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .toastContainer {
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+  }
+  
+  .toast {
+    min-width: unset;
+    width: 100%;
+  }
+}

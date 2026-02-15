@@ -36,8 +36,6 @@ export default function CertificationsCanvas({ progress }: CertificationsCanvasP
         {certifications.slice(0, 5).map((cert, index) => {
           const leftPos = index % 2 === 0 ? "calc(50% - 520px)" : "calc(50% + 20px)";
           
-          const stagger = index * 60;
-          
           return (
             <div 
               key={index}
@@ -45,7 +43,8 @@ export default function CertificationsCanvas({ progress }: CertificationsCanvasP
               style={{
                 position: "absolute",
                 "--cert-left-desktop": leftPos,
-                top: `${cardY + stagger}vh`,
+                "--cert-index": index,
+                top: `calc(${cardY}vh + var(--cert-index) * var(--cert-stagger))`,
                 pointerEvents: "auto"
               } as React.CSSProperties}
             >

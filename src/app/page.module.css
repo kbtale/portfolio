@@ -43,7 +43,7 @@
   grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
   column-gap: var(--gutter);
   row-gap: var(--gutter);
-  padding: 24px var(--margin) 120px;
+  padding: 24px var(--margin) 24px;
   min-height: 100vh;
   color: var(--text-primary);
   position: relative;
@@ -85,8 +85,8 @@
 }
 
 .heroNameBlock h1 {
-  font-size: 6rem;
-  line-height: calc(5rem);
+  font-size: clamp(3rem, 10vw, 6rem);
+  line-height: clamp(2.5rem, 8vw, 5rem);
   margin: 0;
 }
 
@@ -142,15 +142,7 @@
   height: 100%;
   min-height: 40vh;
   border: 1px solid rgba(64, 46, 50, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.faceCanvas canvas {
-  width: 95%;
-  height: 95%;
-  display: block;
+  display: grid;
 }
 
 .workFilter {
@@ -263,6 +255,12 @@
 
 .projectCard * {
   pointer-events: none;
+}
+
+@media (min-width: 601px) {
+  .projectCard:not([data-active="true"]) * {
+    pointer-events: none;
+  }
 }
 
 
@@ -654,10 +652,10 @@ a.secondary {
 
 @media (max-width: 600px) {
   .grid {
-    --columns: 4;
+    --columns: 5;
     --margin: 16px;
     --gutter: 16px;
-    padding: 64px var(--margin);
+    padding: 24px var(--margin);
   }
 
   .stickyTrack {
@@ -686,7 +684,14 @@ a.secondary {
     grid-row: auto;
   }
 
-  .heroText,
+  .heroText {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    min-height: auto;
+    padding-top: 40px;
+    padding-bottom: 60px;
+  }
+
   .about {
     grid-row: auto;
   }
@@ -877,12 +882,11 @@ a.secondary {
   align-items: center;
   gap: 6px;
   padding: 4px 10px;
-  border: 1px solid rgba(64, 46, 50, 0.2);
+  border: 1px solid var(--foreground);
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-secondary);
-  background: rgba(255, 252, 248, 0.8);
   margin-left: -12px;
 }
 
@@ -904,25 +908,25 @@ a.secondary {
   gap: 32px;
   flex: 1;
   min-height: 0;
-  text-align: left; /* Ensure left alignment */
+  text-align: left;
+}
+
+.projectDetailContent > * {
+  min-width: 0;
 }
 
 /* Left column: Video/Image */
 .projectDetailMedia {
-  background: rgba(64, 46, 50, 0.08);
-  border: 1px solid rgba(64, 46, 50, 0.15);
   position: relative;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .projectDetailMedia video,
 .projectDetailMedia img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
+  border: var(--foreground) 1px solid;
 }
 
 /* Right column: Info */
@@ -973,12 +977,41 @@ a.secondary {
 }
 
 @media (max-width: 767px) {
+  .projectDetailHeader {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .projectDetailTitle {
+    font-size: clamp(1.2rem, 5vw, 1.8rem);
+    width: 100%;
+    order: 2;
+  }
+
+  .detailBackButton {
+    order: 1;
+  }
+
+  .detailStarsBadge {
+    order: 3;
+    margin-left: 0;
+  }
+
   .projectDetailContent {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
   }
   
   .projectDetailMedia {
-    height: 200px;
+    height: auto;
+    min-height: 200px;
+  }
+
+  .projectDetailInfo {
+    width: 100%;
+    overflow: hidden;
   }
 }
 
@@ -1063,6 +1096,7 @@ a.secondary {
   z-index: 20;
   overflow: hidden;
   color: var(--text-primary);
+  --cert-stagger: 60vh;
 }
 
 .certCardTop {
@@ -1172,6 +1206,8 @@ a.secondary {
     left: 50%; 
     transform: translateX(-50%);
     padding: 20px;
+    min-height: 280px;
+    --cert-stagger: 80vh;
   }
   
   .certCardTop {

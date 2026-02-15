@@ -1,0 +1,219 @@
+/* ─── LoadingScreen ─── */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: all;
+}
+
+/* ─── Split panels (for exit animation) ─── */
+
+.topPanel,
+.bottomPanel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background: var(--background);
+  z-index: 2;
+  overflow: hidden;
+}
+
+.topPanel {
+  top: 0;
+  height: 50%;
+}
+
+.bottomPanel {
+  bottom: 0;
+  height: 50%;
+}
+
+/* ─── Center Content ─── */
+
+.centerContent {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* ─── Name Block ─── */
+
+.nameBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 24px;
+}
+
+.firstName,
+.lastName {
+  font-family: var(--font-kameron), serif;
+  font-weight: 700;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+  white-space: nowrap;
+  user-select: none;
+  font-size: clamp(3.5rem, 10vw, 8rem);
+}
+
+/* ─── Progress Area ─── */
+
+.progressArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: clamp(200px, 40vw, 400px);
+}
+
+.progressTrack {
+  width: 100%;
+  height: 2px;
+  background: var(--text-primary);
+  opacity: 0.15;
+  position: relative;
+  overflow: hidden;
+}
+
+.progressFill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--accent-primary, var(--text-primary));
+  transition: width 0.15s linear;
+}
+
+.progressText {
+  font-family: var(--font-sanchez), serif;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  opacity: 0.5;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.percentage {
+  font-family: var(--font-kameron), serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-primary, var(--text-primary));
+  letter-spacing: 0.05em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Exit Animation ─── */
+/* Sequence: content fades first (0-0.4s), then panels split apart (0.3-1.1s) */
+
+.exiting .centerContent {
+  animation: fadeScale 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.exiting .topPanel {
+  animation: slideUp 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.3s forwards;
+}
+
+.exiting .bottomPanel {
+  animation: slideDown 0.8s cubic-bezier(0.76, 0, 0.24, 1) 0.3s forwards;
+}
+
+@keyframes slideUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+
+@keyframes slideDown {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100%); }
+}
+
+@keyframes fadeScale {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+
+/* ─── Entrance animations ─── */
+
+.firstName {
+  animation: revealLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.1s;
+}
+
+.lastName {
+  animation: revealRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.25s;
+}
+
+.progressArea {
+  animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.5s;
+}
+
+@keyframes revealLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes revealRight {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Responsive: Mobile stacks name in two rows ─── */
+
+@media (max-width: 600px) {
+  .nameBlock {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .firstName,
+  .lastName {
+    font-size: clamp(3rem, 14vw, 5rem);
+  }
+
+  .progressArea {
+    width: 60vw;
+  }
+}
