@@ -21,8 +21,14 @@ const CLIP_Y_ROTATION = -Math.PI / 180 * 15
 const CLIP_Z_ROTATION = -Math.PI / 180 * -33
 
 export function FaceWireframeReveal() {
-  const { currentPalette } = useTheme()
+  const { currentPalette, setIsModelLoaded } = useTheme()
   const { nodes, scene } = useGLTF('/models/face3.glb') as FaceGLTF
+
+  useEffect(() => {
+    if (scene) {
+      setIsModelLoaded(true)
+    }
+  }, [scene, setIsModelLoaded])
   const orangeWireframe = useMemo(() => new THREE.Color(currentPalette.accent_1), [currentPalette.accent_1])
   const groupRef = useRef<THREE.Group>(null)
   const pointerRef = useRef({ x: 0, y: 0 })

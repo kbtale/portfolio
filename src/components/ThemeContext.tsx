@@ -182,6 +182,8 @@ type ThemeContextType = {
   currentPalette: Palette;
   paletteIndex: number;
   nextPalette: () => void;
+  isModelLoaded: boolean;
+  setIsModelLoaded: (loaded: boolean) => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -197,6 +199,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [index, setIndex] = useState(0);
   const [showToast, setShowToast] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [isModelLoaded, setIsModelLoaded] = useState(false);
   const transitionRef = useRef<ThemeTransitionHandle>(null);
 
   // Sync with system dark mode preference with useSyncExternalStore
@@ -261,7 +264,13 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   }, [currentPalette]);
 
   return (
-    <ThemeContext.Provider value={{ currentPalette, paletteIndex: index, nextPalette }}>
+    <ThemeContext.Provider value={{ 
+      currentPalette, 
+      paletteIndex: index, 
+      nextPalette,
+      isModelLoaded,
+      setIsModelLoaded
+    }}>
       {children}
       <ThemeToast 
         palette={currentPalette} 

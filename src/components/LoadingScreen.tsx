@@ -8,7 +8,7 @@ const MINIMUM_DISPLAY_MS = 2000;
 const PROGRESS_INTERVAL_MS = 30;
 
 export default function LoadingScreen() {
-  const { currentPalette } = useTheme();
+  const { currentPalette, isModelLoaded } = useTheme();
   const [displayProgress, setDisplayProgress] = useState(0);
   const [phase, setPhase] = useState<"loading" | "exiting" | "done">("loading");
   const startTimeRef = useRef<number>(0);
@@ -20,15 +20,20 @@ export default function LoadingScreen() {
   const getTargetProgress = useCallback(() => {
     let p = 0;
 
-    if (document.readyState === "loading") p = 20;
-    else if (document.readyState === "interactive") p = 45;
-    else if (document.readyState === "complete") p = 65;
+    // Standard DOM markers
+    if (document.readyState === "loading") p = 15;
+    else if (document.readyState === "interactive") p = 35;
+    else if (document.readyState === "complete") p = 50;
 
-    if (fontsReadyRef.current) p += 15;
-    if (windowLoadedRef.current) p += 20;
+    // Assets signals
+    if (fontsReadyRef.current) p += 10;
+    if (windowLoadedRef.current) p += 15;
+    
+    // 3D Model Readiness
+    if (isModelLoaded) p += 25;
 
     return Math.min(p, 100);
-  }, []);
+  }, [isModelLoaded]);
 
   useEffect(() => {
     startTimeRef.current = Date.now();
@@ -60,7 +65,7 @@ export default function LoadingScreen() {
     }
     window.addEventListener("load", onLoad);
 
-    // Initial target
+    // Update target whenever getTargetProgress dependencies (like isModelLoaded) change
     updateTarget();
 
     // --- Smooth animated progress ticker ---

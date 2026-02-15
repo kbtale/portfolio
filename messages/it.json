@@ -1,71 +1,122 @@
 {
   "nav": {
     "home": "Home",
-    "projects": "Il mio lavoro",
-    "experience": "Esperienza",
+    "projects": "Miei Lavori",
+    "experience": "Mia Esperienza",
     "certifications": "Certificazioni",
     "about": "Chi sono",
     "contact": "Contatto"
   },
   "cta": {
-    "viewWork": "Vedi lavori",
+    "viewWork": "Vedi Lavori",
     "getInTouch": "Contattami"
   },
   "hero": {
     "name": "Carlos Bolívar",
-    "slogan": "Progetto sistemi. Automatizzo la crescita."
+    "slogan": "Costruisco soluzioni. Risolvo sfide."
   },
   "work": {
-    "animatedTitle": "Il mio lavoro",
-    "filters": "Tutti · Automazione dei flussi · Ingegneria backend · Full stack web · Ottimizzazione dei sistemi",
-    "categoriesLabel": "Categorie dei progetti",
+    "animatedTitle": "Miei Lavori",
+    "categoriesLabel": "Categorie Progetti",
     "categories": {
-      "websites": "Siti web",
-      "webapps": "Web app",
+      "websites": "Siti Web",
+      "webapps": "Web App",
       "desktop": "Desktop",
       "mobile": "Mobile",
       "extensions": "Estensioni",
       "libraries": "Librerie",
       "tools": "Strumenti"
-    },
-    "items": {
-      "automationSuite": {
-        "title": "Suite di automazione operativa",
-        "tag": "Automazione dei flussi",
-        "description": "Ho sviluppato estensioni del browser e utility desktop per eliminare l'inserimento manuale dei dati, ottimizzando processi interni ad alto volume."
-      },
-      "dataMigration": {
-        "title": "Motore di migrazione dati legacy",
-        "tag": "Ingegneria backend",
-        "description": "Ho sviluppato script di scraping e parsing ad alta fedeltà per migrare dati critici tra architetture legacy e ambienti moderni SharePoint/Cloud."
-      },
-      "inventory": {
-        "title": "Architettura di inventario scalabile",
-        "tag": "Full stack web",
-        "description": "Ho progettato architetture di database sicure e scalabili per sistemi di inventario, gestendo transazioni ad alto volume per clienti privati."
-      },
-      "edtech": {
-        "title": "Ottimizzazione piattaforma EdTech",
-        "tag": "Ottimizzazione dei sistemi",
-        "description": "Ho ottimizzato un ambiente di apprendimento virtuale, riducendo del 90% le richieste di supporto giornaliere con miglioramenti di stabilità backend e strumenti amministrativi personalizzati."
-      }
-    },
-    "cards": {
-      "workA": {
-        "title": "Suite di automazione operativa",
-        "tag": "Automazione dei flussi",
-        "stack": "Node.js · Estensioni Chrome (Manifest V3) · Power Automate"
-      },
-      "workB": {
-        "title": "Motore di migrazione dati legacy",
-        "tag": "Ingegneria backend",
-        "stack": "Python · XML Parsing · SQL · PowerShell"
-      }
     }
   },
   "projects": {
-    "techStack": "Stack tecnico",
-    "viewProject": "Vedi progetto"
+    "techStack": "Tecnologie",
+    "viewProject": "Vedi Progetto",
+    "viewDetails": "Dettagli",
+    "download": "Scarica",
+    "viewSite": "Vedi Sito →",
+    "back": "← Indietro",
+    "about": "Sul Progetto",
+    "githubRepo": "Repository",
+    "noDescription": "Nessuna descrizione disponibile.",
+    "tech": {
+      "c": "C",
+      "css": "CSS",
+      "html": "HTML",
+      "js": "JavaScript",
+      "php": "PHP",
+      "python": "Python",
+      "typescript": "TypeScript",
+      "flutter": "Flutter",
+      "gsap": "GSAP",
+      "laravel": "Laravel",
+      "nestjs": "NestJS",
+      "nextjs": "Next.js",
+      "reactjs": "React",
+      "tailwind": "Tailwind CSS",
+      "three": "Three.js",
+      "vue": "Vue",
+      "mysql": "MySQL",
+      "postgresql": "PostgreSQL",
+      "firebase": "Firebase",
+      "supabase": "Supabase",
+      "chrome-extensions": "Chrome Extensions",
+      "nodejs": "Node.js",
+      "ai": "IA",
+      "docker": "Docker",
+      "apicalypse": "Apicalypse",
+      "make": "Make",
+      "swagger": "Swagger"
+    },
+    "items": {
+      "findthagame": {
+        "title": "FindThaGame",
+        "description": "Un sito che ti aiuta a trovare i giochi usando i criteri specifici che ricordi. Utilizza diverse query simultanee tramite Apicalypse e un algoritmo di punteggio personalizzato per classificare i risultati dal database IGDB."
+      },
+      "ocr-to-txt": {
+        "title": "OCR to TXT",
+        "description": "App che estrae testo da immagini e screenshot usando Tesseract OCR. Permette di regolare contrasto, luminosità e altri parametri prima dell'elaborazione per ottenere risultati precisi anche su immagini poco chiare."
+      },
+      "lease-sentinel": {
+        "title": "Lease Sentinel",
+        "description": "Sistema di monitoraggio scadenze automatizzato che usa Gemini 1.5 Flash per convertire clausole legali in avvisi. Utilizza Slack, Telegram, email e webhook personalizzati per le notifiche."
+      },
+      "palindot": {
+        "title": "Palindot",
+        "description": "Un abbreviatore di URL che genera codici 'palindromici' che si leggono allo stesso modo in entrambi i sensi, creando indirizzi brevi simmetrici."
+      },
+      "shell-c": {
+        "title": "Shell C",
+        "description": "Una command line con capacità espanse, scritta da zero. Include strumenti per ispezionare file, consultare il meteo, diagnosticare problemi di rete e altro. Funziona su Windows, Mac e Linux."
+      },
+      "retro-notes": {
+        "title": "Retro Notes",
+        "description": "App per appunti in stile 8-bit. Progettata per categorizzare e archiviare rapidamente i tuoi pensieri con salvataggio automatico."
+      },
+      "exhale-app": {
+        "title": "Exhale App",
+        "description": "Progettata per il mindfulness, questa app offre un modo semplice per liberare la mente. Registra la tua voce per esprimere sentimenti e lasciali andare: la registrazione viene riprodotta una volta e poi eliminata automaticamente."
+      },
+      "useless-polymath": {
+        "title": "Useless Polymath",
+        "description": "Collezione di esercizi per imparare metodi e sistemi di nicchia, come leggere codici colore elettronici, prevedere le fasi lunari o usare cifrari segreti."
+      },
+      "civy": {
+        "title": "Civy",
+        "description": "SaaS per creare molteplici curriculum e lettere di presentazione con anteprima dal vivo e formattazione automatica. Permette anche di usare YAML per definire la struttura."
+      },
+      "react-three-text-fx": {
+        "title": "React Three Text FX",
+        "description": "Libreria di componenti React per effetti di testo, costruita con GSAP e animazioni Three.js, progettata per l'integrazione in progetti React Three Fiber."
+      },
+      "openrise-www": {
+        "title": "Openrise Landing Page",
+        "description": "Sito web per Openrise, una comunità open source che costruisce strumenti gratuiti e accessibili per creatori e sviluppatori."
+      },
+      "te-filter": {
+        "title": "TE Filter",
+        "description": "Estensione Chrome che semplifica la ricerca di classi su Moodle. Sostituisce le liste lunghe con un menu di ricerca istantanea e automatizza la selezione dei formati di download."
+      }
+    }
   },
   "experience": {
     "items": [
@@ -73,72 +124,69 @@
         "date": "Dic 2025 – Presente",
         "company": "Openrise",
         "role": "Lead Developer",
-        "description": "Progetto strumenti open source focalizzati sull'efficienza tecnica.",
+        "description": "Guido un team di sviluppatori nella creazione di prodotti Open Source per la comunità.",
         "url": "https://www.openrise.tech/"
       },
       {
         "date": "Lug 2018 – Presente",
         "company": "Freelance · Remoto",
         "role": "Sviluppatore software freelance",
-        "description": "Realizzo soluzioni end‑to‑end e piattaforme web scalabili con uno stack robusto (Laravel, Vue.js, Node.js). Specializzato in strumenti di automazione che risolvono inefficienze operative."
+        "description": "Consegno soluzioni end-to-end e app web scalabili. Specializzato in strumenti di automazione che risolvono inefficienze operative."
       },
       {
         "date": "Apr 2025 – Nov 2025",
         "company": "BetterWorld Technology",
-        "role": "Service Desk Team Lead (Technical)",
-        "description": "Ho guidato flussi di report automatizzati usando Node.js e integrazioni API. Ho ottenuto record di CSAT per 4 mesi consecutivi attraverso strategia basata sui dati e ristrutturazione del team.",
+        "role": "Service Desk Team Lead",
+        "description": "Ho lavorato su molteplici siti web, coordinato le operazioni del Service Desk e collaborato alla pianificazione strategica per ottimizzare i flussi di lavoro.",
         "url": "https://www.betterworldtechnology.com/"
       },
       {
         "date": "Gen 2024 – Mar 2025",
         "company": "BetterWorld Technology",
         "role": "IT Services Delivery Associate",
-        "description": "Ho gestito configurazioni di rete e progetti infrastrutturali. Ho sviluppato script di automazione in Python per migrazione dati e estensioni Chrome per ottimizzare le operazioni di ingegneria.",
+        "description": "Sviluppato script di automazione in Python e PowerShell per task e deployment, e creato estensioni Chrome per ottimizzare le operazioni.",
         "url": "https://www.betterworldtechnology.com/"
       },
       {
         "date": "Apr 2023 – Dic 2023",
         "company": "Inglés en Español",
-        "role": "Technical Support Associate",
-        "description": "Ho gestito la manutenzione tecnica di piattaforme web (Wix/Velo) e standardizzato strumenti di valutazione digitale per ottimizzare i processi di intake.",
+        "role": "ESL Instructor Technical Support Associate",
+        "description": "Gestito la piattaforma web e VoIP, standardizzando strumenti di valutazione digitale per ottimizzare i processi di ammissione.",
         "url": "https://aprendeinglesenespanol.com/"
       },
       {
         "date": "Feb 2022 – Feb 2023",
         "company": "Centro Venezolano Americano del Zulia",
         "role": "IT Academic Analyst",
-        "description": "Ho guidato iniziative di trasformazione digitale, conducendo analisi avanzate (Pareto/Ishikawa) per individuare colli di bottiglia e sviluppando strumenti web che hanno aumentato l'efficienza del 500%.",
+        "description": "Guidato iniziative di trasformazione digitale, realizzando analisi avanzate per individuare colli di bottiglia e sviluppando strumenti web che hanno aumentato l'efficienza del 500%.",
+        "url": "https://www.cevaz.org/"
+      },
+      {
+        "date": "Sep 2021 – Feb 2022",
+        "company": "Centro Venezolano Americano del Zulia",
+        "role": "IT Analyst",
+        "description": "Automazione di sistemi e processi amministrativi attraverso lo sviluppo e il deployment di script PowerShell e Python.",
         "url": "https://www.cevaz.org/"
       }
     ]
   },
   "timeline": {
-    "titleMy": "La mia",
+    "titleMy": "Mia",
     "titleExperience": "Esperienza"
   },
   "about": {
     "title": "Chi sono",
-    "subtitle": "Full Stack Engineer orientato al prodotto e leader operativo.",
+    "subtitle": "Orientato agli obiettivi e in costante apprendimento.",
     "paragraphs": [
-      "Con oltre 6 anni di esperienza, collego logica architetturale complessa ed efficienza operativa. Mi specializzo nello sviluppo di applicazioni web scalabili (Next.js, Laravel) e strumenti interni che risolvono problemi di business.",
-      "Il mio background unisce competenze tecniche profonde, dall'automazione in Python all'integrazione di IA generativa, con leadership strategica. Non scrivo solo codice; progetto sistemi che riducono attriti, ottimizzano i flussi e generano crescita misurabile.",
-      "Core Stack: React, Next.js, Node.js, Python, Laravel.",
-      "Focus: Automazione dei flussi, web immersivo, architettura dei sistemi.",
-      "Lingue: Spagnolo (Madrelingua), Inglese (Fluente), Italiano (Intermedio)."
+      "Ho iniziato a programmare a 12 anni. Da allora ho realizzato numerosi progetti con tecnologie diverse. Risolvo sfide complesse che mi spingono a crescere.",
+      "Dai un'occhiata ai miei progetti qui sotto. Spero troverai qualcosa di interessante."
     ]
-  },
-  "contact": {
-    "title": "Contatto",
-    "email": "carlosabolivart@gmail.com",
-    "linkedin": "LinkedIn: /in/carlos-alejandro-bolivar",
-    "github": "GitHub: github.com/kbtale",
-    "location": "Località: Maracaibo, Venezuela"
   },
   "footer": {
     "sectionTitle": "Contatto",
-    "headline": "Hai un progetto in mente? Costruiamo qualcosa di grande insieme.",
+    "headline": "Hai un progetto in mente o cerchi un developer? Costruiamo qualcosa di grande insieme.",
     "emailLabel": "Email",
-    "email": "carlosabolivart@gmail.com",
+    "email": "cbolivar.dev@openrise.tech",
     "locationLabel": "Località",
     "location": "Maracaibo, Venezuela",
     "socialsLabel": "Social",
@@ -146,7 +194,9 @@
     "linkedinLabel": "LinkedIn",
     "github": "github.com/kbtale",
     "githubLabel": "GitHub",
+    "tiktokLabel": "TikTok (+65k follower)",
+    "repoLabel": "Dai una stella alla repo di questo portfolio!",
     "copyright": "© 2026 Carlos Bolívar. Tutti i diritti riservati.",
-    "tagline": "Progetto sistemi. Automatizzo la crescita."
+    "tagline": "Costruisco soluzioni. Risolvo sfide."
   }
 }

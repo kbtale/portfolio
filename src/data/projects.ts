@@ -7,11 +7,9 @@ export type Tech = {
 
 export type Project = {
   id: string
-  title: string
   githubUrl: string
   repo: string
   stars: number | null
-  description: string
   tech: string[]
   categories: ProjectCategoryId[]
   additionalLinks: { type: string; link: string }
@@ -78,11 +76,9 @@ export const techStack: Tech[] = [
 export const projects: Project[] = [
   {
     id: "findthagame",
-    title: "FindThaGame",
     githubUrl: "https://github.com/kbtale/findthagame",
     repo: "kbtale/findthagame",
     stars: null,
-    description: "A website that helps you track down games using specific criteria like console, year, or genre. Far from a simple lookup, it leverages Apicalypse queries and a custom scoring algorithm (detailed in the README) to intelligently rank results from the IGDB database and find the exact title you're missing.",
     tech: ["typescript", "reactjs", "tailwind", "ai", "apicalypse"],
     categories: ["websites", "webapps"],
     additionalLinks: {
@@ -96,11 +92,9 @@ export const projects: Project[] = [
   },
   {
     id: "ocr-to-txt",
-    title: "OCR to TXT",
     githubUrl: "https://github.com/kbtale/ocr-to-txt",
     repo: "kbtale/ocr-to-txt",
     stars: null,
-    description: "A desktop app that pulls text from images and screenshots using Tesseract OCR. It helps you get accurate results from unclear images by letting you adjust contrast and brightness before processing. You can convert, edit, and save text from multiple files at once.",
     tech: ["python"],
     categories: ["desktop"],
     additionalLinks: {
@@ -114,11 +108,9 @@ export const projects: Project[] = [
   },
   {
     id: "lease-sentinel",
-    title: "Lease Sentinel",
     githubUrl: "https://github.com/kbtale/lease-sentinel",
     repo: "kbtale/lease-sentinel",
     stars: null,
-    description: "LeaseSentinel is an automated deadline monitoring system that leverages Google Gemini 1.5 Flash to parse natural language lease clauses into structured webhook alerts. Built on Next.js 16 and Firebase Firestore, the application implements a \"Deep Module\" architecture to encapsulate complex logic, such as AI prompt engineering and timestamp serialization, behind strict interfaces. It features a custom dual-authentication configuration to bridge NextAuth v5 with the Firestore adapter and utilizes type-safe Server Actions for robust error handling. The system runs a daily cron job to identify trigger dates, delegating final delivery to a serverless Make.com orchestration layer that routes notifications to Slack, Twilio, or Email based on user preferences.",
     tech: ["nextjs", "typescript", "firebase", "make", "ai", "tailwind"],
     categories: ["webapps"],
     additionalLinks: {
@@ -132,11 +124,9 @@ export const projects: Project[] = [
   },
   {
     id: "palindot",
-    title: "Palindot",
     githubUrl: "https://github.com/kbtale/Palindot",
     repo: "kbtale/Palindot",
     stars: null,
-    description: "A URL shortener that adds a creative twist to link sharing. Instead of random characters, it generates \"palindromic\" codes sequences that read the same forwards and backwards. It processes the original link to create a symmetrical short address for every user.",
     tech: ["vue", "php", "laravel", "mysql", "swagger"],
     categories: ["webapps"],
     additionalLinks: {
@@ -150,11 +140,9 @@ export const projects: Project[] = [
   },
   {
     id: "shell-c",
-    title: "Shell C",
     githubUrl: "https://github.com/kbtale/shell-c",
     repo: "kbtale/shell-c",
     stars: null,
-    description: "This project rebuilds the command line interface with expanded capabilities. Beyond basic file management, it includes utilities to view file internals, check the weather, and diagnose internet issues. It runs on Windows, Mac, and Linux.",
     tech: ["c"],
     categories: ["tools", "desktop"],
     additionalLinks: {
@@ -168,11 +156,9 @@ export const projects: Project[] = [
   },
   {
     id: "retro-notes",
-    title: "Retro Notes",
     githubUrl: "https://github.com/kbtale/retro-notes",
     repo: "kbtale/retro-notes",
     stars: null,
-    description: "A note-taking app that brings back the nostalgia of 8-bit video games. It combines a retro, pixelated design with modern reliability, offering a secure place to write, categorize, and archive your thoughts. It automatically saves your drafts to your device so you never lose an idea.",
     tech: ["reactjs", "typescript", "tailwind", "nestjs", "postgresql", "docker"],
     categories: ["webapps"],
     additionalLinks: {
@@ -186,11 +172,9 @@ export const projects: Project[] = [
   },
   {
     id: "exhale-app",
-    title: "Exhale App",
     githubUrl: "https://github.com/kbtale/exhale-app",
     repo: "kbtale/exhale-app",
     stars: null,
-    description: "Designed for mindfulness, this app provides a simple way to clear your head. Record your voice to express feelings, hear them one last time, and let them go as the recording is automatically discarded. It keeps nothing on the cloud or your device, creating a fleeting moment of release.",
     tech: ["flutter"],
     categories: ["mobile"],
     additionalLinks: {
@@ -204,11 +188,9 @@ export const projects: Project[] = [
   },
   {
     id: "useless-polymath",
-    title: "Useless Polymath",
     githubUrl: "https://github.com/kbtale/Useless-Polymath",
     repo: "kbtale/Useless-Polymath",
     stars: null,
-    description: "This project is a collection of drills for learning random knowledge. It helps you practice skills like reading electronic color codes, predicting moon phases, or using secret ciphers. It is designed to be a digital playground where you can learn interesting technical facts.",
     tech: ["reactjs", "typescript", "css"],
     categories: ["webapps", "websites"],
     additionalLinks: {
@@ -222,11 +204,9 @@ export const projects: Project[] = [
   },
   {
     id: "civy",
-    title: "Civy",
     githubUrl: "https://github.com/openrise-hub/civy",
     repo: "openrise-hub/civy",
     stars: null,
-    description: "A SaaS to create multiple CVs and cover letters with a live previsualizer and automatic formatting by using multiple templates. You can also use YAML",
     tech: ["typescript", "reactjs", "tailwind", "nestjs", "postgresql", "docker"],
     categories: ["webapps", "websites"],
     additionalLinks: {
@@ -240,11 +220,9 @@ export const projects: Project[] = [
   },
   {
     id: "react-three-text-fx",
-    title: "React Three Text FX",
     githubUrl: "https://github.com/openrise-hub/react-three-text-fx",
     repo: "openrise-hub/react-three-text-fx",
     stars: null,
-    description: "A React component library of text effects built with GSAP and Three.js animations for easy integration into React Three Fiber projects.",
     tech: ["three", "gsap","reactjs"],
     categories: ["libraries"],
     additionalLinks: {
@@ -258,11 +236,9 @@ export const projects: Project[] = [
   },
   {
     id: "openrise-www",
-    title: "Openrise Landing Page",
     githubUrl: "https://github.com/openrise-hub/www",
     repo: "openrise-hub/www",
     stars: null,
-    description: "Landing page for Openrise, an open source community that builds free and accessible tools for creators and developers.",
     tech: ["three", "gsap","nextjs", "typescript", "tailwind"],
     categories: ["websites"],
     additionalLinks: {
@@ -276,11 +252,9 @@ export const projects: Project[] = [
   },
   {
     id: "te-filter",
-    title: "TE Filter",
     githubUrl: "https://github.com/kbtale/TE-Filter",
     repo: "kbtale/TE-Filter",
     stars: null,
-    description: "A browser extension that simplifies finding classes on the Moodle platform. It replaces the long, hard-to-use list of groups with a searchable menu, letting staff find the right class instantly. It also saves time by automatically selecting the Excel format for downloads and copying the class name for easy file labeling.",
     tech: ["chrome-extensions", "css", "js"],
     categories: ["extensions"],
     additionalLinks: {

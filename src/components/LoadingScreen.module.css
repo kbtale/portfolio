@@ -80,8 +80,7 @@
 .progressTrack {
   width: 100%;
   height: 2px;
-  background: var(--text-primary);
-  opacity: 0.15;
+  background: rgba(var(--foreground-rgb), 0.1);
   position: relative;
   overflow: hidden;
 }
