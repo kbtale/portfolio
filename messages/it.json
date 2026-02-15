@@ -178,9 +178,13 @@
     "title": "Chi sono",
     "subtitle": "Orientato agli obiettivi e in costante apprendimento.",
     "paragraphs": [
-      "Ho iniziato a programmare a 12 anni. Da allora ho realizzato numerosi progetti con tecnologie diverse. Risolvo sfide complesse che mi spingono a crescere.",
+      "Ho iniziato a programmare a 12 anni. Da allora ho realizzato numerosi progetti con tecnologie diverse. Risolvo sfide complesse e cerco sempre di innovare dove ha senso.",
       "Dai un'occhiata ai miei progetti qui sotto. Spero troverai qualcosa di interessante."
     ]
+  },
+  "certifications": {
+    "title": "Certificazioni",
+    "tagline": "Vuoi vedere tutte le mie certificazioni? Controlla i miei profili Credly e LinkedIn."
   },
   "footer": {
     "sectionTitle": "Contatto",

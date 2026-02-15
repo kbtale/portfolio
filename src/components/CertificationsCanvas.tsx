@@ -2,14 +2,15 @@
 
 import React from "react";
 import Image from "next/image";
-import { certifications } from "../data/certifications";
+import { Certification, certifications } from "../data/certifications";
 import styles from "../app/page.module.css";
 
 interface CertificationsCanvasProps {
+  title: string;
   progress: number;
 }
 
-export default function CertificationsCanvas({ progress }: CertificationsCanvasProps) {
+export default function CertificationsCanvas({ title, progress }: CertificationsCanvasProps) {
 
   const titleScale = Math.min(progress / 0.4, 1) * 0.7;
   
@@ -27,13 +28,13 @@ export default function CertificationsCanvas({ progress }: CertificationsCanvasP
             opacity: 1
           }}
         >
-          CERTIFICATIONS
+          {title}
         </h1>
       </div>
 
 
       <div style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-        {certifications.slice(0, 5).map((cert, index) => {
+        {certifications.slice(0, 5).map((cert: Certification, index: number) => {
           const leftPos = index % 2 === 0 ? "calc(50% - 520px)" : "calc(50% + 20px)";
           
           return (

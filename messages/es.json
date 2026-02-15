@@ -178,9 +178,13 @@
     "title": "Sobre mí",
     "subtitle": "Orientado a objetivos y siempre en aprendizaje constante",
     "paragraphs": [
-      "Mis primeras pinceladas con la programación fueron alrededor de los 12 años. Desde entonces he hecho múltiples proyectos y en tecnologías muy diversas. Disfruto mucho de los proyectos que representan un reto.",
+      "Mis primeras pinceladas con la programación fueron alrededor de los 12 años. Desde entonces he hecho múltiples proyectos y en tecnologías muy diversas. Disfruto mucho de los proyectos que representan un reto, y siempre busco innovar en donde sea congruente.",
       "Revisa mis proyectos abajo, espero que encuentres alguno que te guste."
     ]
+  },
+  "certifications": {
+    "title": "Certificaciones",
+    "tagline": "¿Quieres ver todas mis certificaciones? Revisa mis perfiles en Credly y LinkedIn."
   },
   "footer": {
     "sectionTitle": "Contacto",

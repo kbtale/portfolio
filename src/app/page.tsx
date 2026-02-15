@@ -56,7 +56,10 @@ export default async function Home() {
 
           <ExperienceTimeline items={t.raw("experience.items") as ExperienceItem[]} />
 
-          <CertificationsSection />
+          <CertificationsSection 
+            title={t("certifications.title")} 
+            tagline={t("certifications.tagline")}
+          />
 
           <ContactFooter />
         </div>

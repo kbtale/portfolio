@@ -178,9 +178,13 @@
     "title": "About",
     "subtitle": "Goal-driven and always evolving.",
     "paragraphs": [
-      "I wrote my first lines of code at 12. Since then, I've built a wide range of projects across diverse technologies. I solve complex and challenging problems.",
+      "I wrote my first lines of code at 12. Since then, I've built a wide range of projects across diverse technologies. I solve complex problems and strive to innovate wherever it makes sense.",
       "Check out my projects below. I hope you find something interesting."
     ]
+  },
+  "certifications": {
+    "title": "Certifications",
+    "tagline": "Want to see all my certifications? Check my Credly and LinkedIn profiles."
   },
   "footer": {
     "sectionTitle": "Contact",
