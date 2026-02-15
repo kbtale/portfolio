@@ -18,6 +18,7 @@ export default function SmoothScroller() {
     });
 
     lenis.on("scroll", ScrollTrigger.update);
+    window.lenis = lenis;
 
     function update(time: number) {
       lenis.raf(time * 1000);

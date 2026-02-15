@@ -1,7 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, useMemo, useSyncExternalStore } from "react";
+import React, { createContext, useContext, useState, useEffect, useMemo, useSyncExternalStore, useRef } from "react";
 import ThemeToast from "./ThemeToast";
+import ThemeTransition, { ThemeTransitionHandle } from "./ThemeTransition";
 
 export type Palette = {
   name: string;
@@ -195,6 +196,8 @@ const hexToRgb = (hex: string): string => {
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [index, setIndex] = useState(0);
   const [showToast, setShowToast] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const transitionRef = useRef<ThemeTransitionHandle>(null);
 
   // Sync with system dark mode preference with useSyncExternalStore
   const isSystemDark = useSyncExternalStore(
@@ -218,9 +221,18 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     return newPalettes;
   }, [isSystemDark]);
 
-  const nextPalette = () => {
-    setIndex((prev) => (prev + 1) % orderedPalettes.length);
-    setShowToast(true);
+  const nextPalette = async () => {
+    if (isTransitioning || !transitionRef.current) return;
+    
+    setIsTransitioning(true);
+    const nextIdx = (index + 1) % orderedPalettes.length;
+
+    await transitionRef.current.play(() => {
+      setIndex(nextIdx);
+      setShowToast(true);
+    });
+
+    setIsTransitioning(false);
   };
 
   const currentPalette = orderedPalettes[index];
@@ -242,9 +254,9 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.style.setProperty("--button-primary-hover", currentPalette.action_hover);
     root.style.setProperty("--text-on-accent", currentPalette.on_accent);
 
-    // Dynamic Scrollbar Colors
-    root.style.setProperty("--scrollbar-thumb", currentPalette.accent_1);
-    root.style.setProperty("--scrollbar-thumb-hover", currentPalette.action_hover);
+    // Dynamic Scrollbar Colors - Use -theme suffix to allow class overrides without !important
+    root.style.setProperty("--scrollbar-thumb-theme", currentPalette.accent_1);
+    root.style.setProperty("--scrollbar-thumb-hover-theme", currentPalette.action_hover);
     root.style.setProperty("--scrollbar-track", currentPalette.background);
   }, [currentPalette]);
 
@@ -256,6 +268,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         isVisible={showToast} 
         onClose={() => setShowToast(false)} 
       />
+      <ThemeTransition ref={transitionRef} />
     </ThemeContext.Provider>
   );
 };

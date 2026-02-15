@@ -33,11 +33,10 @@ export default function LoadingScreen() {
   useEffect(() => {
     startTimeRef.current = Date.now();
 
-    // Lock scroll
-    const prevBody = document.body.style.overflow;
-    const prevHtml = document.documentElement.style.overflow;
-    document.body.style.overflow = "hidden";
-    document.documentElement.style.overflow = "hidden";
+    // Lock scroll and hide scrollbar via class
+    window.lenis?.stop();
+    const html = document.documentElement;
+    html.classList.add("hide-scrollbar");
 
     // --- Listen for real load signals and update target ---
     const updateTarget = () => {
@@ -84,8 +83,7 @@ export default function LoadingScreen() {
     }, PROGRESS_INTERVAL_MS);
 
     return () => {
-      document.body.style.overflow = prevBody;
-      document.documentElement.style.overflow = prevHtml;
+      window.lenis?.start();
       document.removeEventListener("readystatechange", updateTarget);
       window.removeEventListener("load", onLoad);
       clearInterval(interval);
@@ -109,8 +107,8 @@ export default function LoadingScreen() {
     if (phase !== "exiting") return;
 
     const timer = setTimeout(() => {
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
+      window.lenis?.start();
+      document.documentElement.classList.remove("hide-scrollbar");
       setPhase("done");
     }, 1200); // matches CSS animation duration + buffer
 

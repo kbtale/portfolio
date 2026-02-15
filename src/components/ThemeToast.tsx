@@ -21,7 +21,7 @@ export default function ThemeToast({ palette, isVisible, onClose }: ThemeToastPr
         x: 20,
         opacity: 0,
         scale: 0.95,
-        duration: 0.4,
+        duration: 0.45,
         ease: "power2.in",
         onComplete: onClose,
       });
@@ -39,7 +39,7 @@ export default function ThemeToast({ palette, isVisible, onClose }: ThemeToastPr
       gsap.fromTo(
         toastRef.current,
         { x: 50, opacity: 0, scale: 0.95 },
-        { x: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power4.out" }
+        { x: 0, opacity: 1, scale: 1, duration: 0.45, ease: "power4.out" }
       );
 
       // Set timer to auto-close

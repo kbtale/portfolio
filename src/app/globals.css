@@ -25,6 +25,11 @@
   --scrollbar-thumb: #DC753C;
 
   --accent-orange: var(--accent-primary);
+  scrollbar-gutter: stable;
+  
+  /* Scrollbar Theme Defaults */
+  --scrollbar-thumb: var(--scrollbar-thumb-theme);
+  --scrollbar-thumb-hover: var(--scrollbar-thumb-hover-theme);
 }
 
 html,
@@ -64,6 +69,7 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--scrollbar-thumb);
   border-radius: 0px;
   border: none;
+  transition: background-color 0.45s ease;
 }
 
 html::-webkit-scrollbar-thumb:hover,
@@ -81,8 +87,11 @@ body::-webkit-scrollbar-corner {
   background: var(--background);
 }
 
-/* Firefox - Target root (Standard properties support limited styling) */
-/* We target Firefox specifically to prevent Chrome 121+ from overriding our webkit styles with standard properties */
+.hide-scrollbar {
+  --scrollbar-thumb: transparent;
+  --scrollbar-thumb-hover: transparent;
+}
+
 @supports (-moz-appearance: none) {
   * {
     scrollbar-width: thin;
