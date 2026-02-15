@@ -35,12 +35,12 @@ export default function ProjectVideo({ src, isVisible, sectionInView }: ProjectV
   return (
     <video
       ref={videoRef}
-      src={src}
+      src={sectionInView ? src : undefined}
       className={styles.projectVideo}
       muted
       loop
       playsInline
-      preload="auto" 
+      preload="metadata" 
     />
   );
 }

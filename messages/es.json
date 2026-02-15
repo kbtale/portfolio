@@ -1,23 +1,22 @@
 {
   "nav": {
     "home": "Inicio",
-    "projects": "Mi trabajo",
+    "projects": "Mis Proyectos",
     "experience": "Experiencia",
     "certifications": "Certificaciones",
     "about": "Sobre mí",
     "contact": "Contacto"
   },
   "cta": {
-    "viewWork": "Ver trabajo",
-    "getInTouch": "Contactar"
+    "viewWork": "Ver Proyectos",
+    "getInTouch": "Contáctame"
   },
   "hero": {
     "name": "Carlos Bolívar",
     "slogan": "Arquitectando sistemas. Automatizando crecimiento."
   },
   "work": {
-    "animatedTitle": "Mi trabajo",
-    "filters": "Todo · Automatización de flujos · Ingeniería backend · Full stack web · Optimización de sistemas",
+    "animatedTitle": "Mis Proyectos",
     "categoriesLabel": "Categorías de proyectos",
     "categories": {
       "websites": "Sitios web",
@@ -125,13 +124,10 @@
   },
   "about": {
     "title": "Sobre mí",
-    "subtitle": "Full Stack Engineer y líder de operaciones orientado al producto.",
+    "subtitle": "",
     "paragraphs": [
-      "Con más de 6 años de experiencia, conecto lógica arquitectónica compleja con eficiencia operativa. Me especializo en construir aplicaciones web escalables (Next.js, Laravel) y herramientas internas que resuelven problemas de negocio.",
-      "Mi trayectoria combina experiencia técnica profunda, desde automatización en Python hasta integración de IA generativa, con liderazgo estratégico. No solo escribo código; diseño sistemas que reducen fricción, optimizan flujos y generan crecimiento medible.",
-      "Core Stack: React, Next.js, Node.js, Python, Laravel.",
-      "Focus: Automatización de flujos, web inmersiva, arquitectura de sistemas.",
-      "Idiomas: Español (Nativo), Inglés (Fluido), Italiano (Intermedio)."
+      "",
+      ""
     ]
   },
   "contact": {
