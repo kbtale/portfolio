@@ -3,7 +3,7 @@ import AboutHeader from "../components/AboutHeader";
 import ProjectsSection from "../components/ProjectsSection";
 import StickyNavbar from "../components/StickyNavbar";
 import WhooshButton from "../components/WhooshButton";
-import { fetchGitHubMeta, projects } from "../data/projects";
+import { projects } from "../data/projects";
 import ExperienceTimeline, { ExperienceItem } from "../components/ExperienceTimeline";
 import LazyFaceCanvas from "../components/LazyFaceCanvas";
 import LazyGridCanvas from "../components/LazyGridCanvas";
@@ -52,14 +52,7 @@ export default async function Home() {
           </div>
 
 
-          <ProjectsSection 
-            projects={await Promise.all(
-              projects.map(async (p) => {
-                const meta = await fetchGitHubMeta(p.repo);
-                return { ...p, stars: meta?.stars ?? null };
-              })
-            )} 
-          />
+          <ProjectsSection projects={projects} />
 
           <ExperienceTimeline items={t.raw("experience.items") as ExperienceItem[]} />
 
