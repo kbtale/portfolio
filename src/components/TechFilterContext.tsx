@@ -56,7 +56,11 @@ export function TechFilterProvider({ children }: { children: React.ReactNode }) 
     if (lastScrollTrigger > 0) {
       const projectsSection = document.getElementById("projects");
       if (projectsSection) {
-        projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (window.lenis) {
+          window.lenis.scrollTo(projectsSection, { offset: -80 });
+        } else {
+          projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       }
     }
   }, [lastScrollTrigger]);

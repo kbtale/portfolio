@@ -228,7 +228,11 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
 
     // Smooth scroll to top of section on mobile
     if (window.innerWidth < 768 && sectionRef.current) {
-      sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+      if (window.lenis) {
+        window.lenis.scrollTo(sectionRef.current, { offset: -80 });
+      } else {
+        sectionRef.current.scrollIntoView({ behavior: 'smooth' });
+      }
     }
     
     // After carousel exits, show detail
@@ -502,16 +506,20 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                     <Image
                       src={selectedProject.media.url}
                       alt={t(`projects.items.${selectedProject.id}.title`)}
-                      fill
-                      style={{ objectFit: "contain" }}
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      style={{ width: '100%', height: 'auto', objectFit: "contain" }}
                     />
                   )
                 ) : (
                   <Image
                     src="/images/placeholder.jpeg"
                     alt=""
-                    fill
-                    style={{ objectFit: "contain" }}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    style={{ width: '100%', height: 'auto', objectFit: "contain" }}
                   />
                 )}
               </div>

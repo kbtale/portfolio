@@ -18,7 +18,7 @@
   "work": {
     "animatedTitle": "Proyectos",
     "categoriesLabel": "Categorías de proyectos",
-    "filterByTech": "Filtrar por tecnología...",
+    "filterByTech": "Tecnologías",
     "searchPlaceholder": "Buscar tecnologías...",
     "noResults": "No se encontraron tecnologías",
     "clearFilters": "Limpiar",
@@ -182,7 +182,7 @@
   },
   "about": {
     "title": "Sobre mí",
-    "subtitle": "Orientado a objetivos y siempre en aprendizaje constante",
+    "subtitle": "Orientado a objetivos y siempre aprendiendo",
     "paragraphs": [
       "Mis primeras pinceladas con la programación fueron alrededor de los 12 años. Desde entonces he hecho múltiples proyectos y en tecnologías muy diversas. Disfruto mucho de los proyectos que representan un reto, y siempre busco innovar en donde sea congruente.",
       "Aquí puedes ver las herramientas que utilizo. Pulsa en ellas para filtrar mis proyectos por tecnología."

@@ -38,7 +38,6 @@ body {
   overflow-x: hidden;
   scroll-padding-top: 80px;
   color-scheme: light; /* Force light mode */
-  scroll-behavior: smooth;
 }
 
 body {

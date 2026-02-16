@@ -97,7 +97,11 @@ export default function ExperienceTimeline({ items }: ExperienceTimelineProps) {
 
           const clampedScroll = gsap.utils.clamp(this.minScroll, this.maxScroll, rawScroll);
           
-          window.scrollTo(0, clampedScroll);
+          if (window.lenis) {
+            window.lenis.scrollTo(clampedScroll, { immediate: true });
+          } else {
+            window.scrollTo(0, clampedScroll);
+          }
         }
       });
 
