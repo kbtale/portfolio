@@ -114,6 +114,22 @@ export const projects: Project[] = [
     }
   },
   {
+    id: "shell-c",
+    githubUrl: "https://github.com/kbtale/shell-c",
+    repo: "kbtale/shell-c",
+    stars: null,
+    tech: ["c"],
+    categories: ["tools", "desktop"],
+    additionalLinks: {
+      type: "none",
+      link: "",
+    },
+    media: {
+      type: "video",
+      url: "/videos/shellc_compressed_4.mp4"
+    }
+  },
+  {
     id: "lease-sentinel",
     githubUrl: "https://github.com/kbtale/lease-sentinel",
     repo: "kbtale/lease-sentinel",
@@ -146,38 +162,6 @@ export const projects: Project[] = [
     }
   },
   {
-    id: "shell-c",
-    githubUrl: "https://github.com/kbtale/shell-c",
-    repo: "kbtale/shell-c",
-    stars: null,
-    tech: ["c"],
-    categories: ["tools", "desktop"],
-    additionalLinks: {
-      type: "none",
-      link: "",
-    },
-    media: {
-      type: "video",
-      url: "/videos/shellc_compressed_4.mp4"
-    }
-  },
-  {
-    id: "retro-notes",
-    githubUrl: "https://github.com/kbtale/retro-notes",
-    repo: "kbtale/retro-notes",
-    stars: null,
-    tech: ["reactjs", "typescript", "tailwind", "nestjs", "postgresql", "docker"],
-    categories: ["webapps"],
-    additionalLinks: {
-      type: "none",
-      link: "",
-    },
-    media: {
-      type: "video",
-      url: "/videos/retronotes_compressed.mp4"
-    }
-  },
-  {
     id: "exhale-app",
     githubUrl: "https://github.com/kbtale/exhale-app",
     repo: "kbtale/exhale-app",
@@ -187,22 +171,6 @@ export const projects: Project[] = [
     additionalLinks: {
       type: "installer",
       link: "https://github.com/kbtale/exhale-app/releases/tag/v1.1.0"
-    },
-    media: {
-      type: "image",
-      url: ""
-    }
-  },
-  {
-    id: "useless-polymath",
-    githubUrl: "https://github.com/kbtale/Useless-Polymath",
-    repo: "kbtale/Useless-Polymath",
-    stars: null,
-    tech: ["reactjs", "typescript", "css"],
-    categories: ["webapps", "websites"],
-    additionalLinks: {
-      type: "none",
-      link: "",
     },
     media: {
       type: "image",
@@ -226,6 +194,22 @@ export const projects: Project[] = [
     }
   },
   {
+    id: "useless-polymath",
+    githubUrl: "https://github.com/kbtale/Useless-Polymath",
+    repo: "kbtale/Useless-Polymath",
+    stars: null,
+    tech: ["reactjs", "typescript", "css"],
+    categories: ["webapps", "websites"],
+    additionalLinks: {
+      type: "none",
+      link: "",
+    },
+    media: {
+      type: "image",
+      url: ""
+    }
+  },
+  {
     id: "react-three-text-fx",
     githubUrl: "https://github.com/openrise-hub/react-three-text-fx",
     repo: "openrise-hub/react-three-text-fx",
@@ -242,22 +226,6 @@ export const projects: Project[] = [
     }
   },
   {
-    id: "openrise-www",
-    githubUrl: "https://github.com/openrise-hub/www",
-    repo: "openrise-hub/www",
-    stars: null,
-    tech: ["three", "gsap","nextjs", "typescript", "tailwind"],
-    categories: ["websites"],
-    additionalLinks: {
-      type: "website",
-      link: "https://openrise.tech/",
-    },
-    media: {
-      type: "video",
-      url: "/videos/openrise-landing_compressed.mp4"
-    }
-  },
-  {
     id: "te-filter",
     githubUrl: "https://github.com/kbtale/TE-Filter",
     repo: "kbtale/TE-Filter",
@@ -271,6 +239,38 @@ export const projects: Project[] = [
     media: {
       type: "image",
       url: ""
+    }
+  },
+  {
+    id: "retro-notes",
+    githubUrl: "https://github.com/kbtale/retro-notes",
+    repo: "kbtale/retro-notes",
+    stars: null,
+    tech: ["reactjs", "typescript", "tailwind", "nestjs", "postgresql", "docker"],
+    categories: ["webapps"],
+    additionalLinks: {
+      type: "none",
+      link: "",
+    },
+    media: {
+      type: "video",
+      url: "/videos/retronotes_compressed.mp4"
+    }
+  },
+  {
+    id: "openrise-www",
+    githubUrl: "https://github.com/openrise-hub/www",
+    repo: "openrise-hub/www",
+    stars: null,
+    tech: ["three", "gsap","nextjs", "typescript", "tailwind"],
+    categories: ["websites"],
+    additionalLinks: {
+      type: "website",
+      link: "https://openrise.tech/",
+    },
+    media: {
+      type: "video",
+      url: "/videos/openrise-landing_compressed.mp4"
     }
   },
 ];

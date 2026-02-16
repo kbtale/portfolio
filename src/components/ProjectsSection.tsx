@@ -8,6 +8,7 @@ import Image from "next/image";
 import ProjectVideo from "./ProjectVideo";
 import GitHubStars from "./GitHubStars";
 import { useTechFilter } from "./TechFilterContext";
+import { useTheme } from "./ThemeContext";
 import type { Project } from "../data/projects";
 import { projectCategories, techStack } from "../data/projects";
 import styles from "../app/page.module.css";
@@ -20,7 +21,14 @@ type ProjectsSectionProps = {
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const t = useTranslations();
   const { selectedTech, activeCategories, setActiveCategories, setTechFilter } = useTechFilter();
+  const { triggerToast } = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (selectedTech === "git") {
+      triggerToast("message", t.raw("work.gitToast"));
+    }
+  }, [selectedTech, triggerToast, t]);
   const [filterVersion, setFilterVersion] = useState(0);
   const currentIndexRef = useRef(currentIndex);
   useLayoutEffect(() => {
@@ -44,7 +52,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
             project.categories.some((category) => activeCategories.includes(category))
           );
           
-    if (selectedTech && selectedTech !== "html" && selectedTech !== "css") {
+    if (selectedTech && selectedTech !== "html" && selectedTech !== "css" && selectedTech !== "git") {
       base = base.filter((project) => project.tech.includes(selectedTech));
     }
 

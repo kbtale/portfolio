@@ -128,9 +128,6 @@ export default function TechSearchFilter() {
                     <TechIcon id={tech.id} />
                   </div>
                   <span className={styles.resultName}>{tech.localizedName}</span>
-                  {selectedTech === tech.id && (
-                    <span className={styles.selectedBadge}>✓</span>
-                  )}
                 </div>
               ))
             ) : (

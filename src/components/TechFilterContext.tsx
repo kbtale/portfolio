@@ -31,9 +31,13 @@ export function TechFilterProvider({ children }: { children: React.ReactNode }) 
       }
     } 
     else if (techId === "git") {
-      setSelectedTech(null);
-      setActiveCategories([]);
-      setLastScrollTrigger(Date.now());
+      if (isAlreadySet) {
+        setSelectedTech(null);
+      } else {
+        setSelectedTech(techId);
+        setActiveCategories([]);
+        setLastScrollTrigger(Date.now());
+      }
     }
     else {
       if (isAlreadySet) {

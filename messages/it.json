@@ -22,6 +22,7 @@
     "searchPlaceholder": "Cerca tecnologie...",
     "noResults": "Nessuna tecnologia trovata",
     "clearFilters": "Cancella",
+    "gitToast": "Non è un bug! Uso Git per tutti i miei progetti, puoi trovarli sul mio <link>GitHub</link>.",
     "categories": {
       "websites": "Siti Web",
       "webapps": "Web App",
@@ -212,6 +213,18 @@
     "tiktokLabel": "TikTok (+65k follower)",
     "repoLabel": "Dai una stella alla repo di questo portfolio!",
     "copyright": "© 2026 Carlos Bolívar. Tutti i diritti riservati.",
-    "tagline": "Costruisco soluzioni. Risolvo sfide."
+    "tagline": "Costruisco soluzioni. Risolvo sfide.",
+    "form": {
+      "nameLabel": "Nome",
+      "namePlaceholder": "Il tuo nome",
+      "emailLabel": "Email",
+      "emailPlaceholder": "tua@email.com",
+      "messageLabel": "Messaggio",
+      "messagePlaceholder": "Raccontami del tuo progetto...",
+      "sendButton": "Invia Messaggio",
+      "sending": "Invio in corso...",
+      "success": "Messaggio inviato con successo!",
+      "error": "Errore durante l'invio del messaggio. Riprova."
+    }
   }
 }

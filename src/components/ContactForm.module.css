@@ -1,0 +1,82 @@
+.contactForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+}
+
+.row > * {
+  flex: 1;
+}
+
+.input,
+.textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(var(--foreground-rgb), 0.3);
+  padding: 8px 0;
+  color: var(--text-primary);
+  font-family: var(--font-sanchez), serif;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+  outline: none;
+  width: 100%;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: var(--text-primary);
+}
+
+.textarea {
+  min-height: 60px;
+  max-height: 250px;
+  resize: vertical;
+}
+
+.honeyPot {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  height: 0;
+  width: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.submitWrapper {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+
+.submitDisabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.statusMessage {
+  font-family: var(--font-sanchez), serif;
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+.success {
+  color: var(--accent-primary);
+}
+
+.error {
+  color: #ff4444;
+}
+
+@media (max-width: 600px) {
+  .row {
+    flex-direction: column;
+    gap: 12px;
+  }
+}

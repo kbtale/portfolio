@@ -128,11 +128,6 @@
   font-style: italic;
 }
 
-.selectedBadge {
-  font-weight: 600;
-  font-size: 0.8rem;
-  margin-left: auto;
-}
 
 @media (max-width: 768px) {
   .searchWrapper {

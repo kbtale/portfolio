@@ -73,6 +73,25 @@
   letter-spacing: -0.02em;
 }
 
+.messageBody {
+  font-family: var(--font-sanchez), serif;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+  max-width: 320px;
+}
+
+.toastLink {
+  color: var(--text-primary);
+  text-decoration: underline;
+  font-weight: 700;
+  transition: opacity 0.2s ease;
+}
+
+.toastLink:hover {
+  opacity: 0.7;
+}
+
 @media (max-width: 768px) {
   .toastContainer {
     bottom: 20px;

@@ -184,6 +184,7 @@ type ThemeContextType = {
   nextPalette: () => void;
   isModelLoaded: boolean;
   setIsModelLoaded: (loaded: boolean) => void;
+  triggerToast: (type: "theme" | "message", message?: string) => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -197,10 +198,25 @@ const hexToRgb = (hex: string): string => {
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [index, setIndex] = useState(0);
-  const [showToast, setShowToast] = useState(false);
+  const [toastConfig, setToastConfig] = useState<{
+    isVisible: boolean;
+    type: "theme" | "message";
+    message?: string;
+  }>({
+    isVisible: false,
+    type: "theme",
+  });
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isModelLoaded, setIsModelLoaded] = useState(false);
   const transitionRef = useRef<ThemeTransitionHandle>(null);
+
+  const triggerToast = (type: "theme" | "message", message?: string) => {
+    setToastConfig({ isVisible: true, type, message });
+  };
+
+  const closeToast = () => {
+    setToastConfig((prev) => ({ ...prev, isVisible: false }));
+  };
 
   // Sync with system dark mode preference with useSyncExternalStore
   const isSystemDark = useSyncExternalStore(
@@ -232,7 +248,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
     await transitionRef.current.play(() => {
       setIndex(nextIdx);
-      setShowToast(true);
+      triggerToast("theme");
     });
 
     setIsTransitioning(false);
@@ -273,13 +289,16 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       paletteIndex: index, 
       nextPalette,
       isModelLoaded,
-      setIsModelLoaded
+      setIsModelLoaded,
+      triggerToast
     }}>
       {children}
       <ThemeToast 
         palette={currentPalette} 
-        isVisible={showToast} 
-        onClose={() => setShowToast(false)} 
+        isVisible={toastConfig.isVisible} 
+        type={toastConfig.type}
+        message={toastConfig.message}
+        onClose={closeToast} 
       />
       <ThemeTransition ref={transitionRef} />
     </ThemeContext.Provider>
