@@ -12,8 +12,6 @@
   max-height: 420px;
   background: var(--background);
   border: 1px solid var(--text-primary);
-  /* CRITICAL: NO ROUNDED CORNERS */
-  border-radius: 0;
   box-shadow: 10px 10px 0px rgba(var(--foreground-rgb), 0.05);
   overflow: hidden;
   z-index: 100;
@@ -36,16 +34,14 @@
 .searchInputWrapper {
   padding: 12px;
   background: rgba(var(--foreground-rgb), 0.03);
-  border-bottom: 1px solid rgba(var(--foreground-rgb), 0.1);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .searchInput {
   width: 100%;
   padding: 10px 14px;
   background: var(--background);
-  border: 1px solid rgba(var(--foreground-rgb), 0.2);
-  /* CRITICAL: NO ROUNDED CORNERS */
-  border-radius: 0;
+  border: 1px solid var(--border-subtle);
   color: var(--text-primary);
   font-family: var(--font-sanchez);
   font-size: 0.9rem;
@@ -83,9 +79,8 @@
   gap: 12px;
   padding: 10px 16px;
   /* CRITICAL: NO ROUNDED CORNERS */
-  border-radius: 0;
   cursor: pointer;
-  border-bottom: 1px solid rgba(var(--foreground-rgb), 0.03);
+  border-bottom: 1px solid var(--border-subtle);
 }
 
 .resultItem:last-child {
@@ -142,8 +137,9 @@
 @media (max-width: 768px) {
   .searchWrapper {
     margin-left: 0;
-    margin-top: 12px;
-    width: 100%;
+    margin-top: 0;
+    flex: 1;
+    min-width: 0;
   }
   
   .searchBox {

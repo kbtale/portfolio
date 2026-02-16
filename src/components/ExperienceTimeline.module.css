@@ -146,7 +146,7 @@
   text-decoration: none;
   color: inherit;
   background: rgba(var(--background-rgb), 0.95);
-  border: 1px solid rgba(64, 46, 50, 0.2); 
+  border: 1px solid var(--border-subtle); 
   padding: 24px;
   display: flex;
   flex-direction: column;
@@ -158,7 +158,7 @@
 }
 
 .card:hover {
-  border-color: rgba(64, 46, 50, 0.6);
+  border-color: var(--border-strong);
 }
 
 .cardDate {
@@ -166,7 +166,7 @@
   font-weight: 700;
   font-size: 0.85rem;
   color: var(--text-secondary);
-  border-bottom: 1px solid rgba(64, 46, 50, 0.1);
+  border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 8px;
   margin-bottom: 4px;
   text-transform: uppercase;
@@ -276,7 +276,7 @@
   
   padding: 24px;
   background: rgba(var(--background-rgb), 0.95);
-  border: 1px solid rgba(64, 46, 50, 0.2);
+  border: 1px solid var(--border-subtle);
   
 
   margin-right: 10vw;
@@ -297,7 +297,7 @@
 }
 
 .footerBox:hover {
-  border-color: rgba(64, 46, 50, 0.6);
+  border-color: var(--border-strong);
 }
 
 .footerText {

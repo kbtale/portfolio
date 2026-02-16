@@ -261,6 +261,10 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     root.style.setProperty("--scrollbar-thumb-theme", currentPalette.accent_1);
     root.style.setProperty("--scrollbar-thumb-hover-theme", currentPalette.action_hover);
     root.style.setProperty("--scrollbar-track", currentPalette.background);
+    
+    // Solid Border Colors
+    root.style.setProperty("--border-subtle", currentPalette.sub_neutral);
+    root.style.setProperty("--border-strong", currentPalette.text);
   }, [currentPalette]);
 
   return (

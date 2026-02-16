@@ -5,12 +5,13 @@ import { Canvas } from "@react-three/fiber";
 import { InteractiveGrid } from "./InteractiveGrid";
 import { FaceWireframeReveal } from "./faceWireframeReveal";
 import { useTheme } from "./ThemeContext";
+import styles from "./FaceWireframeCanvas.module.css";
 
 
 export default function FaceWireframeCanvas() {
   const [isInView, setIsInView] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
-  const { nextPalette } = useTheme();
+  const { nextPalette, currentPalette } = useTheme();
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -30,9 +31,22 @@ export default function FaceWireframeCanvas() {
   return (
     <div 
       ref={containerRef} 
-      style={{ width: '100%', height: '100%', cursor: 'pointer', minHeight: 0, minWidth: 0 }}
+      className={styles.container}
+      style={{ width: '100%', height: '100%', cursor: 'pointer', minHeight: 0, minWidth: 0, position: 'relative' }}
       onClick={nextPalette}
     >
+      <div className={styles.indicatorWrapper}>
+        <div className={styles.paletteName}>
+          {currentPalette.name}
+        </div>
+        <div className={styles.swatches}>
+          <div className={styles.swatch} style={{ backgroundColor: currentPalette.background }} />
+          <div className={styles.swatch} style={{ backgroundColor: currentPalette.accent_1 }} />
+          <div className={styles.swatch} style={{ backgroundColor: currentPalette.accent_2 }} />
+          <div className={styles.swatch} style={{ backgroundColor: currentPalette.sub_neutral }} />
+          <div className={styles.swatch} style={{ backgroundColor: currentPalette.text }} />
+        </div>
+      </div>
       <Canvas
         frameloop={isInView ? "always" : "never"}
         dpr={[1, 1.5]}

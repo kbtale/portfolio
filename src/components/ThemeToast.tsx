@@ -58,27 +58,27 @@ export default function ThemeToast({ palette, isVisible, onClose }: ThemeToastPr
           <span className={styles.themeName}>{palette.name}</span>
         </div>
         <div className={styles.toastBody}>
-          <div className={styles.swatches}>
-            <div 
-              className={styles.swatch} 
-              style={{ background: palette.background }} 
-              title="Background"
-            />
-            <div 
-              className={styles.swatch} 
-              style={{ background: palette.accent_1 }} 
-              title="Accent 1"
-            />
-            <div 
-              className={styles.swatch} 
-              style={{ background: palette.accent_2 }} 
-              title="Accent 2"
-            />
-          </div>
-          <div className={styles.colorDetails}>
-            <span className={styles.hexValue}>{palette.background}</span>
-            <span className={styles.hexValue}>{palette.accent_1}</span>
-            <span className={styles.hexValue}>{palette.accent_2}</span>
+          <div className={styles.gridContainer}>
+            <div className={styles.gridItem}>
+              <div className={styles.swatch} style={{ background: palette.background }} title="Background" />
+              <span className={styles.hexValue}>{palette.background}</span>
+            </div>
+            <div className={styles.gridItem}>
+              <div className={styles.swatch} style={{ background: palette.text }} title="Text" />
+              <span className={styles.hexValue}>{palette.text}</span>
+            </div>
+            <div className={styles.gridItem}>
+              <div className={styles.swatch} style={{ background: palette.accent_1 }} title="Accent 1" />
+              <span className={styles.hexValue}>{palette.accent_1}</span>
+            </div>
+            <div className={styles.gridItem}>
+              <div className={styles.swatch} style={{ background: palette.accent_2 }} title="Accent 2" />
+              <span className={styles.hexValue}>{palette.accent_2}</span>
+            </div>
+            <div className={styles.gridItem}>
+              <div className={styles.swatch} style={{ background: palette.sub_neutral }} title="Sub Neutral" />
+              <span className={styles.hexValue}>{palette.sub_neutral}</span>
+            </div>
           </div>
         </div>
       </div>

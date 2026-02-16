@@ -17,12 +17,12 @@
   width: fit-content;
   background: rgba(var(--background-rgb), 0.92);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(64, 46, 50, 0);
+  border: 1px solid transparent;
   transition: border-color 0.42s ease-in-out;
 }
 
 .navbar[data-scrolled="true"] .navInner {
-  border-color: rgba(64, 46, 50, 0.6);
+  border-color: var(--border-strong);
 }
 
 .navMenu {
@@ -80,7 +80,7 @@
 .navToggle {
   display: none;
   background: none;
-  border: 1px solid rgba(64, 46, 50, 0.4);
+  border: 1px solid var(--border-subtle);
   padding: 6px 10px;
   gap: 4px;
   flex-direction: column;

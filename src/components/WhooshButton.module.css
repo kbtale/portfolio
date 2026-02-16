@@ -39,7 +39,6 @@
   text-decoration: none;
   display: grid;
   position: relative;
-  border-radius: 0;
 }
 
 
@@ -61,7 +60,6 @@
   grid-area: 1 / 1;
   display: grid;
   overflow: clip;
-  border-radius: 0;
 }
 
 .buttonColorSwooshBgInner {
@@ -96,7 +94,6 @@
   display: grid;
   overflow: clip;
   position: relative;
-  border-radius: 0;
 }
 
 .buttonColorSwooshText {
