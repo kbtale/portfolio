@@ -39,6 +39,7 @@
   text-decoration: none;
   display: grid;
   position: relative;
+  overflow: hidden;
 }
 
 
@@ -59,7 +60,7 @@
   background-color: var(--_theme---button-bg, var(--background));
   grid-area: 1 / 1;
   display: grid;
-  overflow: clip;
+  overflow: hidden;
 }
 
 .buttonColorSwooshBgInner {
@@ -92,7 +93,7 @@
   align-items: center;
   padding: .6em 1.2em .6em 2em;
   display: grid;
-  overflow: clip;
+  overflow: hidden;
   position: relative;
 }
 
@@ -118,11 +119,16 @@
 .buttonColorSwooshInner::after {
   content: attr(data-text);
   color: var(--_colors---swatch--black);
-  display: block;
-  grid-area: 1 / 1;
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  padding: inherit;
+  white-space: pre;
   translate: 0 2em 0;
   rotate: 1 1 .5 -30deg;
   transform-origin: top right;
+  pointer-events: none;
   transition: translate .75s var(--elastic-ease-out), rotate .5s var(--smooth-ease), opacity .2s ease-out;
 }
 
