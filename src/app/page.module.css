@@ -168,6 +168,17 @@
   --_theme---button-text: var(--background);
 }
 
+.clearFiltersInner {
+  border: 1px dashed rgba(var(--foreground-rgb), 0.3);
+  opacity: 0.8;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.clearFiltersInner:hover {
+  opacity: 1;
+  border-color: var(--accent-orange);
+}
+
 .projectsCarousel {
   margin-top: 1vh;
   display: flex;
@@ -388,6 +399,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   overflow: hidden;
 }
 

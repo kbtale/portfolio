@@ -2,7 +2,6 @@ import type { SVGProps } from "react";
 import { C } from "./Techs SVGs/C";
 import { AI } from "./Techs SVGs/ai";
 import { Apicalypse } from "./Techs SVGs/apicalypse";
-import { ChromeExtensions } from "./Techs SVGs/chrome-extensions";
 import { CSS } from "./Techs SVGs/css";
 import { Docker } from "./Techs SVGs/docker";
 import { Firebase } from "./Techs SVGs/firebase";
@@ -33,7 +32,6 @@ const iconMap: Record<string, React.FC<SVGProps<SVGSVGElement>>> = {
   git: Git,
   ai: AI,
   apicalypse: Apicalypse,
-  "chrome-extensions": ChromeExtensions,
   css: CSS,
   docker: Docker,
   firebase: Firebase,

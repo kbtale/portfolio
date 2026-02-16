@@ -77,7 +77,6 @@ export const techStack: Tech[] = [
   { id: "git", name: "Git", icon: "git", category: "tools" },
   { id: "make", name: "Make", icon: "make", category: "tools" },
   { id: "swagger", name: "Swagger", icon: "swagger", category: "tools" },
-  { id: "chrome-extensions", name: "Chrome Extensions", icon: "chrome", category: "tools" },
   { id: "ai", name: "AI Integration", icon: "ai", category: "tools" },
 ];
 

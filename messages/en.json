@@ -17,7 +17,11 @@
   },
   "work": {
     "animatedTitle": "My Work",
-    "categoriesLabel": "Project Categories",
+    "categoriesLabel": "Filter by category",
+    "filterByTech": "Filter by tech...",
+    "searchPlaceholder": "Search technologies...",
+    "noResults": "No technology found.",
+    "clearFilters": "Clear",
     "categories": {
       "websites": "Websites",
       "webapps": "Web Apps",

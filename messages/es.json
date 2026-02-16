@@ -18,6 +18,10 @@
   "work": {
     "animatedTitle": "Proyectos",
     "categoriesLabel": "Categorías de proyectos",
+    "filterByTech": "Filtrar por tecnología...",
+    "searchPlaceholder": "Buscar tecnologías...",
+    "noResults": "No se encontraron tecnologías",
+    "clearFilters": "Limpiar",
     "categories": {
       "websites": "Sitios web",
       "webapps": "Apps web",

@@ -11,6 +11,7 @@ import { useTechFilter } from "./TechFilterContext";
 import type { Project } from "../data/projects";
 import { projectCategories, techStack } from "../data/projects";
 import styles from "../app/page.module.css";
+import TechSearchFilter from "./TechSearchFilter";
 
 type ProjectsSectionProps = {
   projects: Project[];
@@ -307,6 +308,21 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   />
                 );
               })}
+              <TechSearchFilter />
+              {(activeCategories.length > 0 || selectedTech) && (
+                <WhooshButton
+                  label={t("work.clearFilters") || "Clear"}
+                  href="#"
+                  showDot={false}
+                  innerClassName={styles.clearFiltersInner}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setActiveCategories([]);
+                    setTechFilter(null);
+                    setFilterVersion(v => v + 1);
+                  }}
+                />
+              )}
             </div>
             <div
               className={styles.projectsCarousel}

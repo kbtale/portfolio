@@ -16,8 +16,12 @@
     "slogan": "Costruisco soluzioni. Risolvo sfide."
   },
   "work": {
-    "animatedTitle": "Miei Lavori",
-    "categoriesLabel": "Categorie Progetti",
+    "animatedTitle": "IL MIO LAVORO",
+    "categoriesLabel": "Filtra per categoria",
+    "filterByTech": "Filtra per tecnologia...",
+    "searchPlaceholder": "Cerca tecnologie...",
+    "noResults": "Nessuna tecnologia trovata",
+    "clearFilters": "Cancella",
     "categories": {
       "websites": "Siti Web",
       "webapps": "Web App",
