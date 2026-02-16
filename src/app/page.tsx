@@ -9,13 +9,16 @@ import LazyFaceCanvas from "../components/LazyFaceCanvas";
 import LazyGridCanvas from "../components/LazyGridCanvas";
 import CertificationsSection from "../components/CertificationsSection";
 import ContactFooter from "../components/ContactFooter";
+import TechStack from "../components/TechStack";
+import TechFilterWrapper from "../components/TechFilterWrapper";
 import styles from "./page.module.css";
 
 export default async function Home() {
   const t = await getTranslations();
 
   return (
-    <div className={styles.page}>
+    <TechFilterWrapper>
+      <div className={styles.page}>
       <div className={styles.wireframeCanvas} aria-hidden="true">
         <LazyGridCanvas />
       </div>
@@ -48,6 +51,7 @@ export default async function Home() {
               {t.raw("about.paragraphs").map((paragraph: string, index: number) => (
                 <p key={`${paragraph.slice(0, 16)}-${index}`}>{paragraph}</p>
               ))}
+              <TechStack />
             </section>
           </div>
 
@@ -65,5 +69,6 @@ export default async function Home() {
         </div>
       </main>
     </div>
+    </TechFilterWrapper>
   );
 }

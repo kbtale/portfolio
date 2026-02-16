@@ -558,7 +558,7 @@
   flex-direction: column;
   justify-content: flex-start; /* Align to top like other sections */
   padding-top: 40px; /* Consistent top spacing */
-  gap: 20px;
+  gap: 12px;
 }
 
 .contact {

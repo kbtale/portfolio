@@ -46,6 +46,7 @@
       "php": "PHP",
       "python": "Python",
       "typescript": "TypeScript",
+      "git": "Git",
       "flutter": "Flutter",
       "gsap": "GSAP",
       "laravel": "Laravel",
@@ -61,7 +62,7 @@
       "supabase": "Supabase",
       "chrome-extensions": "Chrome Extensions",
       "nodejs": "Node.js",
-      "ai": "IA",
+      "ai": "Integración de IA",
       "docker": "Docker",
       "apicalypse": "Apicalypse",
       "make": "Make",
@@ -179,8 +180,14 @@
     "subtitle": "Orientado a objetivos y siempre en aprendizaje constante",
     "paragraphs": [
       "Mis primeras pinceladas con la programación fueron alrededor de los 12 años. Desde entonces he hecho múltiples proyectos y en tecnologías muy diversas. Disfruto mucho de los proyectos que representan un reto, y siempre busco innovar en donde sea congruente.",
-      "Revisa mis proyectos abajo, espero que encuentres alguno que te guste."
-    ]
+      "Aquí puedes ver las herramientas que utilizo. Pulsa en ellas para filtrar mis proyectos por tecnología."
+    ],
+    "sections": {
+      "languages": "Lenguajes",
+      "frontend_mobile": "Frontend y Móvil",
+      "backend_cloud": "Backend y Cloud",
+      "tools": "Herramientas"
+    }
   },
   "certifications": {
     "title": "Certificaciones",

@@ -2,7 +2,7 @@ export type Tech = {
   id: string;
   name: string;
   icon: string;
-  category: "language" | "framework" | "database" | "platform" | "tool";
+  category: "languages" | "frontend_mobile" | "backend_cloud" | "tools";
 };
 
 export type Project = {
@@ -44,33 +44,41 @@ export const projectCategories: ProjectCategory[] = [
 ];
 
 export const techStack: Tech[] = [
-  { id: "c", name: "C", icon: "c", category: "language" },
-  { id: "css", name: "CSS", icon: "css", category: "language" },
-  { id: "html", name: "HTML", icon: "html", category: "language" },
-  { id: "js", name: "JavaScript", icon: "javascript", category: "language" },
-  { id: "php", name: "PHP", icon: "php", category: "language" },
-  { id: "python", name: "Python", icon: "python", category: "language" },
-  { id: "typescript", name: "TypeScript", icon: "typescript", category: "language" },
-  { id: "flutter", name: "Flutter", icon: "flutter", category: "framework" },
-  { id: "gsap", name: "GSAP", icon: "gsap", category: "framework" },
-  { id: "laravel", name: "Laravel", icon: "laravel", category: "framework" },
-  { id: "nestjs", name: "NestJS", icon: "nestjs", category: "framework" },
-  { id: "nextjs", name: "Next.js", icon: "nextjs", category: "framework" },
-  { id: "reactjs", name: "React", icon: "react", category: "framework" },
-  { id: "tailwind", name: "Tailwind CSS", icon: "tailwind", category: "framework" },
-  { id: "three", name: "Three.js", icon: "three", category: "framework" },
-  { id: "vue", name: "Vue", icon: "vue", category: "framework" },
-  { id: "mysql", name: "MySQL", icon: "mysql", category: "database" },
-  { id: "postgresql", name: "PostgreSQL", icon: "postgresql", category: "database" },
-  { id: "firebase", name: "Firebase", icon: "firebase", category: "platform" },
-  { id: "supabase", name: "Supabase", icon: "supabase", category: "platform" },
-  { id: "chrome-extensions", name: "Chrome Extensions", icon: "chrome", category: "platform" },
-  { id: "nodejs", name: "Node.js", icon: "node", category: "platform" },
-  { id: "ai", name: "AI", icon: "ai", category: "tool" },
-  { id: "docker", name: "Docker", icon: "docker", category: "tool" },
-  { id: "apicalypse", name: "Apicalypse", icon: "apicalypse", category: "tool" },
-  { id: "make", name: "Make", icon: "make", category: "tool" },
-  { id: "swagger", name: "Swagger", icon: "swagger", category: "tool" },
+  // Languages
+  { id: "c", name: "C", icon: "c", category: "languages" },
+  { id: "python", name: "Python", icon: "python", category: "languages" },
+  { id: "php", name: "PHP", icon: "php", category: "languages" },
+  { id: "js", name: "JavaScript", icon: "javascript", category: "languages" },
+  { id: "typescript", name: "TypeScript", icon: "typescript", category: "languages" },
+  { id: "html", name: "HTML", icon: "html", category: "languages" },
+  { id: "css", name: "CSS", icon: "css", category: "languages" },
+
+  // Frontend & Mobile
+  { id: "reactjs", name: "React", icon: "react", category: "frontend_mobile" },
+  { id: "vue", name: "Vue", icon: "vue", category: "frontend_mobile" },
+  { id: "nextjs", name: "Next.js", icon: "nextjs", category: "frontend_mobile" },
+  { id: "tailwind", name: "Tailwind CSS", icon: "tailwind", category: "frontend_mobile" },
+  { id: "gsap", name: "GSAP", icon: "gsap", category: "frontend_mobile" },
+  { id: "three", name: "Three.js", icon: "three", category: "frontend_mobile" },
+  { id: "flutter", name: "Flutter", icon: "flutter", category: "frontend_mobile" },
+
+  // Backend & Cloud
+  { id: "nodejs", name: "Node.js", icon: "node", category: "backend_cloud" },
+  { id: "laravel", name: "Laravel", icon: "laravel", category: "backend_cloud" },
+  { id: "nestjs", name: "NestJS", icon: "nestjs", category: "backend_cloud" },
+  { id: "mysql", name: "MySQL", icon: "mysql", category: "backend_cloud" },
+  { id: "postgresql", name: "PostgreSQL", icon: "postgresql", category: "backend_cloud" },
+  { id: "firebase", name: "Firebase", icon: "firebase", category: "backend_cloud" },
+  { id: "supabase", name: "Supabase", icon: "supabase", category: "backend_cloud" },
+  { id: "docker", name: "Docker", icon: "docker", category: "backend_cloud" },
+  { id: "apicalypse", name: "Apicalypse", icon: "apicalypse", category: "backend_cloud" },
+
+  // Tools
+  { id: "git", name: "Git", icon: "git", category: "tools" },
+  { id: "make", name: "Make", icon: "make", category: "tools" },
+  { id: "swagger", name: "Swagger", icon: "swagger", category: "tools" },
+  { id: "chrome-extensions", name: "Chrome Extensions", icon: "chrome", category: "tools" },
+  { id: "ai", name: "AI Integration", icon: "ai", category: "tools" },
 ];
 
 export const projects: Project[] = [
@@ -79,7 +87,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/findthagame",
     repo: "kbtale/findthagame",
     stars: null,
-    tech: ["typescript", "reactjs", "tailwind", "ai", "apicalypse"],
+    tech: ["typescript", "reactjs", "tailwind", "ai", "apicalypse", "git"],
     categories: ["websites", "webapps"],
     additionalLinks: {
       type: "website",
@@ -95,7 +103,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/ocr-to-txt",
     repo: "kbtale/ocr-to-txt",
     stars: null,
-    tech: ["python"],
+    tech: ["python", "git"],
     categories: ["desktop"],
     additionalLinks: {
       type: "installer",
@@ -111,7 +119,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/lease-sentinel",
     repo: "kbtale/lease-sentinel",
     stars: null,
-    tech: ["nextjs", "typescript", "firebase", "make", "ai", "tailwind"],
+    tech: ["nextjs", "typescript", "firebase", "make", "ai", "tailwind", "git"],
     categories: ["webapps"],
     additionalLinks: {
       type: "website",
@@ -127,7 +135,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/Palindot",
     repo: "kbtale/Palindot",
     stars: null,
-    tech: ["vue", "php", "laravel", "mysql", "swagger"],
+    tech: ["vue", "php", "laravel", "mysql", "swagger", "git"],
     categories: ["webapps"],
     additionalLinks: {
       type: "none",
@@ -143,7 +151,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/shell-c",
     repo: "kbtale/shell-c",
     stars: null,
-    tech: ["c"],
+    tech: ["c", "git"],
     categories: ["tools", "desktop"],
     additionalLinks: {
       type: "none",
@@ -159,7 +167,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/retro-notes",
     repo: "kbtale/retro-notes",
     stars: null,
-    tech: ["reactjs", "typescript", "tailwind", "nestjs", "postgresql", "docker"],
+    tech: ["reactjs", "typescript", "tailwind", "nestjs", "postgresql", "docker", "git"],
     categories: ["webapps"],
     additionalLinks: {
       type: "none",
@@ -175,7 +183,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/exhale-app",
     repo: "kbtale/exhale-app",
     stars: null,
-    tech: ["flutter"],
+    tech: ["flutter", "git"],
     categories: ["mobile"],
     additionalLinks: {
       type: "installer",
@@ -191,7 +199,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/Useless-Polymath",
     repo: "kbtale/Useless-Polymath",
     stars: null,
-    tech: ["reactjs", "typescript", "css"],
+    tech: ["reactjs", "typescript", "css", "git"],
     categories: ["webapps", "websites"],
     additionalLinks: {
       type: "none",
@@ -207,7 +215,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/openrise-hub/civy",
     repo: "openrise-hub/civy",
     stars: null,
-    tech: ["typescript", "reactjs", "tailwind", "nestjs", "postgresql", "docker"],
+    tech: ["typescript", "reactjs", "tailwind", "nestjs", "postgresql", "docker", "git"],
     categories: ["webapps", "websites"],
     additionalLinks: {
       type: "none",
@@ -223,7 +231,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/openrise-hub/react-three-text-fx",
     repo: "openrise-hub/react-three-text-fx",
     stars: null,
-    tech: ["three", "gsap","reactjs"],
+    tech: ["three", "gsap", "reactjs", "git"],
     categories: ["libraries"],
     additionalLinks: {
       type: "webiste",
@@ -239,7 +247,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/openrise-hub/www",
     repo: "openrise-hub/www",
     stars: null,
-    tech: ["three", "gsap","nextjs", "typescript", "tailwind"],
+    tech: ["three", "gsap", "nextjs", "typescript", "tailwind", "git"],
     categories: ["websites"],
     additionalLinks: {
       type: "website",
@@ -255,7 +263,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/TE-Filter",
     repo: "kbtale/TE-Filter",
     stars: null,
-    tech: ["chrome-extensions", "css", "js"],
+    tech: ["chrome-extensions", "css", "js", "git"],
     categories: ["extensions"],
     additionalLinks: {
       type: "none",

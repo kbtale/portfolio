@@ -7,7 +7,8 @@ import WhooshButton from "./WhooshButton";
 import Image from "next/image";
 import ProjectVideo from "./ProjectVideo";
 import GitHubStars from "./GitHubStars";
-import type { Project, ProjectCategoryId } from "../data/projects";
+import { useTechFilter } from "./TechFilterContext";
+import type { Project } from "../data/projects";
 import { projectCategories, techStack } from "../data/projects";
 import styles from "../app/page.module.css";
 
@@ -17,7 +18,7 @@ type ProjectsSectionProps = {
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const t = useTranslations();
-  const [activeCategories, setActiveCategories] = useState<ProjectCategoryId[]>([]);
+  const { selectedTech, activeCategories, setActiveCategories, setTechFilter } = useTechFilter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [filterVersion, setFilterVersion] = useState(0);
   const currentIndexRef = useRef(currentIndex);
@@ -35,14 +36,19 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [isExiting, setIsExiting] = useState(false);
 
   const filteredProjects = useMemo(() => {
-    const base =
+    let base =
       activeCategories.length === 0
         ? projects
         : projects.filter((project) =>
             project.categories.some((category) => activeCategories.includes(category))
           );
+          
+    if (selectedTech && selectedTech !== "html" && selectedTech !== "css") {
+      base = base.filter((project) => project.tech.includes(selectedTech));
+    }
+
     return Array.from(new Map(base.map((project) => [project.id, project])).values());
-  }, [activeCategories, projects]);
+  }, [activeCategories, projects, selectedTech]);
 
 
   // Track previous filtered projects to detect changes during render
@@ -294,6 +300,8 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                           ? current.filter((item) => item !== category.id)
                           : [...current, category.id]
                       );
+                      // Clear tech filter when manually changing categories to avoid confusion
+                      setTechFilter(null);
                       setFilterVersion(v => v + 1);
                     }}
                   />

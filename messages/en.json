@@ -46,6 +46,7 @@
       "php": "PHP",
       "python": "Python",
       "typescript": "TypeScript",
+      "git": "Git",
       "flutter": "Flutter",
       "gsap": "GSAP",
       "laravel": "Laravel",
@@ -61,7 +62,7 @@
       "supabase": "Supabase",
       "chrome-extensions": "Chrome Extensions",
       "nodejs": "Node.js",
-      "ai": "AI",
+      "ai": "AI Integration",
       "docker": "Docker",
       "apicalypse": "Apicalypse",
       "make": "Make",
@@ -179,8 +180,14 @@
     "subtitle": "Goal-driven and always evolving.",
     "paragraphs": [
       "I wrote my first lines of code at 12. Since then, I've built a wide range of projects across diverse technologies. I solve complex problems and strive to innovate wherever it makes sense.",
-      "Check out my projects below. I hope you find something interesting."
-    ]
+      "Here you can see the tools I use. Click on them to filter my projects by technology."
+    ],
+    "sections": {
+      "languages": "Languages",
+      "frontend_mobile": "Frontend & Mobile",
+      "backend_cloud": "Backend & Cloud",
+      "tools": "Tools"
+    }
   },
   "certifications": {
     "title": "Certifications",
