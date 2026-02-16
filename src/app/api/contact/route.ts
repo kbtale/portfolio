@@ -8,28 +8,43 @@ export async function POST(req: Request) {
       return NextResponse.json({ message: 'Bot detected' }, { status: 400 });
     }
 
-    const accessKey = process.env.WEB3FORMS_ACCESS_KEY;
-    if (!accessKey) {
-      return NextResponse.json({ message: 'Missing WEB3FORMS_ACCESS_KEY environment variable' }, { status: 500 });
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      console.error("API: Missing RESEND_API_KEY");
+      return NextResponse.json({ message: 'Missing RESEND_API_KEY environment variable' }, { status: 500 });
     }
 
-    const response = await fetch("https://api.web3forms.com/submit", {
+    const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Authorization": `Bearer ${apiKey}`,
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
-        access_key: accessKey,
-        ...body
+        from: "Portfolio <onboarding@resend.dev>",
+        to: "carlosabolivart@gmail.com", 
+        subject: `New Message from ${body.name}`,
+        html: `
+          <h3>New Contact Form Submission</h3>
+          <p><strong>Name:</strong> ${body.name}</p>
+          <p><strong>Email:</strong> ${body.email}</p>
+          <p><strong>Message:</strong></p>
+          <p>${body.message}</p>
+        `
       }),
     });
 
-    // Handle case where service might not return JSON
-    const result = await response.json().catch(() => null);
+    const result = await response.json();
     
-    if (!result) {
-      return NextResponse.json({ message: 'Web3Forms failed to respond correctly' }, { status: 502 });
+    if (response.ok) {
+      return NextResponse.json({ success: true, id: result.id });
+    } else {
+      console.error("API: Resend Error:", result);
+      return NextResponse.json({ 
+        message: 'Resend failed to send email', 
+        error: result 
+      }, { status: response.status });
     }
-
-    return NextResponse.json(result, { status: response.ok ? 200 : response.status });
   } catch (error: unknown) {
     const errorMessage = error instanceof Error ? error.message : String(error);
     return NextResponse.json({ 

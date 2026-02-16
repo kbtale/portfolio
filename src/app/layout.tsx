@@ -25,6 +25,9 @@ const sanchez = Sanchez({
 export const metadata: Metadata = {
   title: "Carlos Bolívar - Portfolio",
   description: "Welcome to my portfolio, a developer one!",
+  icons: {
+    icon: '/C.ico',
+  },
 };
 
 import { ThemeProvider } from "../components/ThemeContext";
