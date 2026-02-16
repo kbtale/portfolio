@@ -22,7 +22,7 @@ export async function POST(req: Request) {
       },
       body: JSON.stringify({
         from: "Portfolio <onboarding@resend.dev>",
-        to: "cbolivar.dev@openrise.tech", 
+        to: "carlosabolivart@gmail.com", 
         subject: `New Message from ${body.name}`,
         html: `
           <h3>New Contact Form Submission</h3>
