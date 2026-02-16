@@ -7,7 +7,8 @@ import WhooshButton from "./WhooshButton";
 import Image from "next/image";
 import ProjectVideo from "./ProjectVideo";
 import GitHubStars from "./GitHubStars";
-import type { Project, ProjectCategoryId } from "../data/projects";
+import { useTechFilter } from "./TechFilterContext";
+import type { Project } from "../data/projects";
 import { projectCategories, techStack } from "../data/projects";
 import styles from "../app/page.module.css";
 
@@ -17,7 +18,7 @@ type ProjectsSectionProps = {
 
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const t = useTranslations();
-  const [activeCategories, setActiveCategories] = useState<ProjectCategoryId[]>([]);
+  const { selectedTech, activeCategories, setActiveCategories, setTechFilter } = useTechFilter();
   const [currentIndex, setCurrentIndex] = useState(0);
   const [filterVersion, setFilterVersion] = useState(0);
   const currentIndexRef = useRef(currentIndex);
@@ -35,14 +36,19 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const [isExiting, setIsExiting] = useState(false);
 
   const filteredProjects = useMemo(() => {
-    const base =
+    let base =
       activeCategories.length === 0
         ? projects
         : projects.filter((project) =>
             project.categories.some((category) => activeCategories.includes(category))
           );
+          
+    if (selectedTech && selectedTech !== "html" && selectedTech !== "css") {
+      base = base.filter((project) => project.tech.includes(selectedTech));
+    }
+
     return Array.from(new Map(base.map((project) => [project.id, project])).values());
-  }, [activeCategories, projects]);
+  }, [activeCategories, projects, selectedTech]);
 
 
   // Track previous filtered projects to detect changes during render
@@ -85,9 +91,9 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   }
 
   const techNameById = useMemo(() => {
-    const entries = techStack.map((tech) => [tech.id, tech.name] as const);
+    const entries = techStack.map((tech) => [tech.id, t(`projects.tech.${tech.id}`)] as const);
     return Object.fromEntries(entries) as Record<string, string>;
-  }, []);
+  }, [t]);
 
   const { visibleProjects, activePositionIndex, positionMap } = useMemo(() => {
     if (filteredProjects.length === 0) {
@@ -120,7 +126,6 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
     }
 
     // With exactly 7 items, unique keys are required for each virtual position.
-    // This stops the card from "flying" across the screen when it wraps around, because React treats it as a new instance.
     if (total === 7) {
       const count = 7;
       const midpoint = 3;
@@ -144,9 +149,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
       };
     }
 
-    // For 8 or more items, the standard logic works effectively because items naturally unmount/mount as they scroll out of view.
-    // The project ID serves as a sufficient key here.
-    const count = 7; // Max visible is still 7
+    const count = 7;
     const midpoint = Math.floor(count / 2);
     const offsets = Array.from({ length: count }, (_, index) => index - midpoint);
     const baseIndices = offsets.map(
@@ -164,7 +167,6 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   }, [currentIndex, filteredProjects]);
 
   const shiftIndex = (direction: 1 | -1) => {
-    // Throttle navigation to prevent rapid changes
     const now = Date.now();
     if (now - lastShiftTime.current < 600) return;
     lastShiftTime.current = now;
@@ -173,18 +175,15 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
       const total = filteredProjects.length;
       if (total === 0) return 0;
       
-      // For small counts, clamp to prevent wrap-around
       if (total <= 6) {
         const next = current + direction;
         return Math.max(0, Math.min(next, total - 1));
       }
 
-      // Special handling for exactly 7: Allow the index to grow indefinitely to support unique virtual keys.
       if (total === 7) {
         return current + direction;
       }
       
-      // Otherwise, wrap the index around the total count.
       const next = (current + direction + total) % total;
       return next;
     });
@@ -301,6 +300,8 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                           ? current.filter((item) => item !== category.id)
                           : [...current, category.id]
                       );
+                      // Clear tech filter when manually changing categories to avoid confusion
+                      setTechFilter(null);
                       setFilterVersion(v => v + 1);
                     }}
                   />
@@ -352,7 +353,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                     ) : (
                       <Image
                         src={project.media.url}
-                        alt={project.title}
+                        alt={t(`projects.items.${project.id}.title`)}
                         className={styles.projectImage}
                         draggable={false}
                         fill
@@ -392,8 +393,8 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   </div>
                 </div>
                 <div className={styles.projectBody}>
-                  <h3>{project.title}</h3>
-                  <p className={styles.projectDescription}>{project.description || "—"}</p>
+                  <h3>{t(`projects.items.${project.id}.title`)}</h3>
+                  <p className={styles.projectDescription}>{t(`projects.items.${project.id}.description`) || "—"}</p>
                   <div className={styles.projectStack}>
                     {project.tech.length
                       ? project.tech.map((tech) => (
@@ -407,7 +408,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                      <div className={styles.projectActionRow}>
                        <div className={styles.wideWhooshWrapper} onPointerDown={(e) => e.stopPropagation()}>
                          <WhooshButton 
-                           label="View Details"
+                           label={t("projects.viewDetails")}
                            href="#"
                            showDot={false}
                            onClick={(e) => {
@@ -419,7 +420,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                       {project.additionalLinks.type !== "none" && (
                         <div className={styles.wideWhooshWrapper} onPointerDown={(e) => e.stopPropagation()}>
                           <WhooshButton 
-                             label={project.additionalLinks.type === "installer" ? "Download" : "View Site →"}
+                             label={project.additionalLinks.type === "installer" ? t("projects.download") : t("projects.viewSite")}
                              href={project.additionalLinks.link}
                              target="_blank"
                              rel="noopener noreferrer"
@@ -447,7 +448,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
           >
             <div className={styles.projectDetailHeader}>
               <WhooshButton 
-                label="← Back"
+                label={t("projects.back")}
                 href="#"
                 showDot={false}
                 className={styles.detailBackButton}
@@ -456,7 +457,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   closeDetailView();
                 }}
               />
-              <h3 className={styles.projectDetailTitle}>{selectedProject.title}</h3>
+              <h3 className={styles.projectDetailTitle}>{t(`projects.items.${selectedProject.id}.title`)}</h3>
               <GitHubStars repo={selectedProject.repo} variant="detail" />
             </div>
             <div className={styles.projectDetailContent}>
@@ -474,7 +475,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   ) : (
                     <Image
                       src={selectedProject.media.url}
-                      alt={selectedProject.title}
+                      alt={t(`projects.items.${selectedProject.id}.title`)}
                       fill
                       style={{ objectFit: "contain" }}
                     />
@@ -491,14 +492,14 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
               {/* Right: Info */}
               <div className={styles.projectDetailInfo}>
                 <div className={styles.detailSection}>
-                  <h4 className={styles.projectDetailAboutTitle}>About the Project</h4>
+                  <h4 className={styles.projectDetailAboutTitle}>{t("projects.about")}</h4>
                   <p className={styles.projectDetailDescription}>
-                    {selectedProject.description || "No description available."}
+                    {t(`projects.items.${selectedProject.id}.description`) || t("projects.noDescription")}
                   </p>
                 </div>
                 
                 <div className={styles.detailSection}>
-                  <h5 className={styles.projectDetailTechTitle}>Tech Stack</h5>
+                  <h5 className={styles.projectDetailTechTitle}>{t("projects.techStack")}</h5>
                   <div className={styles.projectDetailTechList}>
                     {selectedProject.tech.map((techId) => (
                       <span key={techId} className={styles.techBadge}>
@@ -510,7 +511,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                 <div className={styles.projectDetailActions}>
                   {selectedProject.additionalLinks.type !== "none" && (
                     <WhooshButton 
-                      label={selectedProject.additionalLinks.type === "installer" ? "Download" : "View Site →"}
+                      label={selectedProject.additionalLinks.type === "installer" ? t("projects.download") : t("projects.viewSite")}
                       href={selectedProject.additionalLinks.link}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -523,7 +524,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
                        </svg>
                     }
-                    label="GitHub Repo"
+                    label={t("projects.githubRepo")}
                     href={selectedProject.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
