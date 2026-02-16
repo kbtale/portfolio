@@ -91,6 +91,10 @@ export default function ThemeToast({ palette, isVisible, type, message, onClose 
                   <div className={styles.swatch} style={{ background: palette.accent_2 }} />
                   <span className={styles.hexValue}>{palette.accent_2}</span>
                 </div>
+                <div className={`${styles.gridItem} ${styles.fullWidth}`}>
+                  <div className={styles.swatch} style={{ background: palette.sub_neutral }} />
+                  <span className={styles.hexValue}>{palette.sub_neutral}</span>
+                </div>
               </div>
             </div>
           </>
