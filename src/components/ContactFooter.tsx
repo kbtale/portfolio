@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import styles from "./ContactFooter.module.css";
 import pageStyles from "../app/page.module.css";
 import ParallaxTitle from "./ParallaxTitle";
+import ContactForm from "./ContactForm";
 
 export default async function ContactFooter() {
   const t = await getTranslations("footer");
@@ -28,15 +29,8 @@ export default async function ContactFooter() {
 
         {/* ─── Right Column: Contact Details ─── */}
         <div className={styles.right}>
-          {/* Email */}
-          <div className={styles.contactGroup}>
-            <h4 className={styles.contactLabel}>{t("emailLabel")}</h4>
-            <p className={styles.contactValue}>
-              <a href={`mailto:${t("email")}`} className={styles.contactLink}>
-                {t("email")}
-              </a>
-            </p>
-          </div>
+          {/* Contact Form */}
+          <ContactForm />
 
           {/* Location */}
           <div className={styles.contactGroup}>

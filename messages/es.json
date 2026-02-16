@@ -18,6 +18,11 @@
   "work": {
     "animatedTitle": "Proyectos",
     "categoriesLabel": "Categorías de proyectos",
+    "filterByTech": "Filtrar por tecnología...",
+    "searchPlaceholder": "Buscar tecnologías...",
+    "noResults": "No se encontraron tecnologías",
+    "clearFilters": "Limpiar",
+    "gitToast": "¡No es un error! Uso Git para todos mis proyectos, puedes encontrarlos en mi <link>GitHub</link>.",
     "categories": {
       "websites": "Sitios web",
       "webapps": "Apps web",
@@ -208,6 +213,18 @@
     "tiktokLabel": "TikTok (+65k seguidores)",
     "repoLabel": "¡Dale star al repo de este portafolio!",
     "copyright": "© 2026 Carlos Bolívar. Todos los derechos reservados.",
-    "tagline": "Construyendo soluciones y resolviendo problemas."
+    "tagline": "Construyendo soluciones y resolviendo problemas.",
+    "form": {
+      "nameLabel": "Nombre",
+      "namePlaceholder": "Tu Nombre",
+      "emailLabel": "Correo",
+      "emailPlaceholder": "tu@email.com",
+      "messageLabel": "Mensaje",
+      "messagePlaceholder": "Cuéntame sobre tu proyecto...",
+      "sendButton": "Enviar Mensaje",
+      "sending": "Enviando...",
+      "success": "¡Mensaje enviado con éxito!",
+      "error": "Error al enviar el mensaje. Intenta de nuevo."
+    }
   }
 }

@@ -9,7 +9,7 @@
   padding: 60px 48px 32px;
   position: relative;
   z-index: 1;
-  border: 1px solid rgba(64, 46, 50, 0.9);
+  border: 1px solid var(--border-strong);
   background: rgba(var(--background-rgb), 0.6);
   backdrop-filter: blur(3px);
   transform: translateZ(0);
@@ -97,7 +97,7 @@
 .contactLink {
   color: var(--text-primary);
   text-decoration: none;
-  border-bottom: 1px solid rgba(64, 46, 50, 0.3);
+  border-bottom: 1px solid var(--border-subtle);
   transition: border-color 0.2s ease;
   padding-bottom: 2px;
 }
@@ -120,7 +120,7 @@
   text-decoration: none;
   font-family: var(--font-sanchez), serif;
   font-size: 1.1rem;
-  border-bottom: 1px solid rgba(64, 46, 50, 0.3);
+  border-bottom: 1px solid var(--border-subtle);
   padding-bottom: 2px;
   transition: border-color 0.2s ease;
   width: fit-content;
@@ -144,7 +144,7 @@
   align-items: center;
   padding-top: 32px;
   margin-top: 48px;
-  border-top: 1px solid rgba(64, 46, 50, 0.3);
+  border-top: 1px solid var(--border-subtle);
 }
 
 .copyright {

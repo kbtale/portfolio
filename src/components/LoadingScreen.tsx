@@ -4,8 +4,8 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { useTheme } from "./ThemeContext";
 import styles from "./LoadingScreen.module.css";
 
-const MINIMUM_DISPLAY_MS = 2000;
-const PROGRESS_INTERVAL_MS = 30;
+const MINIMUM_DISPLAY_MS = 2500;
+const PROGRESS_INTERVAL_MS = 16;
 
 export default function LoadingScreen() {
   const { currentPalette, isModelLoaded } = useTheme();
@@ -68,20 +68,18 @@ export default function LoadingScreen() {
     // Update target whenever getTargetProgress dependencies (like isModelLoaded) change
     updateTarget();
 
-    // --- Smooth animated progress ticker ---
     const interval = setInterval(() => {
       setDisplayProgress((prev) => {
         const target = targetProgressRef.current;
         const elapsed = Date.now() - startTimeRef.current;
         const minTimeRatio = Math.min(elapsed / MINIMUM_DISPLAY_MS, 1);
 
-        // Don't let display exceed time-based progress (min display time enforcement)
-        const timeCap = Math.round(minTimeRatio * 100);
+        const timeCap = minTimeRatio * 100;
 
-        // Smoothly approach the target (ease towards it)
         const gap = target - prev;
-        const step = Math.max(1, Math.ceil(gap * 0.08));
-        const next = Math.min(prev + step, target, timeCap);
+        const step = gap * 0.05;
+        
+        const next = Math.max(prev, Math.min(prev + Math.max(0.1, step), target, timeCap));
 
         return next;
       });
@@ -173,12 +171,12 @@ export default function LoadingScreen() {
             }}
           >
             <span className={styles.progressText}>Loading</span>
-            <span
-              className={styles.percentage}
-              style={{ color: currentPalette.accent_1 }}
-            >
-              {displayProgress}%
-            </span>
+              <span
+                className={styles.percentage}
+                style={{ color: currentPalette.accent_1 }}
+              >
+                {Math.floor(displayProgress)}%
+              </span>
           </div>
         </div>
       </div>

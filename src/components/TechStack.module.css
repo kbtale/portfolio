@@ -5,27 +5,26 @@
 
 .blocksContainer {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 16px;
   width: 100%;
 }
 
 .categoryBlock {
-  flex: 1 1 auto;
-  min-width: 200px;
   background: rgba(var(--foreground-rgb), 0.03);
-  border: 1px solid rgba(var(--foreground-rgb), 0.1);
+  border: 1px solid var(--border-subtle);
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   position: relative;
-  transition: border-color 0.3s ease, background 0.3s ease;
+  transition: border-color 0.15s ease, background 0.15s ease;
+  height: 100%;
 }
 
 .categoryBlock:hover {
   background: rgba(var(--foreground-rgb), 0.05);
-  border-color: rgba(var(--foreground-rgb), 0.2);
+  border-color: var(--border-strong);
 }
 
 .blockLabel {
@@ -37,68 +36,88 @@
   opacity: 0.8;
 }
 
-.iconsGridDense {
-  display: flex;
-  flex-wrap: wrap;
+.iconsGridBento {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
   gap: 8px;
+  width: 100%;
 }
 
-.techItemTiny {
+.techItemBento {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 6px 10px;
-  background: rgba(var(--background-rgb), 0.5);
-  border: 1px solid rgba(var(--foreground-rgb), 0.05);
-  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: rgba(var(--background-rgb), 0.6);
+  border: 1px solid var(--border-subtle);
+  transition: none;
   cursor: pointer;
+  min-height: 38px;
+  min-width: 0;
+  overflow: hidden;
 }
 
-.techItemTiny:hover,
+.span2 { grid-column: span 2; }
+.span3 { grid-column: span 3; }
+.span6 { grid-column: span 6; }
+
+.techItemBento:hover,
 .activeTechItem {
   background: var(--background);
-  border-color: rgba(var(--foreground-rgb), 0.3);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-color: var(--border-strong);
 }
 
 .activeTechItem {
   border-color: var(--text-primary);
-  background: rgba(var(--foreground-rgb), 0.05);
+  background: rgba(var(--foreground-rgb), 0.08);
 }
 
-.techIconSmall {
+.techIconBento {
+  flex-shrink: 0;
   width: 18px;
   height: 18px;
   filter: grayscale(1);
-  opacity: 0.6;
-  transition: all 0.3s ease;
+  opacity: 0.7;
+  transition: none;
 }
 
-.techItemTiny:hover .techIconSmall,
-.activeTechItem .techIconSmall {
+.techItemBento:hover .techIconBento,
+.activeTechItem .techIconBento {
   filter: grayscale(0);
   opacity: 1;
 }
 
-.techNameTiny {
+.techNameBento {
   font-family: var(--font-sanchez), serif;
   font-size: 0.7rem;
   color: var(--text-primary);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (min-width: 800px) {
+  .blocksContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
 @media (max-width: 600px) {
-  .blocksContainer {
-    gap: 12px;
-  }
-
   .categoryBlock {
-    min-width: 100%;
     padding: 12px;
   }
-
-  .iconsGridDense {
+  
+  .iconsGridBento {
+    grid-template-columns: repeat(6, 1fr);
     gap: 6px;
+  }
+}
+
+@media (max-width: 400px) {
+  .techNameBento {
+    font-size: 0.65rem;
   }
 }

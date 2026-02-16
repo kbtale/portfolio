@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useCallback } from "react";
+import React, { createContext, useContext, useState, useCallback, useEffect } from "react";
 import { ProjectCategoryId } from "../data/projects";
 
 interface TechFilterContextType {
@@ -15,46 +15,51 @@ const TechFilterContext = createContext<TechFilterContextType | undefined>(undef
 export function TechFilterProvider({ children }: { children: React.ReactNode }) {
   const [selectedTech, setSelectedTech] = useState<string | null>(null);
   const [activeCategories, setActiveCategories] = useState<ProjectCategoryId[]>([]);
+  const [lastScrollTrigger, setLastScrollTrigger] = useState<number>(0);
 
   const setTechFilter = useCallback((techId: string | null) => {
-    // Special case for HTML and CSS: Map to categories
+    const isAlreadySet = selectedTech === techId;
+
     if (techId === "html" || techId === "css") {
-      const isAlreadySet = selectedTech === techId;
       if (isAlreadySet) {
         setSelectedTech(null);
         setActiveCategories([]);
       } else {
         setSelectedTech(techId);
         setActiveCategories(["webapps", "websites"]);
+        setLastScrollTrigger(Date.now());
       }
     } 
-    // Special case for Git: Scroll but allow highlight (it exists in all projects now)
     else if (techId === "git") {
-      const isAlreadySet = selectedTech === techId;
-      setSelectedTech(isAlreadySet ? null : techId);
-      setActiveCategories([]); // Clear category filters
-    }
-    else {
-      const isAlreadySet = selectedTech === techId;
       if (isAlreadySet) {
         setSelectedTech(null);
       } else {
         setSelectedTech(techId);
-        // Clear categories when a non-special tech is selected to avoid conflicting filters
-        if (techId) setActiveCategories([]);
+        setActiveCategories([]);
+        setLastScrollTrigger(Date.now());
       }
     }
-    
-    // Auto-scroll to projects if any tech is selected
-    if (techId) {
-      setTimeout(() => {
-        const projectsSection = document.getElementById("projects");
-        if (projectsSection) {
-          projectsSection.scrollIntoView({ behavior: "smooth" });
+    else {
+      if (isAlreadySet) {
+        setSelectedTech(null);
+      } else {
+        setSelectedTech(techId);
+        if (techId) {
+          setActiveCategories([]);
+          setLastScrollTrigger(Date.now());
         }
-      }, 100);
+      }
     }
   }, [selectedTech]);
+
+  useEffect(() => {
+    if (lastScrollTrigger > 0) {
+      const projectsSection = document.getElementById("projects");
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+  }, [lastScrollTrigger]);
 
   return (
     <TechFilterContext.Provider 

@@ -32,7 +32,7 @@
   --gutter: 24px;
   --margin: 24px;
   --row-height: 120px;
-  --line-color: rgba(64, 46, 50, 0.55);
+  --line-color: var(--border-subtle);
   --column-width: calc(
     (100% - (2 * var(--margin)) - ((var(--columns) - 1) * var(--gutter))) /
       var(--columns)
@@ -63,7 +63,7 @@
   position: relative;
   z-index: 1;
   padding: 16px;
-  border: 1px solid rgba(64, 46, 50, 0.9);
+  border: 1px solid var(--border-strong);
   background: rgba(var(--background-rgb), 0.6);
   backdrop-filter: blur(3px);
   transform: translateZ(0);
@@ -141,7 +141,7 @@
   width: 100%;
   height: 100%;
   min-height: 40vh;
-  border: 1px solid rgba(64, 46, 50, 0.9);
+  border: 1px solid var(--border-strong);
   display: grid;
 }
 
@@ -166,6 +166,44 @@
 .categoryActive {
   --_theme---button-bg: var(--text-primary);
   --_theme---button-text: var(--background);
+}
+
+
+.clearButtonDisabled {
+  pointer-events: none;
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+.mobileSearchRow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: nowrap;
+}
+
+.mobileSearchRow > * {
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .mobileSearchRow {
+    width: 100%;
+    padding: 0 12px;
+  }
+}
+
+.clearFiltersInner {
+  border: 1px dashed var(--border-subtle);
+  opacity: 0.8;
+  transition: opacity 0.2s ease, border-color 0.2s ease;
+}
+
+.clearFiltersInner:hover {
+  opacity: 1;
+  border-color: var(--accent-orange);
 }
 
 .projectsCarousel {
@@ -197,7 +235,7 @@
   width: clamp(300px, 28vw, 400px);
   min-height: clamp(420px, 51vh, 540px);
   background: rgba(var(--background-rgb), 0.98);
-  border: 1px solid rgba(var(--foreground-rgb), 0.5);
+  border: 1px solid var(--border-strong);
   box-shadow: 0 24px 48px rgba(var(--foreground-rgb), 0.12);
   display: flex;
   flex-direction: column;
@@ -226,7 +264,7 @@
   width: 30px;
   height: 100%;
   background: linear-gradient(to right, rgba(var(--foreground-rgb), 0.15), rgba(var(--foreground-rgb), 0.05));
-  border: 1px solid rgba(var(--foreground-rgb), 0.25);
+  border: 1px solid var(--border-subtle);
   border-right: none;
   transform-origin: right center;
   transform: perspective(800px) rotateY(-60deg);
@@ -244,7 +282,7 @@
   width: 30px;
   height: 100%;
   background: linear-gradient(to left, rgba(var(--foreground-rgb), 0.15), rgba(var(--foreground-rgb), 0.05));
-  border: 1px solid rgba(var(--foreground-rgb), 0.25);
+  border: 1px solid var(--border-subtle);
   border-left: none;
   transform-origin: left center;
   transform: perspective(800px) rotateY(60deg);
@@ -347,10 +385,10 @@
   flex: 0 0 auto;
   background: linear-gradient(
     135deg,
-    rgba(64, 46, 50, 0.12),
-    rgba(64, 46, 50, 0.02)
+    rgba(var(--foreground-rgb), 0.12),
+    rgba(var(--foreground-rgb), 0.02)
   );
-  border-bottom: 1px solid rgba(64, 46, 50, 0.15);
+  border-bottom: 1px solid var(--border-subtle);
   position: relative;
   overflow: hidden;
 }
@@ -388,6 +426,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   overflow: hidden;
 }
 
@@ -409,7 +448,7 @@
 .wideWhooshWrapper > a {
   display: inline-grid;
   width: auto;
-  border-radius: 0;
+  width: auto;
   justify-content: center;
 }
 
@@ -442,7 +481,6 @@
   text-decoration: none;
   transition: opacity 0.3s ease, background 0.2s ease;
   
-  border-radius: 0;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -472,10 +510,9 @@
 }
 
 .techBadge {
-  background: rgba(64, 46, 50, 0.08);
-  border: 1px solid rgba(64, 46, 50, 0.1);
+  background: rgba(var(--foreground-rgb), 0.08);
+  border: 1px solid var(--border-subtle);
   padding: 4px 8px;
-  border-radius: 0;
   white-space: nowrap;
   font-weight: 500;
   color: var(--text-primary);
@@ -484,7 +521,6 @@
 
 .githubBadgeInner.githubBadgeInner {
   padding: 6px 10px;
-  border-radius: 20px;
 }
 
 .projectsTitle {
@@ -541,12 +577,12 @@
 
 .experienceDate {
   grid-column: 1 / 4;
-  border-bottom: 1px solid rgba(64, 46, 50, 0.9);
+  border-bottom: 1px solid var(--border-strong);
 }
 
 .experienceRole {
   grid-column: 4 / 13;
-  border-bottom: 1px solid rgba(64, 46, 50, 0.9);
+  border-bottom: 1px solid var(--border-strong);
 }
 
 .about {
@@ -611,7 +647,6 @@
   align-items: center;
   height: 40px;
   padding: 0 16px;
-  border-radius: 128px;
   border: 1px solid transparent;
   transition: 0.2s;
   cursor: pointer;
@@ -1086,7 +1121,7 @@ a.secondary {
   display: flex;
   flex-direction: column;
   background: rgb(var(--background-rgb)); 
-  border: 1px solid rgba(var(--foreground-rgb), 0.5);
+  border: 1px solid var(--border-strong);
   padding: 20px; 
   left: var(--cert-left-desktop);
   width: 480px;

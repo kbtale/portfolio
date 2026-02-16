@@ -77,7 +77,6 @@ export const techStack: Tech[] = [
   { id: "git", name: "Git", icon: "git", category: "tools" },
   { id: "make", name: "Make", icon: "make", category: "tools" },
   { id: "swagger", name: "Swagger", icon: "swagger", category: "tools" },
-  { id: "chrome-extensions", name: "Chrome Extensions", icon: "chrome", category: "tools" },
   { id: "ai", name: "AI Integration", icon: "ai", category: "tools" },
 ];
 
@@ -87,7 +86,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/findthagame",
     repo: "kbtale/findthagame",
     stars: null,
-    tech: ["typescript", "reactjs", "tailwind", "ai", "apicalypse", "git"],
+    tech: ["typescript", "reactjs", "tailwind", "ai", "apicalypse"],
     categories: ["websites", "webapps"],
     additionalLinks: {
       type: "website",
@@ -103,7 +102,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/ocr-to-txt",
     repo: "kbtale/ocr-to-txt",
     stars: null,
-    tech: ["python", "git"],
+    tech: ["python"],
     categories: ["desktop"],
     additionalLinks: {
       type: "installer",
@@ -115,11 +114,27 @@ export const projects: Project[] = [
     }
   },
   {
+    id: "shell-c",
+    githubUrl: "https://github.com/kbtale/shell-c",
+    repo: "kbtale/shell-c",
+    stars: null,
+    tech: ["c"],
+    categories: ["tools", "desktop"],
+    additionalLinks: {
+      type: "none",
+      link: "",
+    },
+    media: {
+      type: "video",
+      url: "/videos/shellc_compressed_4.mp4"
+    }
+  },
+  {
     id: "lease-sentinel",
     githubUrl: "https://github.com/kbtale/lease-sentinel",
     repo: "kbtale/lease-sentinel",
     stars: null,
-    tech: ["nextjs", "typescript", "firebase", "make", "ai", "tailwind", "git"],
+    tech: ["nextjs", "typescript", "firebase", "make", "ai", "tailwind"],
     categories: ["webapps"],
     additionalLinks: {
       type: "website",
@@ -135,7 +150,7 @@ export const projects: Project[] = [
     githubUrl: "https://github.com/kbtale/Palindot",
     repo: "kbtale/Palindot",
     stars: null,
-    tech: ["vue", "php", "laravel", "mysql", "swagger", "git"],
+    tech: ["vue", "php", "laravel", "mysql", "swagger"],
     categories: ["webapps"],
     additionalLinks: {
       type: "none",
@@ -147,43 +162,11 @@ export const projects: Project[] = [
     }
   },
   {
-    id: "shell-c",
-    githubUrl: "https://github.com/kbtale/shell-c",
-    repo: "kbtale/shell-c",
-    stars: null,
-    tech: ["c", "git"],
-    categories: ["tools", "desktop"],
-    additionalLinks: {
-      type: "none",
-      link: "",
-    },
-    media: {
-      type: "video",
-      url: "/videos/shellc_compressed_4.mp4"
-    }
-  },
-  {
-    id: "retro-notes",
-    githubUrl: "https://github.com/kbtale/retro-notes",
-    repo: "kbtale/retro-notes",
-    stars: null,
-    tech: ["reactjs", "typescript", "tailwind", "nestjs", "postgresql", "docker", "git"],
-    categories: ["webapps"],
-    additionalLinks: {
-      type: "none",
-      link: "",
-    },
-    media: {
-      type: "video",
-      url: "/videos/retronotes_compressed.mp4"
-    }
-  },
-  {
     id: "exhale-app",
     githubUrl: "https://github.com/kbtale/exhale-app",
     repo: "kbtale/exhale-app",
     stars: null,
-    tech: ["flutter", "git"],
+    tech: ["flutter"],
     categories: ["mobile"],
     additionalLinks: {
       type: "installer",
@@ -195,27 +178,11 @@ export const projects: Project[] = [
     }
   },
   {
-    id: "useless-polymath",
-    githubUrl: "https://github.com/kbtale/Useless-Polymath",
-    repo: "kbtale/Useless-Polymath",
-    stars: null,
-    tech: ["reactjs", "typescript", "css", "git"],
-    categories: ["webapps", "websites"],
-    additionalLinks: {
-      type: "none",
-      link: "",
-    },
-    media: {
-      type: "image",
-      url: ""
-    }
-  },
-  {
     id: "civy",
     githubUrl: "https://github.com/openrise-hub/civy",
     repo: "openrise-hub/civy",
     stars: null,
-    tech: ["typescript", "reactjs", "tailwind", "nestjs", "postgresql", "docker", "git"],
+    tech: ["typescript", "reactjs", "tailwind", "nestjs", "postgresql", "docker"],
     categories: ["webapps", "websites"],
     additionalLinks: {
       type: "none",
@@ -227,11 +194,27 @@ export const projects: Project[] = [
     }
   },
   {
+    id: "useless-polymath",
+    githubUrl: "https://github.com/kbtale/Useless-Polymath",
+    repo: "kbtale/Useless-Polymath",
+    stars: null,
+    tech: ["reactjs", "typescript", "css"],
+    categories: ["webapps", "websites"],
+    additionalLinks: {
+      type: "none",
+      link: "",
+    },
+    media: {
+      type: "image",
+      url: ""
+    }
+  },
+  {
     id: "react-three-text-fx",
     githubUrl: "https://github.com/openrise-hub/react-three-text-fx",
     repo: "openrise-hub/react-three-text-fx",
     stars: null,
-    tech: ["three", "gsap", "reactjs", "git"],
+    tech: ["three", "gsap","reactjs"],
     categories: ["libraries"],
     additionalLinks: {
       type: "webiste",
@@ -243,27 +226,11 @@ export const projects: Project[] = [
     }
   },
   {
-    id: "openrise-www",
-    githubUrl: "https://github.com/openrise-hub/www",
-    repo: "openrise-hub/www",
-    stars: null,
-    tech: ["three", "gsap", "nextjs", "typescript", "tailwind", "git"],
-    categories: ["websites"],
-    additionalLinks: {
-      type: "website",
-      link: "https://openrise.tech/",
-    },
-    media: {
-      type: "video",
-      url: "/videos/openrise-landing_compressed.mp4"
-    }
-  },
-  {
     id: "te-filter",
     githubUrl: "https://github.com/kbtale/TE-Filter",
     repo: "kbtale/TE-Filter",
     stars: null,
-    tech: ["chrome-extensions", "css", "js", "git"],
+    tech: ["chrome-extensions", "css", "js"],
     categories: ["extensions"],
     additionalLinks: {
       type: "none",
@@ -274,15 +241,47 @@ export const projects: Project[] = [
       url: ""
     }
   },
+  {
+    id: "retro-notes",
+    githubUrl: "https://github.com/kbtale/retro-notes",
+    repo: "kbtale/retro-notes",
+    stars: null,
+    tech: ["reactjs", "typescript", "tailwind", "nestjs", "postgresql", "docker"],
+    categories: ["webapps"],
+    additionalLinks: {
+      type: "none",
+      link: "",
+    },
+    media: {
+      type: "video",
+      url: "/videos/retronotes_compressed.mp4"
+    }
+  },
+  {
+    id: "openrise-www",
+    githubUrl: "https://github.com/openrise-hub/www",
+    repo: "openrise-hub/www",
+    stars: null,
+    tech: ["three", "gsap","nextjs", "typescript", "tailwind"],
+    categories: ["websites"],
+    additionalLinks: {
+      type: "website",
+      link: "https://openrise.tech/",
+    },
+    media: {
+      type: "video",
+      url: "/videos/openrise-landing_compressed.mp4"
+    }
+  },
 ];
 
 export async function fetchGitHubMeta(repo: string) {
-  const response = await fetch(`https://api.github.com/repos/${repo}`);
-  if (!response.ok) return null;
-  const data = (await response.json()) as {
-    stargazers_count?: number;
-  };
-  return {
-    stars: data.stargazers_count ?? 0,
-  };
+  try {
+    const response = await fetch(`https://api.github.com/repos/${repo}`);
+    if (!response.ok) return null;
+    const data = (await response.json()) as { stargazers_count?: number };
+    return { stars: data.stargazers_count ?? 0 };
+  } catch {
+    return null;
+  }
 }

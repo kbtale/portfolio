@@ -8,9 +8,11 @@ import Image from "next/image";
 import ProjectVideo from "./ProjectVideo";
 import GitHubStars from "./GitHubStars";
 import { useTechFilter } from "./TechFilterContext";
+import { useTheme } from "./ThemeContext";
 import type { Project } from "../data/projects";
 import { projectCategories, techStack } from "../data/projects";
 import styles from "../app/page.module.css";
+import TechSearchFilter from "./TechSearchFilter";
 
 type ProjectsSectionProps = {
   projects: Project[];
@@ -19,7 +21,14 @@ type ProjectsSectionProps = {
 export default function ProjectsSection({ projects }: ProjectsSectionProps) {
   const t = useTranslations();
   const { selectedTech, activeCategories, setActiveCategories, setTechFilter } = useTechFilter();
+  const { triggerToast } = useTheme();
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    if (selectedTech === "git") {
+      triggerToast("message", t.raw("work.gitToast"));
+    }
+  }, [selectedTech, triggerToast, t]);
   const [filterVersion, setFilterVersion] = useState(0);
   const currentIndexRef = useRef(currentIndex);
   useLayoutEffect(() => {
@@ -43,7 +52,7 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
             project.categories.some((category) => activeCategories.includes(category))
           );
           
-    if (selectedTech && selectedTech !== "html" && selectedTech !== "css") {
+    if (selectedTech && selectedTech !== "html" && selectedTech !== "css" && selectedTech !== "git") {
       base = base.filter((project) => project.tech.includes(selectedTech));
     }
 
@@ -307,6 +316,23 @@ export default function ProjectsSection({ projects }: ProjectsSectionProps) {
                   />
                 );
               })}
+              <div className={styles.mobileSearchRow}>
+                <TechSearchFilter />
+                <WhooshButton
+                  label={t("work.clearFilters") || "Clear"}
+                  href="#"
+                  showDot={false}
+                  className={!(activeCategories.length > 0 || selectedTech) ? styles.clearButtonDisabled : undefined}
+                  innerClassName={styles.clearFiltersInner}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if (!(activeCategories.length > 0 || selectedTech)) return;
+                    setActiveCategories([]);
+                    setTechFilter(null);
+                    setFilterVersion(v => v + 1);
+                  }}
+                />
+              </div>
             </div>
             <div
               className={styles.projectsCarousel}

@@ -17,7 +17,12 @@
   },
   "work": {
     "animatedTitle": "My Work",
-    "categoriesLabel": "Project Categories",
+    "categoriesLabel": "Filter by category",
+    "filterByTech": "Filter by tech...",
+    "searchPlaceholder": "Search technologies...",
+    "noResults": "No technology found.",
+    "clearFilters": "Clear",
+    "gitToast": "It's not a bug! I use Git for all my projects, you can find them on my <link>GitHub</link>.",
     "categories": {
       "websites": "Websites",
       "webapps": "Web Apps",
@@ -208,6 +213,18 @@
     "tiktokLabel": "TikTok (+65k followers)",
     "repoLabel": "Star this portfolio repo!",
     "copyright": "© 2026 Carlos Bolívar. All rights reserved.",
-    "tagline": "Crafting solutions. Solving challenges."
+    "tagline": "Crafting solutions. Solving challenges.",
+    "form": {
+      "nameLabel": "Name",
+      "namePlaceholder": "Your Name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "your@email.com",
+      "messageLabel": "Message",
+      "messagePlaceholder": "Tell me about your project...",
+      "sendButton": "Send Message",
+      "sending": "Sending...",
+      "success": "Message sent successfully!",
+      "error": "Failed to send message. Please try again."
+    }
   }
 }
