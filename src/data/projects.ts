@@ -50,10 +50,10 @@ export const techStack: Tech[] = [
   { id: "php", name: "PHP", icon: "php", category: "languages" },
   { id: "js", name: "JavaScript", icon: "javascript", category: "languages" },
   { id: "typescript", name: "TypeScript", icon: "typescript", category: "languages" },
-  { id: "html", name: "HTML", icon: "html", category: "languages" },
-  { id: "css", name: "CSS", icon: "css", category: "languages" },
 
   // Frontend & Mobile
+  { id: "html", name: "HTML", icon: "html", category: "frontend_mobile" },
+  { id: "css", name: "CSS", icon: "css", category: "frontend_mobile" },
   { id: "reactjs", name: "React", icon: "react", category: "frontend_mobile" },
   { id: "vue", name: "Vue", icon: "vue", category: "frontend_mobile" },
   { id: "nextjs", name: "Next.js", icon: "nextjs", category: "frontend_mobile" },
