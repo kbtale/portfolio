@@ -1,7 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { fetchGitHubMeta } from "../data/projects";
+import { useGitHubStars } from "./GitHubStarsContext";
 
 interface GitHubStarsProps {
   repo: string;
@@ -9,30 +8,12 @@ interface GitHubStarsProps {
 }
 
 export default function GitHubStars({ repo, variant = "carousel" }: GitHubStarsProps) {
-  const [stars, setStars] = useState<number | null>(null);
+  const { starsData } = useGitHubStars();
+  const stars = starsData[repo];
 
-  useEffect(() => {
-    let isMounted = true;
-    
-    async function loadStars() {
-      try {
-        const meta = await fetchGitHubMeta(repo);
-        if (isMounted && meta) {
-          setStars(meta.stars);
-        }
-      } catch (error) {
-        console.error(`Failed to fetch stars for ${repo}:`, error);
-      }
-    }
-
-    loadStars();
-    return () => { isMounted = false; };
-  }, [repo]);
-
-  if (stars === null || stars === 0) return null;
+  if (stars === undefined || stars === 0) return null;
 
   if (variant === "detail") {
-    // Detail view layout
     return (
       <div style={{
         display: 'flex',
@@ -52,7 +33,6 @@ export default function GitHubStars({ repo, variant = "carousel" }: GitHubStarsP
     );
   }
 
-  // Carousel/Default layout
   return (
     <>
       <span style={{ 

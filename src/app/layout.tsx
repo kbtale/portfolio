@@ -31,6 +31,7 @@ import { ThemeProvider } from "../components/ThemeContext";
 import SmoothScroller from "../components/SmoothScroller";
 import LanguageTransitionProvider from "../components/LanguageTransition";
 import LoadingScreen from "../components/LoadingScreen";
+import { GitHubStarsProvider } from "../components/GitHubStarsContext";
 
 export default async function RootLayout({
   children,
@@ -47,8 +48,10 @@ export default async function RootLayout({
           <ThemeProvider>
             <LoadingScreen />
             <LanguageTransitionProvider>
-              <SmoothScroller />
-              {children}
+              <GitHubStarsProvider>
+                <SmoothScroller />
+                {children}
+              </GitHubStarsProvider>
             </LanguageTransitionProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
