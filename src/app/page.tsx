@@ -1,16 +1,16 @@
 import { getTranslations } from "next-intl/server";
-import AboutHeader from "../components/AboutHeader";
-import ProjectsSection from "../components/ProjectsSection";
-import StickyNavbar from "../components/StickyNavbar";
-import WhooshButton from "../components/WhooshButton";
-import { projects } from "../data/projects";
-import ExperienceTimeline, { ExperienceItem } from "../components/ExperienceTimeline";
-import LazyFaceCanvas from "../components/LazyFaceCanvas";
-import LazyGridCanvas from "../components/LazyGridCanvas";
-import CertificationsSection from "../components/CertificationsSection";
-import ContactFooter from "../components/ContactFooter";
-import TechStack from "../components/TechStack";
-import TechFilterWrapper from "../components/TechFilterWrapper";
+import AboutHeader from "@/entities/experience/AboutHeader";
+import ProjectsSection from "@/widgets/projects-section/ProjectsSection";
+import StickyNavbar from "@/widgets/navbar/StickyNavbar/StickyNavbar";
+import WhooshButton from "@/shared/ui/WhooshButton/WhooshButton";
+import { projects } from "@/data/projects";
+import ExperienceTimeline, { ExperienceItem } from "@/widgets/experience-timeline/ExperienceTimeline";
+import LazyFaceCanvas from "@/shared/ui/canvas/LazyFaceCanvas";
+import LazyGridCanvas from "@/shared/ui/canvas/LazyGridCanvas";
+import CertificationsSection from "@/widgets/certifications-section/CertificationsSection";
+import ContactFooter from "@/widgets/footer/ContactFooter";
+import TechStack from "@/entities/tech/TechStack";
+import TechFilterWrapper from "@/features/tech-filter/TechFilterWrapper";
 import styles from "./page.module.css";
 
 export default async function Home() {
