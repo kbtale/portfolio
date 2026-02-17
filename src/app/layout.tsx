@@ -27,11 +27,11 @@ export const metadata: Metadata = {
   description: "Welcome to my portfolio, a developer one!",
 };
 
-import { ThemeProvider } from "../components/ThemeContext";
-import SmoothScroller from "../components/SmoothScroller";
-import LanguageTransitionProvider from "../components/LanguageTransition";
-import LoadingScreen from "../components/LoadingScreen";
-import { GitHubStarsProvider } from "../components/GitHubStarsContext";
+import { ThemeProvider } from "@/app/providers/ThemeContext";
+import SmoothScroller from "@/shared/ui/SmoothScroller/SmoothScroller";
+import LanguageTransitionProvider from "@/shared/ui/LanguageTransition/LanguageTransition";
+import LoadingScreen from "@/shared/ui/LoadingScreen/LoadingScreen";
+import { GitHubStarsProvider } from "@/app/providers/GitHubStarsContext";
 
 export default async function RootLayout({
   children,
